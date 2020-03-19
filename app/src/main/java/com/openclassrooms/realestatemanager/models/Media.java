@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.Models;
+package com.openclassrooms.realestatemanager.models;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -9,16 +9,14 @@ import androidx.room.PrimaryKey;
                     childColumns = "propertyId"))
 public class Media {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private long id;
     private String comment;
     private String mediaUrl;
     private String propertyId;
 
     // --- CONSTRUCTORS ---
-    public Media() {}
-    public Media(long id, String comment, String mediaUrl, String propertyId) {
-        this.id = id;
+    public Media(String comment, String mediaUrl, String propertyId) {
         this.comment = comment;
         this.mediaUrl = mediaUrl;
         this.propertyId = propertyId;

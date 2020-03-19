@@ -1,9 +1,9 @@
-package com.openclassrooms.realestatemanager.Repositories;
+package com.openclassrooms.realestatemanager.repositories;
 
 import androidx.lifecycle.LiveData;
 
-import com.openclassrooms.realestatemanager.Database.Dao.InterestPointDAO;
-import com.openclassrooms.realestatemanager.Models.InterestPoint;
+import com.openclassrooms.realestatemanager.database.Dao.InterestPointDAO;
+import com.openclassrooms.realestatemanager.models.InterestPoint;
 
 public class InterestPointDataRepository {
 

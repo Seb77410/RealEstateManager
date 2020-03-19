@@ -1,9 +1,11 @@
-package com.openclassrooms.realestatemanager.Repositories;
+package com.openclassrooms.realestatemanager.repositories;
 
 import androidx.lifecycle.LiveData;
 
-import com.openclassrooms.realestatemanager.Database.Dao.HouseSellerDAO;
-import com.openclassrooms.realestatemanager.Models.HouseSeller;
+import com.openclassrooms.realestatemanager.database.Dao.HouseSellerDAO;
+import com.openclassrooms.realestatemanager.models.HouseSeller;
+
+import java.util.List;
 
 public class HouseSellerDataRepository {
 
@@ -16,6 +18,7 @@ public class HouseSellerDataRepository {
 
     // --- READ ---
     public LiveData<HouseSeller> getHouseSeller(long houseSellerId){return this.houseSellerDAO.getHouseSellerById(houseSellerId);}
+    public LiveData<List<HouseSeller>> getHouseSellersList(){return this.houseSellerDAO.getHouseSellersList();}
 
     // --- DELETE ---
     public void deleteHouseSeller(long houseSellerId){this.houseSellerDAO.deleteHouseSeller(houseSellerId);}

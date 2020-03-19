@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.Database.Dao;
+package com.openclassrooms.realestatemanager.database.Dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -6,8 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.openclassrooms.realestatemanager.Models.HouseSeller;
-import com.openclassrooms.realestatemanager.Models.InterestPoint;
+import com.openclassrooms.realestatemanager.models.InterestPoint;
 
 @Dao
 public interface InterestPointDAO {

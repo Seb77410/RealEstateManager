@@ -1,9 +1,9 @@
-package com.openclassrooms.realestatemanager.Repositories;
+package com.openclassrooms.realestatemanager.repositories;
 
 import androidx.lifecycle.LiveData;
 
-import com.openclassrooms.realestatemanager.Database.Dao.MediaDAO;
-import com.openclassrooms.realestatemanager.Models.Media;
+import com.openclassrooms.realestatemanager.database.Dao.MediaDAO;
+import com.openclassrooms.realestatemanager.models.Media;
 
 public class MediaDataRepository {
 

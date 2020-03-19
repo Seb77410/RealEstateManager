@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.Models;
+package com.openclassrooms.realestatemanager.models;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -6,14 +6,12 @@ import androidx.room.PrimaryKey;
 @Entity
 public class InterestPoint {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private long id;
     private String category;
 
     // --- CONSTRUCTORS ---
-    public InterestPoint() {}
-    public InterestPoint(long id, String category) {
-        this.id = id;
+    public InterestPoint(String category) {
         this.category = category;
     }
 

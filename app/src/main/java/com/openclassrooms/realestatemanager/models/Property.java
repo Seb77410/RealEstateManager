@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.Models;
+package com.openclassrooms.realestatemanager.models;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -15,7 +15,7 @@ import androidx.room.PrimaryKey;
        )
 public class Property {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private long id;
     private int price;
     private int area;
@@ -31,10 +31,9 @@ public class Property {
 
     // --- CONSTRUCTORS ---
     public Property() {}
-    public Property(long id, int price, int area, int rooms, String type, String description,
+    public Property(int price, int area, int rooms, String type, String description,
                     String address, String status, String sellStartingDate, String sellDate,
                     String interestPointId, String houseSellerId) {
-        this.id = id;
         this.price = price;
         this.area = area;
         this.rooms = rooms;

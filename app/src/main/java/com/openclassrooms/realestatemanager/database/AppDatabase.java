@@ -1,22 +1,21 @@
-package com.openclassrooms.realestatemanager.Database;
+package com.openclassrooms.realestatemanager.database;
 
 import androidx.sqlite.db.SupportSQLiteDatabase;
 import androidx.room.Database;
-import androidx.room.OnConflictStrategy;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import android.content.Context;
 import androidx.annotation.NonNull;
 
-import com.openclassrooms.realestatemanager.Database.Dao.HouseSellerDAO;
-import com.openclassrooms.realestatemanager.Database.Dao.InterestPointDAO;
-import com.openclassrooms.realestatemanager.Database.Dao.MediaDAO;
-import com.openclassrooms.realestatemanager.Database.Dao.PropertyDAO;
-import com.openclassrooms.realestatemanager.Models.HouseSeller;
-import com.openclassrooms.realestatemanager.Models.InterestPoint;
-import com.openclassrooms.realestatemanager.Models.Media;
-import com.openclassrooms.realestatemanager.Models.Property;
+import com.openclassrooms.realestatemanager.database.Dao.HouseSellerDAO;
+import com.openclassrooms.realestatemanager.database.Dao.InterestPointDAO;
+import com.openclassrooms.realestatemanager.database.Dao.MediaDAO;
+import com.openclassrooms.realestatemanager.database.Dao.PropertyDAO;
+import com.openclassrooms.realestatemanager.models.HouseSeller;
+import com.openclassrooms.realestatemanager.models.InterestPoint;
+import com.openclassrooms.realestatemanager.models.Media;
+import com.openclassrooms.realestatemanager.models.Property;
 
 @Database(entities = {Property.class, Media.class, InterestPoint.class, HouseSeller.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {

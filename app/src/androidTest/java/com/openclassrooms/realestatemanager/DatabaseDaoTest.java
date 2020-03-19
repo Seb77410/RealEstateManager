@@ -10,11 +10,11 @@ import androidx.room.Room;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.openclassrooms.realestatemanager.Database.AppDatabase;
-import com.openclassrooms.realestatemanager.Models.HouseSeller;
-import com.openclassrooms.realestatemanager.Models.InterestPoint;
-import com.openclassrooms.realestatemanager.Models.Media;
-import com.openclassrooms.realestatemanager.Models.Property;
+import com.openclassrooms.realestatemanager.database.AppDatabase;
+import com.openclassrooms.realestatemanager.models.HouseSeller;
+import com.openclassrooms.realestatemanager.models.InterestPoint;
+import com.openclassrooms.realestatemanager.models.Media;
+import com.openclassrooms.realestatemanager.models.Property;
 
 import org.junit.After;
 import org.junit.Before;
@@ -26,7 +26,6 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import static junit.framework.TestCase.assertEquals;
-import static org.junit.Assert.*;
 
 /**
  * Instrumented test, which will execute on an Android device.

@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager;
+package com.openclassrooms.realestatemanager.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -65,7 +65,9 @@ public class Utils {
 
         if (connectivityManager != null) {
             networkInfo = connectivityManager.getActiveNetworkInfo();
-            return networkInfo.isConnected();
+            if (networkInfo != null) {
+                return networkInfo.isConnected();
+            }else{return false;}
         }
         else { return false;}
     }

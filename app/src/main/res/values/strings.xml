@@ -1,3 +1,19 @@
 <resources>
-    <string name="app_name">Real Estate Manager</string>
+    <string name="app_name" translatable="false">Real Estate Manager</string>
+
+    <string name="price" translatable="true">Price</string>
+    <string name="address" translatable="true">Address</string>
+    <string name="surface" translatable="true">Surface</string>
+    <string name="type" translatable="true">Type :</string>
+    <string name="room_number" translatable="true">Room number</string>
+    <string name="description" translatable="true">Description</string>
+    <string name="add_photo" translatable="true">Add photo</string>
+    <string name="house_seller" translatable="true">House seller</string>
+
+    <string name="add_menu_title">Add menu main</string>
+    <string name="add_house_seller">Add house seller</string>
+    <string name="e_mail">E-mail</string>
+    <string name="name">Name</string>
+    <string name="save_house_seller">Save House Seller</string>
+
 </resources>
