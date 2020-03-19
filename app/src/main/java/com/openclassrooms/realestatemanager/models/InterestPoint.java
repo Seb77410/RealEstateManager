@@ -6,12 +6,13 @@ import androidx.room.PrimaryKey;
 @Entity
 public class InterestPoint {
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     private long id;
     private String category;
 
     // --- CONSTRUCTORS ---
-    public InterestPoint(String category) {
+    public InterestPoint(long id, String category) {
+        this.id = id;
         this.category = category;
     }
 

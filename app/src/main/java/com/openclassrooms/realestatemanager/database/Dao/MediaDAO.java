@@ -16,6 +16,9 @@ public interface MediaDAO {
     @Query("SELECT * FROM Media WHERE id = :mediaId")
     LiveData<Media> getMediaById(long mediaId);
 
+    @Query("SELECT * FROM Media WHERE propertyId = :propertyId")
+    LiveData<Media> getMediaByProperty(String propertyId);
+
     @Query("DELETE FROM Media WHERE id = :mediaId")
     int deleteMedia(long mediaId);
 }

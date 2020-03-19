@@ -36,10 +36,10 @@ public class DatabaseDaoTest {
 
     // For data
     private AppDatabase appDatabase;
-    private HouseSeller houseSeller = new HouseSeller(1,"BeauChamp", "Alexis");
-    private InterestPoint interestPoint = new InterestPoint(2, "Ecole");
-    private Media media = new Media(3, "Ceci est un test", "il n'y a pas d'url","4");
-    private Property property = new Property(4,234000,153,5,"Maison", "Trop belle", "Chez moi", "Vendu", "21/12/2020", "22/12/2020", "2", "1");
+    private HouseSeller houseSeller = new HouseSeller("BeauChamp", "beauchamp@gmail.com");
+    private InterestPoint interestPoint = new InterestPoint( 2,"Ecole");
+    private Media media = new Media( "Ceci est un test", "il n'y a pas d'url","4");
+    private Property property = new Property(234000,153,5,"Maison", "Trop belle", "Chez moi", "Vendu", "21/12/2020", "22/12/2020", "2", "1");
 
 
     @Rule
@@ -64,8 +64,8 @@ public class DatabaseDaoTest {
 
         // Test HouseSellerDAO
         this.appDatabase.houseSellerDAO().createHouseSeller(houseSeller);
-        HouseSeller houseSeller1  = getValue(this.appDatabase.houseSellerDAO().getHouseSellerById(1));
-        assertEquals(houseSeller1.getName(), houseSeller.getName());
+        HouseSeller houseSeller1  = getValue(this.appDatabase.houseSellerDAO().getHouseSellerByName("BeauChamp"));
+        assertEquals(houseSeller1.getEmail(), houseSeller.getEmail());
 
         // Test InterestPointDAO
         this.appDatabase.interestPointDAO().createInterestPoint(interestPoint);
@@ -74,13 +74,9 @@ public class DatabaseDaoTest {
 
         // Test PropertyDao
         this.appDatabase.propertyDAO().createProperty(property);
-        Property property1  = getValue(this.appDatabase.propertyDAO().getPropertyById(4));
-        assertEquals(property1.getAddress(), property.getAddress());
+        Property property1  = getValue(this.appDatabase.propertyDAO().getPropertyByAddress("Chez moi"));
+        assertEquals(property1.getType(), property.getType());
 
-        // Test MediaDao
-        this.appDatabase.mediaDAO().createMedia(media);
-        Media media1  = getValue(this.appDatabase.mediaDAO().getMediaById(3));
-        assertEquals(media1.getMediaUrl(), media.getMediaUrl());
 
     }
 

@@ -15,8 +15,8 @@ public interface HouseSellerDAO {
     @Insert
     long createHouseSeller(HouseSeller houseSeller);
 
-    @Query("SELECT * FROM HouseSeller WHERE id = :houseSellerId")
-    LiveData<HouseSeller> getHouseSellerById(long houseSellerId);
+    @Query("SELECT * FROM HouseSeller WHERE name = :houseSellerName")
+    LiveData<HouseSeller> getHouseSellerByName(String houseSellerName);
 
     @Query("SELECT * FROM HouseSeller")
     LiveData<List<HouseSeller>> getHouseSellersList();

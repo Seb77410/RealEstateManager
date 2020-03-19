@@ -35,7 +35,7 @@ public class AddHouseSellerViewModel extends ViewModel {
         });
     }
         // --- read ---
-    public LiveData<HouseSeller> getHouseSeller(long houseSellerId) {
+    public LiveData<HouseSeller> getHouseSeller(String houseSellerId) {
         return houseSellerDataSource.getHouseSeller(houseSellerId);
     }
 
