@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager.database;
 
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 import androidx.room.Database;
 import androidx.room.Room;
@@ -16,8 +17,11 @@ import com.openclassrooms.realestatemanager.models.HouseSeller;
 import com.openclassrooms.realestatemanager.models.InterestPoint;
 import com.openclassrooms.realestatemanager.models.Media;
 import com.openclassrooms.realestatemanager.models.Property;
+import com.openclassrooms.realestatemanager.utils.Converters;
+
 
 @Database(entities = {Property.class, Media.class, InterestPoint.class, HouseSeller.class}, version = 1, exportSchema = false)
+@TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
 
     // --- SINGLETON ---

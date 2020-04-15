@@ -23,4 +23,5 @@ public interface HouseSellerDAO {
 
     @Query("DELETE FROM HouseSeller WHERE id = :houseSellerId")
     int deleteHouseSeller(long houseSellerId);
+
 }

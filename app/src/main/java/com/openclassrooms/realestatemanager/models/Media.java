@@ -1,5 +1,7 @@
 package com.openclassrooms.realestatemanager.models;
 
+import android.net.Uri;
+
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
@@ -12,25 +14,25 @@ public class Media {
     @PrimaryKey(autoGenerate = true)
     private long id;
     private String comment;
-    private String mediaUrl;
-    private String propertyId;
+    private Uri mediaUri;
+    private long propertyId;
 
     // --- CONSTRUCTORS ---
-    public Media(String comment, String mediaUrl, String propertyId) {
+    public Media(String comment, Uri mediaUri, long propertyId) {
         this.comment = comment;
-        this.mediaUrl = mediaUrl;
+        this.mediaUri = mediaUri;
         this.propertyId = propertyId;
     }
 
     // --- GETTER ---
     public long getId() {return id;}
     public String getComment() {return comment;}
-    public String getMediaUrl() {return mediaUrl;}
-    public String getPropertyId() {return propertyId;}
+    public Uri getMediaUri() {return mediaUri;}
+    public long getPropertyId() {return propertyId;}
 
     // --- SETTERS ---
     public void setId(long id) {this.id = id;}
     public void setComment(String comment) {this.comment = comment;}
-    public void setMediaUrl(String mediaUrl) {this.mediaUrl = mediaUrl;}
-    public void setPropertyId(String propertyId) {this.propertyId = propertyId;}
+    public void setMediaUri(Uri mediaUri) {this.mediaUri = mediaUri;}
+    public void setPropertyId(long propertyId) {this.propertyId = propertyId;}
 }

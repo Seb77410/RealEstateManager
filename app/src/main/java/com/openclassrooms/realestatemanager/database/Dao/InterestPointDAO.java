@@ -8,6 +8,8 @@ import androidx.room.Update;
 
 import com.openclassrooms.realestatemanager.models.InterestPoint;
 
+import java.util.ArrayList;
+
 @Dao
 public interface InterestPointDAO {
 
@@ -15,11 +17,17 @@ public interface InterestPointDAO {
     long createInterestPoint(InterestPoint interestPoint);
 
     @Update
-    int updateInterestPoint(InterestPoint interestPoint);
+    void updateInterestPoint(InterestPoint interestPoint);
+
+    @Query("SELECT * FROM InterestPoint WHERE category = :list")
+    LiveData<InterestPoint> getInterestPointByList(String list);
 
     @Query("SELECT * FROM InterestPoint WHERE id = :interestPointId")
     LiveData<InterestPoint> getInterestPointById(long interestPointId);
 
     @Query("DELETE FROM InterestPoint WHERE id = :interestPointId")
-    int deleteInterestPoint(long interestPointId);
+    void deleteInterestPoint(long interestPointId);
+
+    @Query("SELECT * FROM InterestPoint ORDER BY id DESC LIMIT 1")
+    LiveData<InterestPoint> getLastInterestPointSaved();
 }

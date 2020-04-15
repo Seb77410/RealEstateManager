@@ -78,6 +78,7 @@ public class DatabaseDaoTest {
         assertEquals(property1.getType(), property.getType());
 
 
+
     }
 
 

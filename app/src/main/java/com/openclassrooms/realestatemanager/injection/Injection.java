@@ -3,6 +3,7 @@ package com.openclassrooms.realestatemanager.injection;
 import android.content.Context;
 
 import com.openclassrooms.realestatemanager.activities.AddHouseSeller.AddHouseSellerViewModelFactory;
+import com.openclassrooms.realestatemanager.activities.AddProperties.AddPropertiesViewModelFactory;
 import com.openclassrooms.realestatemanager.database.AppDatabase;
 import com.openclassrooms.realestatemanager.repositories.HouseSellerDataRepository;
 import com.openclassrooms.realestatemanager.repositories.InterestPointDataRepository;
@@ -42,5 +43,14 @@ public class Injection {
         HouseSellerDataRepository dataSourceHouseSeller = provideHouseSellerDataSource(context);
         Executor executor = provideExecutor();
         return new AddHouseSellerViewModelFactory(dataSourceHouseSeller, executor);
+    }
+
+    public static AddPropertiesViewModelFactory providerAddPropertiesViewModelFactory(Context context){
+        HouseSellerDataRepository dataSourceHouseSeller = provideHouseSellerDataSource(context);
+        InterestPointDataRepository dataSourceInterestPoint = providerInterestPointDataSource(context);
+        MediaDataRepository dataSourceMedia = providerMediaDataSource(context);
+        PropertyDataRepository dataSourceProperty = providerPropertyDataSource(context);
+        Executor executor = provideExecutor();
+        return new AddPropertiesViewModelFactory(dataSourceHouseSeller, dataSourceInterestPoint, dataSourceMedia, dataSourceProperty,executor);
     }
 }

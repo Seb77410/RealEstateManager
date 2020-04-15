@@ -4,7 +4,7 @@
     <string name="price" translatable="true">Price</string>
     <string name="address" translatable="true">Address</string>
     <string name="surface" translatable="true">Surface</string>
-    <string name="type" translatable="true">Type :</string>
+    <string name="type" translatable="true">Property type :</string>
     <string name="room_number" translatable="true">Room number</string>
     <string name="description" translatable="true">Description</string>
     <string name="add_photo" translatable="true">Add photo</string>
@@ -15,5 +15,9 @@
     <string name="e_mail">E-mail</string>
     <string name="name">Name</string>
     <string name="save_house_seller">Save House Seller</string>
+    <string name="add_property">Add property</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

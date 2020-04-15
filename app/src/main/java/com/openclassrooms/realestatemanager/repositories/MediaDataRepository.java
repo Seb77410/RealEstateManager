@@ -12,7 +12,7 @@ public class MediaDataRepository {
     public MediaDataRepository(MediaDAO mediaDAO){this.mediaDAO = mediaDAO;}
 
     // --- CREATE ---
-    public void createMedia(Media media){this.mediaDAO.createMedia(media);}
+    public long createMedia(Media media){return this.mediaDAO.createMedia(media);}
 
     // --- READ ---
     public LiveData<Media> getMedia(long mediaId){return this.mediaDAO.getMediaById(mediaId);}

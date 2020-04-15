@@ -14,4 +14,10 @@
         <item name="android:textColor">@android:color/black</item>
     </style>
 
+    <style name="Checkbox">
+    <item name="colorAccent">@color/primaryColor</item> //color when checked
+    </style>
+
+    <style name="myDialog" parent="Theme.AppCompat.Dialog">
+    </style>
 </resources>

@@ -12,11 +12,12 @@ public class InterestPointDataRepository {
     public InterestPointDataRepository(InterestPointDAO interestPointDAO){this.interestPointDAO = interestPointDAO;}
 
     // --- CREATE ---
-    public void createInterestPoint(InterestPoint interestPoint){this.interestPointDAO.createInterestPoint(interestPoint);}
+    public long createInterestPoint(InterestPoint interestPoint){return this.interestPointDAO.createInterestPoint(interestPoint);}
 
     // --- GET ---
     public LiveData<InterestPoint> getInterestPoint(long interestPointId){return this.interestPointDAO.getInterestPointById((interestPointId));}
-
+    public LiveData<InterestPoint> getInterestPointByList(String list){return this.interestPointDAO.getInterestPointByList(list);}
+    public LiveData<InterestPoint> getLastInterestPointSaved(){return this.interestPointDAO.getLastInterestPointSaved();}
     // --- UPDATE ---
     public void updateInterestPoint(InterestPoint interestPoint){this.interestPointDAO.updateInterestPoint(interestPoint);}
 

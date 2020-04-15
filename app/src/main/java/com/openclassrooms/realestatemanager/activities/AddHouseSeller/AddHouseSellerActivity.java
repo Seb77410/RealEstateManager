@@ -4,7 +4,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.res.ResourcesCompat;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -65,22 +66,17 @@ public class AddHouseSellerActivity extends AppCompatActivity {
     public void saveHouseSeller(View view) {
         getNameFromEditText();
         getEmailFromEditText();
-        nameIsWrite = nameIsCorrectlyWrite();
-        emailIsWrite =  emailIsCorrectlyWrite();
+        nameIsWrite = nameIsNotNull();
+        emailIsWrite =  emailIsNotNull();
         if (nameIsWrite && emailIsWrite){
-            // Check if input email have correct format
-            emailIsCorrect = !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
-            if(emailIsCorrect) {
-                // TODO : save house seller
+            nameTextInputLayout.setError(null);
+            if(emailAsGoodFormat()) {
                 createHouseSeller();
                 createToastAfterHouseSellerCreating();
             }
-            else {
-                Toast.makeText(getApplicationContext(), "E-mail is wrong", Toast.LENGTH_LONG).show();
-            }
         }
         else{
-            checkForToast();
+            checkForInputError();
         }
     }
 
@@ -97,25 +93,45 @@ public class AddHouseSellerActivity extends AppCompatActivity {
         email = String.valueOf(Objects.requireNonNull(emailTextInputLayout.getEditText()).getText());
     }
 
-    private boolean nameIsCorrectlyWrite(){
+    private boolean nameIsNotNull(){
         return !name.equals("");
     }
 
-    private Boolean emailIsCorrectlyWrite(){
+    private boolean emailIsNotNull(){
         return !email.equals("");
     }
 
-    private void checkForToast(){
+    private void checkForInputError(){
         if (!nameIsWrite && !emailIsWrite){
-            Toast.makeText(getApplicationContext(), "A name and an e-mail must be write", Toast.LENGTH_LONG).show();
+            emailTextInputLayout.setError("Enter an e-mail");
+            nameTextInputLayout.setError("Enter a name");
         }
         else if (!nameIsWrite){
-            Toast.makeText(getApplicationContext(), "A name must be write", Toast.LENGTH_LONG).show();
+            nameTextInputLayout.setError("Enter a name");
+            emailTextInputLayout.setError(null);
+            emailAsGoodFormat();
         }
         else if (!emailIsWrite){
-            Toast.makeText(getApplicationContext(), "An e-mail must be write", Toast.LENGTH_LONG).show();
+            emailTextInputLayout.setError("Enter an e-mail");
+            nameTextInputLayout.setError(null);
+        }
+        else{
+            nameTextInputLayout.setError(null);
+            emailAsGoodFormat();
         }
     }
+
+    private boolean emailAsGoodFormat(){
+        emailIsCorrect = !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+        if (!emailIsCorrect){
+            emailTextInputLayout.setError("Pls enter a valid e-mail");
+            return false;
+        }
+        else {
+            emailTextInputLayout.setError(null);
+            return true;
+        }
+     }
 
     //----------------------------------------------------------------------------------------------
     // DATA
@@ -124,21 +140,25 @@ public class AddHouseSellerActivity extends AppCompatActivity {
     // Configure ViewModel
     private void configureViewModel(){
         AddHouseSellerViewModelFactory addHouseSellerViewModelFactory = Injection.providerAddHouseSellerViewModelFactory(getApplicationContext());
-        this.viewModel = ViewModelProviders.of(this, addHouseSellerViewModelFactory).get(AddHouseSellerViewModel.class);
+        this.viewModel = new ViewModelProvider(this, addHouseSellerViewModelFactory).get(AddHouseSellerViewModel.class);
     }
 
     // Crete House Seller
     private void createHouseSeller (){
         HouseSeller houseSeller = new HouseSeller(name, email);
-        this.viewModel.createHouseSeller(houseSeller);
+         this.viewModel.createHouseSeller(houseSeller);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     private void createToastAfterHouseSellerCreating(){
-        viewModel.getHouseSellersLIst()
+
+
+        /*viewModel.getHouseSellersLIst()
                 .observe(this, houseSellers -> Toast.makeText(getApplicationContext(),
-                        houseSellers.get(houseSellers.size()-1).getName() + "  " + houseSellers.get(houseSellers.size()-1).getEmail(),
+                        houseSellers.get(houseSellers.size()-1).getName() + ", ID :  " + houseSellers.get(houseSellers.size()-1).getId(),
                         Toast.LENGTH_LONG).show());
+
+         */
     }
 
 }

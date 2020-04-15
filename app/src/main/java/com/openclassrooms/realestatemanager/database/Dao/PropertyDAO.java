@@ -30,4 +30,7 @@ public interface PropertyDAO {
 
     @Query("DELETE FROM Property WHERE id = :propertyId")
     int deleteProperty(long propertyId);
+
+    @Query("SELECT * FROM Property ORDER BY id DESC LIMIT 1")
+    LiveData<Property> getLastPropertySaved();
 }

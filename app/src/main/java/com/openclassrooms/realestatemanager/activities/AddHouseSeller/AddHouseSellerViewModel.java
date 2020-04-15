@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager.activities.AddHouseSeller;
 
-import androidx.annotation.Nullable;
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -16,9 +17,6 @@ public class AddHouseSellerViewModel extends ViewModel {
     private final HouseSellerDataRepository houseSellerDataSource;
     private final Executor executor;
 
-    // --- DATA ---
-    @Nullable
-    private HouseSeller currentHouseSeller;
 
     // --- CONSTRUCTOR ---
     public AddHouseSellerViewModel (HouseSellerDataRepository houseSellerDataSource, Executor executor){
@@ -26,12 +24,18 @@ public class AddHouseSellerViewModel extends ViewModel {
         this.executor = executor;
     }
 
+    // --- DATA ---
+    private String userName;
+    private String userEmail;
+
+
     // --- FOR HOUSE SELLER ---
 
         // --- create ---
     public void createHouseSeller(HouseSeller houseSeller){
         executor.execute(()->{
-            houseSellerDataSource.createHouSeller(houseSeller);
+            long id =  houseSellerDataSource.createHouSeller(houseSeller);
+            Log.e("HouseSellerId", String.valueOf(id));
         });
     }
         // --- read ---

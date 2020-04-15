@@ -4,6 +4,8 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import java.util.Calendar;
+
 @Entity(foreignKeys ={
             @ForeignKey(entity = InterestPoint.class,
                 parentColumns = "id",
@@ -24,25 +26,25 @@ public class Property {
     private String description;
     private String address;
     private String Status;
-    private String createDate;
+    private Calendar createDate;
     private String SellDate;
-    private String interestPointId;
-    private String houseSellerId;
+    private long interestPointId;
+    private long houseSellerId;
 
     // --- CONSTRUCTORS ---
     public Property() {}
     public Property(int price, int area, int rooms, String type, String description,
-                    String address, String status, String sellStartingDate, String sellDate,
-                    String interestPointId, String houseSellerId) {
+                    String address, String status, Calendar sellStartingDate, String sellDate,
+                    long interestPointId, long houseSellerId) {
         this.price = price;
         this.area = area;
         this.rooms = rooms;
         this.type = type;
         this.description = description;
         this.address = address;
-        Status = status;
-        createDate = sellStartingDate;
-        SellDate = sellDate;
+        this.Status = status;
+        this.createDate = sellStartingDate;
+        this.SellDate = sellDate;
         this.interestPointId = interestPointId;
         this.houseSellerId = houseSellerId;
     }
@@ -57,10 +59,10 @@ public class Property {
     public String getDescription() {return description;}
     public String getAddress() {return address;}
     public String getStatus() {return Status;}
-    public String getCreateDate() {return createDate;}
+    public Calendar getCreateDate() {return createDate;}
     public String getSellDate() {return SellDate;}
-    public String getInterestPointId() {return interestPointId;}
-    public String getHouseSellerId() {return houseSellerId;}
+    public long getInterestPointId() {return interestPointId;}
+    public long getHouseSellerId() {return houseSellerId;}
 
 
     // --- SETTERS ---
@@ -72,9 +74,9 @@ public class Property {
     public void setDescription(String description) {this.description = description;}
     public void setAddress(String address) {this.address = address;}
     public void setStatus(String status) {Status = status;}
-    public void setCreateDate(String createDate) {
+    public void setCreateDate(Calendar createDate) {
         this.createDate = createDate;}
     public void setSellDate(String sellDate) {SellDate = sellDate;}
-    public void setInterestPointId(String interestPointId) {this.interestPointId = interestPointId;}
-    public void setHouseSellerId(String houseSellerId) {this.houseSellerId = houseSellerId;}
+    public void setInterestPointId(long interestPointId) {this.interestPointId = interestPointId;}
+    public void setHouseSellerId(long houseSellerId) {this.houseSellerId = houseSellerId;}
 }

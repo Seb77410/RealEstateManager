@@ -14,7 +14,7 @@ public class HouseSellerDataRepository {
     public HouseSellerDataRepository (HouseSellerDAO houseSellerDAO){this.houseSellerDAO = houseSellerDAO;}
 
     // --- CREATE ---
-    public void createHouSeller(HouseSeller houseSeller){this.houseSellerDAO.createHouseSeller(houseSeller);}
+    public long createHouSeller(HouseSeller houseSeller){ return this.houseSellerDAO.createHouseSeller(houseSeller);}
 
     // --- READ ---
     public LiveData<HouseSeller> getHouseSeller(String houseSellerId){return this.houseSellerDAO.getHouseSellerByName(houseSellerId);}
