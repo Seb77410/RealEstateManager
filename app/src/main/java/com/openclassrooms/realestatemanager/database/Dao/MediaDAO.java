@@ -7,6 +7,8 @@ import androidx.room.Query;
 
 import com.openclassrooms.realestatemanager.models.Media;
 
+import java.util.List;
+
 @Dao
 public interface MediaDAO {
 
@@ -21,4 +23,7 @@ public interface MediaDAO {
 
     @Query("DELETE FROM Media WHERE id = :mediaId")
     int deleteMedia(long mediaId);
+
+    @Query("SELECT * FROM Media WHERE propertyId = :propertyId")
+    LiveData<List<Media>> getMediaByPropertyId(long propertyId);
 }

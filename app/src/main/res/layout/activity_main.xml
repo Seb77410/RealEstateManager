@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.openclassrooms.realestatemanager.activities.MainActivity"
+    tools:context=".ui.activities.MainActivity"
     android:gravity="center">
 
     <androidx.appcompat.widget.Toolbar
@@ -19,6 +19,15 @@
         android:background="@color/primaryColor"
         android:theme="@style/ToolbarTheme"
         />
+
+    <FrameLayout
+        android:id="@+id/main_activity_list_frame_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_activity_toolbar" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

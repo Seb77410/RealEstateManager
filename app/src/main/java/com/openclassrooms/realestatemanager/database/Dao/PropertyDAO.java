@@ -33,4 +33,7 @@ public interface PropertyDAO {
 
     @Query("SELECT * FROM Property ORDER BY id DESC LIMIT 1")
     LiveData<Property> getLastPropertySaved();
+
+    @Query("SELECT * FROM Property")
+    LiveData<List<Property>> getAllProperties();
 }

@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activities.AddHouseSeller.AddHouseSellerActivity">
+        tools:context=".ui.activities.AddHouseSeller.AddHouseSellerActivity">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/add_house_seller_activity_toolbar"

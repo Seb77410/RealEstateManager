@@ -2,13 +2,17 @@ package com.openclassrooms.realestatemanager.injection;
 
 import android.content.Context;
 
-import com.openclassrooms.realestatemanager.activities.AddHouseSeller.AddHouseSellerViewModelFactory;
-import com.openclassrooms.realestatemanager.activities.AddProperties.AddPropertiesViewModelFactory;
+import androidx.fragment.app.FragmentActivity;
+
+import com.openclassrooms.realestatemanager.ui.activities.AddHouseSeller.AddHouseSellerViewModelFactory;
+import com.openclassrooms.realestatemanager.ui.activities.AddProperties.AddPropertiesViewModelFactory;
 import com.openclassrooms.realestatemanager.database.AppDatabase;
 import com.openclassrooms.realestatemanager.repositories.HouseSellerDataRepository;
 import com.openclassrooms.realestatemanager.repositories.InterestPointDataRepository;
 import com.openclassrooms.realestatemanager.repositories.MediaDataRepository;
 import com.openclassrooms.realestatemanager.repositories.PropertyDataRepository;
+import com.openclassrooms.realestatemanager.ui.fragments.propertiesLisFragment.PropertiesListViewModelFactory;
+import com.openclassrooms.realestatemanager.ui.fragments.propertyDetailsFragment.PropertyDetailsViewModelFactory;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -52,5 +56,20 @@ public class Injection {
         PropertyDataRepository dataSourceProperty = providerPropertyDataSource(context);
         Executor executor = provideExecutor();
         return new AddPropertiesViewModelFactory(dataSourceHouseSeller, dataSourceInterestPoint, dataSourceMedia, dataSourceProperty,executor);
+    }
+
+
+    public static PropertiesListViewModelFactory providerPropertiesListViewModelFactory(Context context) {
+        PropertyDataRepository dataSourceProperty = providerPropertyDataSource(context);
+        MediaDataRepository dataSourceMedia = providerMediaDataSource(context);
+        Executor executor = provideExecutor();
+        return new PropertiesListViewModelFactory(dataSourceProperty, dataSourceMedia, executor );
+    }
+
+    public static PropertyDetailsViewModelFactory providerPropertyDetailsViewModelFactory(Context context) {
+        InterestPointDataRepository dataSourceInterestPoint = providerInterestPointDataSource(context);
+        MediaDataRepository dataSourceMedia = providerMediaDataSource(context);
+        Executor executor = provideExecutor();
+        return new PropertyDetailsViewModelFactory(dataSourceInterestPoint, dataSourceMedia, executor);
     }
 }

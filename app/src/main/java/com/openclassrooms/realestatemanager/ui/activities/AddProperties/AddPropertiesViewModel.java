@@ -1,5 +1,6 @@
-package com.openclassrooms.realestatemanager.activities.AddProperties;
+package com.openclassrooms.realestatemanager.ui.activities.AddProperties;
 
+import android.content.Context;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
@@ -13,6 +14,7 @@ import com.openclassrooms.realestatemanager.repositories.HouseSellerDataReposito
 import com.openclassrooms.realestatemanager.repositories.InterestPointDataRepository;
 import com.openclassrooms.realestatemanager.repositories.MediaDataRepository;
 import com.openclassrooms.realestatemanager.repositories.PropertyDataRepository;
+import com.openclassrooms.realestatemanager.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,7 +81,7 @@ public class AddPropertiesViewModel extends ViewModel {
 
 
     // --- FOR PROPERTY AND DATA ---
-    public void createPropertyAndData(InterestPoint interestPoint, Property property, ArrayList<Media> photoList){
+    public void createPropertyAndData(InterestPoint interestPoint, Property property, ArrayList<Media> photoList, Context context){
         executor.execute(()->{
             long interestPointId = interestPointDataSource.createInterestPoint(interestPoint);
             Log.e("InterestPointId", String.valueOf(interestPointId));
@@ -92,6 +94,11 @@ public class AddPropertiesViewModel extends ViewModel {
                     media.setPropertyId(propertyId);
                     long mediaId = mediaDataSource.createMedia(media);
                     Log.e("mediaId", String.valueOf(mediaId));
+                    if(mediaId >= 0){
+                        Utils.startNotification("Property saved", "The property has been correctly saved", context);
+                    }else{
+                        Utils.startNotification("Property not saved", "An error occurred", context);
+                    }
                 });
                 }
             });

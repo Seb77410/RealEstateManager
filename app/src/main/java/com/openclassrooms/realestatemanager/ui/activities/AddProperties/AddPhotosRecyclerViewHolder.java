@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.activities.AddProperties;
+package com.openclassrooms.realestatemanager.ui.activities.AddProperties;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,7 +13,6 @@ import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.textfield.TextInputLayout;
 import com.openclassrooms.realestatemanager.R;
-import com.openclassrooms.realestatemanager.activities.AddProperties.AddPhotosRecyclerAdapter;
 import com.openclassrooms.realestatemanager.models.Media;
 
 import java.util.ArrayList;

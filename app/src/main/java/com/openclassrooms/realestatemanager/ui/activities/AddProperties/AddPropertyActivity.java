@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.activities.AddProperties;
+package com.openclassrooms.realestatemanager.ui.activities.AddProperties;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
@@ -23,7 +23,6 @@ import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
-import com.openclassrooms.realestatemanager.BottomSheetAddPhoto;
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.injection.Injection;
 import com.openclassrooms.realestatemanager.models.HouseSeller;
@@ -333,7 +332,7 @@ public class AddPropertyActivity extends AppCompatActivity {
                 "For sale", Calendar.getInstance(), null, interestPoint.getId(),
                 houseSellerList.get(propertyHouseSellerSpinner.getSelectedItemPosition()).getId());
 
-        viewModel.createPropertyAndData(interestPoint, property, mediaList);
+        viewModel.createPropertyAndData(interestPoint, property, mediaList, getApplicationContext());
     }
 
 }

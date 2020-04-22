@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.activities.AddProperties;
+package com.openclassrooms.realestatemanager.ui.activities.AddProperties;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;

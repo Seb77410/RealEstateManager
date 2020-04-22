@@ -1,22 +1,30 @@
-package com.openclassrooms.realestatemanager.activities.AddHouseSeller;
+package com.openclassrooms.realestatemanager.ui.activities.AddHouseSeller;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
 import androidx.core.content.res.ResourcesCompat;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.injection.Injection;
 import com.openclassrooms.realestatemanager.models.HouseSeller;
+import com.openclassrooms.realestatemanager.ui.activities.MainActivity;
+import com.openclassrooms.realestatemanager.utils.MyConstants;
 
 import java.util.Objects;
 
@@ -72,7 +80,6 @@ public class AddHouseSellerActivity extends AppCompatActivity {
             nameTextInputLayout.setError(null);
             if(emailAsGoodFormat()) {
                 createHouseSeller();
-                createToastAfterHouseSellerCreating();
             }
         }
         else{
@@ -146,20 +153,10 @@ public class AddHouseSellerActivity extends AppCompatActivity {
     // Crete House Seller
     private void createHouseSeller (){
         HouseSeller houseSeller = new HouseSeller(name, email);
-         this.viewModel.createHouseSeller(houseSeller);
+         this.viewModel.createHouseSeller(houseSeller, getApplicationContext());
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    private void createToastAfterHouseSellerCreating(){
 
-
-        /*viewModel.getHouseSellersLIst()
-                .observe(this, houseSellers -> Toast.makeText(getApplicationContext(),
-                        houseSellers.get(houseSellers.size()-1).getName() + ", ID :  " + houseSellers.get(houseSellers.size()-1).getId(),
-                        Toast.LENGTH_LONG).show());
-
-         */
-    }
 
 }
 

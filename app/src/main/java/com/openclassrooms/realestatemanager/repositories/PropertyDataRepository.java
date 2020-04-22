@@ -19,7 +19,8 @@ public class PropertyDataRepository {
     // --- READE ---
     public LiveData<Property> getProperty(long propertyId){return this.propertyDAO.getPropertyById(propertyId);}
     public LiveData<List<Property>> getProperties(long houseSellerId){return this.propertyDAO.getPropertiesByHouseSellerId(houseSellerId);}
-    public LiveData<Property> getLastPropertySaved(){return this.propertyDAO.getLastPropertySaved();};
+    public LiveData<Property> getLastPropertySaved(){return this.propertyDAO.getLastPropertySaved();}
+    public LiveData<List<Property>> getAllProperties() {return this.propertyDAO.getAllProperties();}
 
 
     // --- UPDATE ---
@@ -27,7 +28,6 @@ public class PropertyDataRepository {
 
     // --- DELETE ---
     public void deleteProperty(long propertyId){this.propertyDAO.deleteProperty(propertyId);}
-
 
 
 }

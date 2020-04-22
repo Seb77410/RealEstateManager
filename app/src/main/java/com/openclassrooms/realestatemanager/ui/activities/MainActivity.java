@@ -1,8 +1,9 @@
-package com.openclassrooms.realestatemanager.activities;
+package com.openclassrooms.realestatemanager.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -10,10 +11,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 
-import com.openclassrooms.realestatemanager.activities.AddHouseSeller.AddHouseSellerActivity;
-import com.openclassrooms.realestatemanager.activities.AddProperties.AddPropertyActivity;
+import com.openclassrooms.realestatemanager.ui.activities.AddHouseSeller.AddHouseSellerActivity;
+import com.openclassrooms.realestatemanager.ui.activities.AddProperties.AddPropertyActivity;
 import com.openclassrooms.realestatemanager.R;
+import com.openclassrooms.realestatemanager.ui.fragments.propertiesLisFragment.PropertiesListFragment;
+import com.openclassrooms.realestatemanager.ui.fragments.propertyDetailsFragment.PropertyDetailsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,6 +43,10 @@ public class MainActivity extends AppCompatActivity {
     //----------------------------------------------------------------------------------------------
     Toolbar toolbar;
     Menu menu;
+    FrameLayout listFrameLayout;
+    FrameLayout detailsFrameLayout;
+    Fragment listFragment;
+    Fragment detailsFragment;
 
     //----------------------------------------------------------------------------------------------
     // onCreate
@@ -49,7 +57,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         toolbar = findViewById(R.id.main_activity_toolbar);
+        listFrameLayout = findViewById(R.id.main_activity_list_frame_layout);
+        detailsFrameLayout = findViewById(R.id.main_activity_details_frame_layout);
         this.configureToolbar();
+        this.configureAndShowListFragment();
     }
 
     //----------------------------------------------------------------------------------------------
@@ -113,5 +124,14 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AddHouseSellerActivity.class);
         startActivity(intent);
     }
+
+
+    private void configureAndShowListFragment(){
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_activity_list_frame_layout, new PropertiesListFragment())
+                .commit();
+    }
+
+
 
 }

@@ -89,6 +89,7 @@ public class PropertiesListFragment extends Fragment {
         // Get properties list
         viewModel.getPropertiesList().observe(getViewLifecycleOwner(), propertiesList ->{
             this.propertiesList = propertiesList;
+            Log.e("Properties list Frag", " List size = " + propertiesList.size());
             propertiesPhotoList = new Uri[propertiesList.size()];
             // Get preview photo for all properties
             for(int x = 0; x < propertiesList.size(); x++){
@@ -121,24 +122,25 @@ public class PropertiesListFragment extends Fragment {
     }
 
     private void configureAndShowDetailsFragment(Property property) {
-        detailsFragment = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.activity_main_frame_layout2);
+        detailsFragment = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.main_activity_details_frame_layout);
         //A - We only add DetailFragment in Tablet mode (If found frame_layout_detail)
-        if (getActivity().findViewById(R.id.activity_main_frame_layout2) != null) {
+        if (getActivity().findViewById(R.id.main_activity_details_frame_layout) != null) {
             detailsFragment = PropertyDetailsFragment.newInstance(property);
             getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.activity_main_frame_layout2, detailsFragment)
+                    .replace(R.id.main_activity_details_frame_layout, detailsFragment)
                     .commit();
         }
         else{
             detailsFragment = PropertyDetailsFragment.newInstance(property);
             getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.activity_main_frame_layout, detailsFragment)
+                    .replace(R.id.main_activity_list_frame_layout, detailsFragment)
                     .commit();
         }
     }
 
     private void startDefaultDetailsFragmentForTablet(){
-        if(propertiesList.size()<0){
+        detailsFragment = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.main_activity_details_frame_layout);
+        if(propertiesList.size()>=1 && getActivity().findViewById(R.id.main_activity_details_frame_layout) != null){
             configureAndShowDetailsFragment(propertiesList.get(0));
         }
     }
