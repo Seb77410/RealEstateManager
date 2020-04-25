@@ -25,6 +25,7 @@ import com.openclassrooms.realestatemanager.injection.Injection;
 import com.openclassrooms.realestatemanager.models.HouseSeller;
 import com.openclassrooms.realestatemanager.ui.activities.MainActivity;
 import com.openclassrooms.realestatemanager.utils.MyConstants;
+import com.openclassrooms.realestatemanager.utils.Utils;
 
 import java.util.Objects;
 

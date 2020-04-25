@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.models.HouseSeller;
 import com.openclassrooms.realestatemanager.repositories.HouseSellerDataRepository;
 import com.openclassrooms.realestatemanager.utils.Utils;
@@ -34,9 +35,9 @@ public class AddHouseSellerViewModel extends ViewModel {
             long id =  houseSellerDataSource.createHouSeller(houseSeller);
             Log.e("HouseSellerId", String.valueOf(id));
             if(id >= 0){
-                Utils.startNotification("House Seller saved", "The house seller has been correctly saved", context);
+                Utils.startNotification(context.getString(R.string.notif_success_house_seller_title), context.getString(R.string.notif_success_house_seller_content), context);
             }else{
-                Utils.startNotification("House Seller not saved", "An error occurred", context);
+                Utils.startNotification(context.getString(R.string.notif_error_house_seller_title), context.getString(R.string.notif_error_house_seller_content), context);
             }
         });
     }

@@ -33,7 +33,7 @@ import static junit.framework.TestCase.assertEquals;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */@RunWith(AndroidJUnit4.class)
 public class DatabaseDaoTest {
-
+/*
     // For data
     private AppDatabase appDatabase;
     private HouseSeller houseSeller = new HouseSeller("BeauChamp", "beauchamp@gmail.com");
@@ -98,4 +98,6 @@ public class DatabaseDaoTest {
         //noinspection unchecked
         return (T) data[0];
     }
+
+ */
 }

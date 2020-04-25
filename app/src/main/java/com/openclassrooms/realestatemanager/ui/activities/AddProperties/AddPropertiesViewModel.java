@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.models.HouseSeller;
 import com.openclassrooms.realestatemanager.models.InterestPoint;
 import com.openclassrooms.realestatemanager.models.Media;
@@ -95,9 +96,9 @@ public class AddPropertiesViewModel extends ViewModel {
                     long mediaId = mediaDataSource.createMedia(media);
                     Log.e("mediaId", String.valueOf(mediaId));
                     if(mediaId >= 0){
-                        Utils.startNotification("Property saved", "The property has been correctly saved", context);
+                        Utils.startNotification(context.getString(R.string.notif_success_property_title), context.getString(R.string.notif_success_property_content), context);
                     }else{
-                        Utils.startNotification("Property not saved", "An error occurred", context);
+                        Utils.startNotification(context.getString(R.string.notif_error_property_title), context.getString(R.string.notif_error_property_content), context);
                     }
                 });
                 }

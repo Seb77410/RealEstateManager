@@ -22,7 +22,6 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.gson.Gson;
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.injection.Injection;
 import com.openclassrooms.realestatemanager.models.HouseSeller;
@@ -186,12 +185,7 @@ public class AddPropertyActivity extends AppCompatActivity {
             boolean photoContentAsNoError = photoContentIsOK(mediaList);
             boolean photoCommentAsNoError = photosCommentsAreOK();
             if (editTextContentAsNoError && photoContentAsNoError && photoCommentAsNoError){
-                //createInterestPoint();
-                //createProperty();
-                //saveMedias();
-
                 createPropertyAndData();
-
                 if (mediaList.get(0).getComment() == null) {
                     Log.e("MEDIA LIST", " comment = null" );
                 }else {
@@ -259,50 +253,6 @@ public class AddPropertyActivity extends AppCompatActivity {
         return allMediaHaveComment;
     }
 
-    private void createInterestPoint(){
-        interestsPointList = new ArrayList<>();
-        if(schoolCheckbox.isChecked()){
-            interestsPointList.add(schoolCheckbox.getText().toString());
-        }
-        if(businessCheckbox.isChecked()){
-            interestsPointList.add(businessCheckbox.getText().toString());
-        }
-        if(gardenCheckbox.isChecked()){
-            interestsPointList.add(gardenCheckbox.getText().toString());
-        }
-        if(transportCheckbox.isChecked()){
-            interestsPointList.add(transportCheckbox.getText().toString());
-        }
-
-        Log.e("Interest Array", String.valueOf(interestsPointList));
-        // TODO : transformer l'arrayList en String?? ou le laisser en Array ??
-        Gson gson = new Gson();
-        String sInterestsPointsList = gson.toJson(interestsPointList);
-        Log.e("Interest string Array", sInterestsPointsList);
-
-        interestPoint = new InterestPoint(sInterestsPointsList);
-        viewModel.createInterestPoint(interestPoint);
-        viewModel.getLastInterestPointSaved().observe(this, interestPoint1 ->
-                interestPoint.setId(interestPoint1.getId()));
-        Log.e("Interest point id", String.valueOf(interestPoint.getId()));
-
-    }
-
-
-    private void createProperty(){
-
-        property = new Property(getIntFromInputLayoutValue(priceEditText), getIntFromInputLayoutValue(surfaceEditText),
-                getIntFromInputLayoutValue(roomNumberEditText), propertyTypeSpinner.getSelectedItem().toString(),
-                getStringFromInputLayoutValue(descriptionEditText), getStringFromInputLayoutValue(addressEditText),
-                "For sale", Calendar.getInstance(), null, interestPoint.getId(),
-                houseSellerList.get(propertyHouseSellerSpinner.getSelectedItemPosition()).getId());
-
-        viewModel.createProperty(property);
-        viewModel.getLastPropertySaved().observe(this, property1 ->
-                property.setId(property1.getId()));
-        Log.e("Property id", String.valueOf(property.getId()));
-    }
-
     private void createPropertyAndData(){
         interestsPointList = new ArrayList<>();
         if(schoolCheckbox.isChecked()){
@@ -318,13 +268,9 @@ public class AddPropertyActivity extends AppCompatActivity {
             interestsPointList.add(transportCheckbox.getText().toString());
         }
 
-        Log.e("Interest Array", String.valueOf(interestsPointList));
-        // TODO : transformer l'arrayList en String?? ou le laisser en Array ??
-        Gson gson = new Gson();
-        String sInterestsPointsList = gson.toJson(interestsPointList);
-        Log.e("Interest string Array", sInterestsPointsList);
+        //Log.e("Interest Array", String.valueOf(interestsPointList));
 
-        interestPoint = new InterestPoint(sInterestsPointsList);
+        interestPoint = new InterestPoint(interestsPointList);
 
         property = new Property(getIntFromInputLayoutValue(priceEditText), getIntFromInputLayoutValue(surfaceEditText),
                 getIntFromInputLayoutValue(roomNumberEditText), propertyTypeSpinner.getSelectedItem().toString(),

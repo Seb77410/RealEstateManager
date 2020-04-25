@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/property_details_fragment_recyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3"
+        />
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/property_details_fragment_scroll_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/property_details_fragment_recyclerView">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <LinearLayout
+                android:id="@+id/property_details_fragment_title_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                >
+            <TextView
+                android:id="@+id/property_details_fragment_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Appartement"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+
+                />
+
+            <TextView
+                android:id="@+id/property_details_fragment_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="300000"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:drawableEnd="@drawable/ic_euro_24px"
+                android:gravity="center_vertical"
+                />
+
+                <LinearLayout
+                    android:id="@+id/property_details_fragment_sell_date_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:id="@+id/property_details_fragment_sell_date_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="For sell since"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black"
+                        android:textStyle="italic"
+                        />
+                    <TextView
+                        android:id="@+id/property_details_fragment_sell_date_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="27/171986"
+                        android:gravity="end"
+                        />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/property_details_fragment_description_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/property_details_fragment_title_container"
+                app:layout_constraintStart_toStartOf="@+id/property_details_fragment_title_container"
+                app:layout_constraintEnd_toEndOf="@+id/property_details_fragment_title_container"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:id="@+id/property_details_fragment_description_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="  Description"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="italic"
+                    android:drawableStart="@drawable/ic_description_24px"
+                    android:gravity="center_vertical"
+                    />
+
+                <TextView
+                    android:id="@+id/property_details_fragment_description_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Très belle maison de ce que tu veux là où tu veux, ett blablabla et blalbla blal vlalalal"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/property_details_fragment_surface_and_room_number_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/property_details_fragment_description_container"
+                app:layout_constraintStart_toStartOf="@+id/property_details_fragment_description_container"
+                app:layout_constraintEnd_toEndOf="@+id/property_details_fragment_description_container"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+
+                >
+
+                <LinearLayout
+                    android:id="@+id/property_details_fragment_surface_container"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:orientation="vertical"
+                >
+                    <TextView
+                        android:id="@+id/property_details_fragment_surface_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="  Surface"
+                        android:textStyle="italic"
+                        android:textColor="@android:color/black"
+                        android:drawableStart="@drawable/ic_m2_black_24px"
+                        android:textSize="18sp"
+                        android:gravity="center_vertical"
+                        />
+                    <TextView
+                        android:id="@+id/property_details_fragment_surface_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="158 m²"
+                        android:layout_marginStart="35dp"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/property_details_fragment_room_number_container"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:id="@+id/property_details_fragment_room_number_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="  Rooms number"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp"
+                        android:textStyle="italic"
+                        android:drawableStart="@drawable/ic_meeting_room_24px"
+                        android:gravity="center_vertical"
+                        />
+                    <TextView
+                        android:id="@+id/property_details_fragment_room_number_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="5"
+                        android:layout_marginStart="35dp"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/property_details_fragment_nearby_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/property_details_fragment_surface_and_room_number_container"
+                app:layout_constraintStart_toStartOf="@+id/property_details_fragment_surface_and_room_number_container"
+                app:layout_constraintEnd_toEndOf="@+id/property_details_fragment_surface_and_room_number_container"
+                android:orientation="vertical"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="20dp"
+                >
+
+                <TextView
+                    android:id="@+id/property_details_fragment_nearby_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="  Nearby"
+                    android:textSize="18sp"
+                    android:textStyle="italic"
+                    android:textColor="@android:color/black"
+                    android:drawableStart="@drawable/ic_nearby_black_24dp"
+                    />
+                <LinearLayout
+                    android:id="@+id/property_details_fragment_nearby_content_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/property_details_fragment_address_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/property_details_fragment_nearby_container"
+                app:layout_constraintStart_toStartOf="@+id/property_details_fragment_nearby_container"
+                app:layout_constraintEnd_toEndOf="@+id/property_details_fragment_nearby_container"
+                android:orientation="vertical"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="15dp"
+                >
+
+                <TextView
+                    android:id="@+id/property_details_fragment_address_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_home_marker_40"
+                    android:text="Address"
+                    android:textSize="18sp"
+                    android:textStyle="italic"
+                    android:textColor="@android:color/black"
+                    android:gravity="center_vertical"
+                    />
+                <TextView
+                    android:id="@+id/property_details_fragment_address_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="86 rue jean jaures, 77410 CLAYE SOUILLY"
+                    android:layout_marginStart="10dp"
+                    />
+
+                <ImageView
+                    android:id="@+id/property_details_fragment_address_map_image"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/properties_list_fragment_empty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/property_details_fragment_address_container"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="75dp"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/property_details_fragment_edit_floating_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@android:color/black"
+        android:text="edit property"
+        android:textColor="@android:color/white"
+        app:backgroundTint="@android:color/white"
+        app:icon="@drawable/ic_feather_edit_black_24dp"
+        app:iconTint="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:rippleColor="@android:color/white" />
+
+    <!--
+        <fragment
+            android:id="@+id/property_details_fragment_map_fragment"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toTopOf="@+id/guideline2"
+            map:cameraZoom="13"
+            map:liteMode="true"
+            map:mapType="normal"/>
+-->
+</androidx.constraintlayout.widget.ConstraintLayout>

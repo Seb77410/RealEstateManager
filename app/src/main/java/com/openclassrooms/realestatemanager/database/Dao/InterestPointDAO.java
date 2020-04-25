@@ -30,4 +30,5 @@ public interface InterestPointDAO {
 
     @Query("SELECT * FROM InterestPoint ORDER BY id DESC LIMIT 1")
     LiveData<InterestPoint> getLastInterestPointSaved();
+
 }

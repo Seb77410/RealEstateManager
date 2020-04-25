@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager.ui.fragments.propertiesLisFragment;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -14,9 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.injection.Injection;
 import com.openclassrooms.realestatemanager.models.Property;
+import com.openclassrooms.realestatemanager.ui.activities.PropertyDetailsActivity;
 import com.openclassrooms.realestatemanager.ui.fragments.propertyDetailsFragment.PropertyDetailsFragment;
 import com.openclassrooms.realestatemanager.utils.RecyclerViewClickSupport;
 
@@ -89,7 +92,7 @@ public class PropertiesListFragment extends Fragment {
         // Get properties list
         viewModel.getPropertiesList().observe(getViewLifecycleOwner(), propertiesList ->{
             this.propertiesList = propertiesList;
-            Log.e("Properties list Frag", " List size = " + propertiesList.size());
+           // Log.e("Properties list Frag", " List size = " + propertiesList.size());
             propertiesPhotoList = new Uri[propertiesList.size()];
             // Get preview photo for all properties
             for(int x = 0; x < propertiesList.size(); x++){
@@ -104,7 +107,7 @@ public class PropertiesListFragment extends Fragment {
                     }
                 });
             }
-            Log.e("PropertiesPhotosList", "Inside fragment, preview photo list = " + propertiesPreviewPhotoList);
+            // Log.e("PropertiesPhotosList", "Inside fragment, preview photo list = " + propertiesPreviewPhotoList);
         });
     }
 
@@ -131,10 +134,17 @@ public class PropertiesListFragment extends Fragment {
                     .commit();
         }
         else{
+            Intent intent = new Intent(getContext(), PropertyDetailsActivity.class);
+            Gson gson = new Gson();
+            String argument = gson.toJson(property);
+            intent.putExtra("property", argument);
+            startActivity(intent);
+            /*
             detailsFragment = PropertyDetailsFragment.newInstance(property);
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.main_activity_list_frame_layout, detailsFragment)
                     .commit();
+             */
         }
     }
 

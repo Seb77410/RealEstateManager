@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name" translatable="false">Real Estate Manager</string>
+    <string name="add_menu_title">Add menu main</string>
 
+    <!-- Toolbar titles -->
+    <string name="add_house_seller">Add house seller</string>
+    <string name="add_property">Add property</string>
+
+    <!-- Add property activity .xml values -->
     <string name="price" translatable="true">Price</string>
     <string name="address" translatable="true">Address</string>
     <string name="surface" translatable="true">Surface</string>
@@ -10,14 +16,28 @@
     <string name="add_photo" translatable="true">Add photo</string>
     <string name="house_seller" translatable="true">House seller</string>
 
-    <string name="add_menu_title">Add menu main</string>
-    <string name="add_house_seller">Add house seller</string>
+    <!-- Add House seller activity .xml values -->
     <string name="e_mail">E-mail</string>
     <string name="name">Name</string>
     <string name="save_house_seller">Save House Seller</string>
-    <string name="add_property">Add property</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- For notifications -->
+        <!-- Save House Seller activity -->
+    <string name="notif_success_house_seller_title">House Seller saved</string>
+    <string name="notif_success_house_seller_content">The house seller has been correctly saved</string>
+    <string name="notif_error_house_seller_title">House Seller not saved</string>
+    <string name="notif_error_house_seller_content">An error occurred</string>
+        <!-- Save Property activity -->
+    <string name="notif_success_property_title">Property saved</string>
+    <string name="notif_success_property_content">The property has been correctly saved</string>
+    <string name="notif_error_property_title">Property not saved</string>
+    <string name="notif_error_property_content">An error occurred</string>
+
+
+
+    <string name="map_api_key" translatable="false">AIzaSyBaAwomMKgWDHN0nAzAvlUR-VRDolCplKw</string>
+
+
+
 
 </resources>

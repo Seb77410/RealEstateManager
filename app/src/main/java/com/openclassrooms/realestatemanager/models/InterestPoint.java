@@ -10,18 +10,18 @@ public class InterestPoint {
 
     @PrimaryKey(autoGenerate = true)
     private long id;
-    private String category;
+    private ArrayList<String> category;
 
     // --- CONSTRUCTORS ---
-    public InterestPoint(String category) {
+    public InterestPoint(ArrayList<String> category) {
         this.category = category;
     }
 
     // --- GETTER ---
     public long getId() {return id;}
-    public String getCategory() {return category;}
+    public ArrayList<String> getCategory() {return category;}
 
     // --- SETTERS ---
     public void setId(long id) {this.id = id;}
-    public void setCategory(String category) {this.category = category;}
+    public void setCategory(ArrayList<String> category) {this.category = category;}
 }
