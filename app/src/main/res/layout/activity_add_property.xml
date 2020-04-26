@@ -37,9 +37,9 @@
                 android:id="@+id/add_property_type_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="@+id/add_property_house_seller_layout"
-                app:layout_constraintStart_toStartOf="@+id/add_property_house_seller_layout"
-                app:layout_constraintTop_toBottomOf="@+id/add_property_house_seller_layout"
+                app:layout_constraintEnd_toEndOf="@+id/add_property_sold_and_house_seller_layout"
+                app:layout_constraintStart_toStartOf="@+id/add_property_sold_and_house_seller_layout"
+                app:layout_constraintTop_toBottomOf="@+id/add_property_sold_and_house_seller_layout"
                 android:layout_marginTop="20dp"
                 >
 
@@ -61,14 +61,14 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/add_property_activity_textView_type"
                     android:layout_alignStart="@+id/add_property_activity_textView_type"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp" />
             </RelativeLayout>
 
 
             <RelativeLayout
-                android:id="@+id/add_property_house_seller_layout"
+                android:id="@+id/add_property_sold_and_house_seller_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -76,13 +76,30 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
+                android:layout_marginStart="10dp"
                 >
 
+                <Switch
+                    android:id="@+id/add_property_activity_property_sold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Property is sold   "
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <LinearLayout
+                    android:id="@+id/add_property_activity_house_seller_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
                 <TextView
                     android:id="@+id/add_property_house_seller_textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
                     android:text="House seller :"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -95,9 +112,10 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/add_property_house_seller_textView"
                     android:layout_alignStart="@+id/add_property_house_seller_textView"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp"
                     />
+                </LinearLayout>
             </RelativeLayout>
 
             <com.google.android.material.textfield.TextInputLayout

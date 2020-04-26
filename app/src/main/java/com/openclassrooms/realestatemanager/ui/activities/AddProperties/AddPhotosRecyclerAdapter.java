@@ -19,10 +19,18 @@ public class AddPhotosRecyclerAdapter extends RecyclerView.Adapter<AddPhotosRecy
     private RequestManager glide;
     private ArrayList<Media> mediaList;
     private ArrayList<Boolean> mediaHaveComment;
+    private ArrayList<Long> mediaToDelete;
 
     public AddPhotosRecyclerAdapter (ArrayList<Media> mediaList, ArrayList<Boolean> mediaHaveComment,RequestManager glide){
         this.mediaList = mediaList;
         this.mediaHaveComment = mediaHaveComment;
+        this.glide = glide;
+    }
+
+    public AddPhotosRecyclerAdapter (ArrayList<Media> mediaList, ArrayList<Boolean> mediaHaveComment, ArrayList<Long> mediaToDelete,RequestManager glide){
+        this.mediaList = mediaList;
+        this.mediaHaveComment = mediaHaveComment;
+        this.mediaToDelete = mediaToDelete;
         this.glide = glide;
     }
 
@@ -38,7 +46,11 @@ public class AddPhotosRecyclerAdapter extends RecyclerView.Adapter<AddPhotosRecy
 
     @Override
     public void onBindViewHolder(@NonNull AddPhotosRecyclerViewHolder holder, int position) {
-        holder.updateWithUriList(mediaList, mediaHaveComment,glide, this);
+        if (mediaToDelete != null) {
+            holder.updateWithUriList(mediaList, mediaHaveComment, mediaToDelete, glide, this);
+        } else {
+            holder.updateWithUriList(mediaList, mediaHaveComment, glide, this);
+        }
     }
 
     @Override

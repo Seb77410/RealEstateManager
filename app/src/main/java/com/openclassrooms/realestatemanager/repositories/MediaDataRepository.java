@@ -21,6 +21,8 @@ public class MediaDataRepository {
     public LiveData<List<Media>> getMediaByPropertyId(long propertyId) { return this.mediaDAO.getMediaByPropertyId(propertyId);}
     // --- DELETE ---
     public void deleteMedia(long mediaId){this.mediaDAO.deleteMedia(mediaId);}
+    // --- UPDATE ---
+    public void updateMedia(Media media){this.mediaDAO.updateMedia(media);}
 
 
 }

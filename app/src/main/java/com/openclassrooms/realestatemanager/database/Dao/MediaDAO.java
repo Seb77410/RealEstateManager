@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.openclassrooms.realestatemanager.models.Media;
 
@@ -26,4 +27,7 @@ public interface MediaDAO {
 
     @Query("SELECT * FROM Media WHERE propertyId = :propertyId")
     LiveData<List<Media>> getMediaByPropertyId(long propertyId);
+
+    @Update
+    int updateMedia(Media media);
 }

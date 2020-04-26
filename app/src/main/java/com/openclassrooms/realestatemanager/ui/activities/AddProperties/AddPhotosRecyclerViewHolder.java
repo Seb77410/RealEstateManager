@@ -25,6 +25,7 @@ public class AddPhotosRecyclerViewHolder extends RecyclerView.ViewHolder {
     private ImageButton deleteButton;
     private ArrayList<Media> mediaList = new ArrayList<>();
     private ArrayList<Boolean> mediaHaveComment = new ArrayList<>();
+    private ArrayList<Long> mediaToDelete;
 
     AddPhotosRecyclerViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -54,6 +55,23 @@ public class AddPhotosRecyclerViewHolder extends RecyclerView.ViewHolder {
         updateImage(glide);
         deletePhoto(addPhotosRecyclerAdapter);
         checkForCommentError();
+        setComment();
+    }
+
+    void updateWithUriList(ArrayList<Media> mediaList,ArrayList<Boolean> mediaHaveComment , ArrayList<Long> mediaToDelete,RequestManager glide, AddPhotosRecyclerAdapter addPhotosRecyclerAdapter){
+        this.mediaList = mediaList;
+        this.mediaHaveComment = mediaHaveComment;
+        this.mediaToDelete = mediaToDelete;
+        updateImage(glide);
+        deletePhoto(addPhotosRecyclerAdapter);
+        checkForCommentError();
+        setComment();
+    }
+
+    private void setComment() {
+        if (mediaList.get(getAdapterPosition()).getComment() != null){
+            Objects.requireNonNull(textInputLayout.getEditText()).setText(mediaList.get(getAdapterPosition()).getComment());
+        }
     }
 
     private void updateImage(RequestManager glide) {
@@ -71,6 +89,9 @@ public class AddPhotosRecyclerViewHolder extends RecyclerView.ViewHolder {
     }
     private void deletePhoto(AddPhotosRecyclerAdapter addPhotosRecyclerAdapter){
         deleteButton.setOnClickListener(v -> {
+            if(mediaToDelete!= null){
+                mediaToDelete.add(mediaList.get(getAdapterPosition()).getId());
+            }
             Objects.requireNonNull(textInputLayout.getEditText()).setText(null);
             mediaHaveComment.remove(getAdapterPosition());
             mediaList.remove(getAdapterPosition());

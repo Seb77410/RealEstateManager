@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-public class AddPropertiesViewModel extends ViewModel {
+class AddPropertiesViewModel extends ViewModel {
 
     // --- Repositories ---
     private final HouseSellerDataRepository houseSellerDataSource;
@@ -31,8 +31,8 @@ public class AddPropertiesViewModel extends ViewModel {
     private final Executor executor;
 
     // --- Constructors ---
-    public AddPropertiesViewModel(HouseSellerDataRepository houseSellerDataSource, InterestPointDataRepository interestPointDataSource,
-                                  MediaDataRepository mediaDataSource, PropertyDataRepository propertyDataSource, Executor executor){
+    AddPropertiesViewModel(HouseSellerDataRepository houseSellerDataSource, InterestPointDataRepository interestPointDataSource,
+                           MediaDataRepository mediaDataSource, PropertyDataRepository propertyDataSource, Executor executor){
         this.houseSellerDataSource = houseSellerDataSource;
         this.interestPointDataSource = interestPointDataSource;
         this.mediaDataSource = mediaDataSource;
@@ -41,48 +41,25 @@ public class AddPropertiesViewModel extends ViewModel {
     }
 
     // --- For House Seller ---
-        // --- Read ---
-    public LiveData<List<HouseSeller>> getHouseSellersLIst(){
+    LiveData<List<HouseSeller>> getHouseSellersLIst(){
         return houseSellerDataSource.getHouseSellersList();
     }
 
     // --- For Interests Points ---
-    public void createInterestPoint(InterestPoint interestPoint){
-        executor.execute(()->{
-        long interestPointId = interestPointDataSource.createInterestPoint(interestPoint);
-        Log.e("InterestPointId", String.valueOf(interestPointId));
-        });
+
+    LiveData<InterestPoint> getInterestPointById(long interestPointId) {
+        return interestPointDataSource.getInterestPoint(interestPointId);
     }
 
-    // --- For Property ---
-    public void createProperty(Property property){
-        executor.execute(()-> {
-            propertyDataSource.createProperty(property);
-        });
+        // --- For Media ---
+    LiveData<List<Media>> getMediaByPropertyId(long propertyId) {
+        return mediaDataSource.getMediaByPropertyId(propertyId);
     }
 
-    // --- For Media ---
-    public void createMedia(Media media){
-        executor.execute(()-> {
-            mediaDataSource.createMedia(media);
-        });
-    }
-
-    // --- read ---
-    public LiveData<InterestPoint> getInterestPointByList(String interestPointList) {
-        return interestPointDataSource.getInterestPointByList(interestPointList);}
-
-    public LiveData<InterestPoint> getLastInterestPointSaved(){
-        return interestPointDataSource.getLastInterestPointSaved();
-    }
-
-    public LiveData<Property> getLastPropertySaved(){
-        return propertyDataSource.getLastPropertySaved();
-    }
 
 
     // --- FOR PROPERTY AND DATA ---
-    public void createPropertyAndData(InterestPoint interestPoint, Property property, ArrayList<Media> photoList, Context context){
+    void createPropertyAndData(InterestPoint interestPoint, Property property, ArrayList<Media> photoList, Context context){
         executor.execute(()->{
             long interestPointId = interestPointDataSource.createInterestPoint(interestPoint);
             Log.e("InterestPointId", String.valueOf(interestPointId));
@@ -106,5 +83,30 @@ public class AddPropertiesViewModel extends ViewModel {
         });
     }
 
+
+    void updatePropertyAndData(InterestPoint interestPoint, Property property, ArrayList<Media> mediaList, ArrayList<Long> mediaToDelete,Context applicationContext) {
+        executor.execute(()->{
+           interestPointDataSource.updateInterestPoint(interestPoint);
+        });
+        executor.execute(()->{
+            propertyDataSource.updateProperty(property);
+        });
+
+        for(Media media : mediaList) {
+            executor.execute(() -> {
+                if (media.getPropertyId() == property.getId()) {
+                    mediaDataSource.updateMedia(media);
+                } else {
+                    media.setPropertyId(property.getId());
+                    mediaDataSource.createMedia(media);
+                }
+            });
+            for (Long mediaId : mediaToDelete) {
+                executor.execute(()->{
+                    mediaDataSource.deleteMedia(mediaId);
+                });
+            }
+        }
+    }
 
 }

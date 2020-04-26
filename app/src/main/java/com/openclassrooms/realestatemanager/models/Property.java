@@ -25,16 +25,17 @@ public class Property {
     private String type;
     private String description;
     private String address;
-    private String Status;
+    private boolean sold;
     private Calendar createDate;
-    private String SellDate;
+    private Calendar sellDate;
     private long interestPointId;
     private long houseSellerId;
 
     // --- CONSTRUCTORS ---
     public Property() {}
+
     public Property(int price, int area, int rooms, String type, String description,
-                    String address, String status, Calendar sellStartingDate, String sellDate,
+                    String address, boolean sold, Calendar sellStartingDate, Calendar sellDate,
                     long interestPointId, long houseSellerId) {
         this.price = price;
         this.area = area;
@@ -42,9 +43,9 @@ public class Property {
         this.type = type;
         this.description = description;
         this.address = address;
-        this.Status = status;
+        this.sold = sold;
         this.createDate = sellStartingDate;
-        this.SellDate = sellDate;
+        this.sellDate = sellDate;
         this.interestPointId = interestPointId;
         this.houseSellerId = houseSellerId;
     }
@@ -58,9 +59,9 @@ public class Property {
     public String getType() {return type;}
     public String getDescription() {return description;}
     public String getAddress() {return address;}
-    public String getStatus() {return Status;}
+    public boolean getSold() {return sold;}
     public Calendar getCreateDate() {return createDate;}
-    public String getSellDate() {return SellDate;}
+    public Calendar getSellDate() {return sellDate;}
     public long getInterestPointId() {return interestPointId;}
     public long getHouseSellerId() {return houseSellerId;}
 
@@ -73,10 +74,10 @@ public class Property {
     public void setType(String type) {this.type = type;}
     public void setDescription(String description) {this.description = description;}
     public void setAddress(String address) {this.address = address;}
-    public void setStatus(String status) {Status = status;}
+    public void setSold(boolean sold) {this.sold = sold;}
     public void setCreateDate(Calendar createDate) {
         this.createDate = createDate;}
-    public void setSellDate(String sellDate) {SellDate = sellDate;}
+    public void setSellDate(Calendar sellDate) {this.sellDate = sellDate;}
     public void setInterestPointId(long interestPointId) {this.interestPointId = interestPointId;}
     public void setHouseSellerId(long houseSellerId) {this.houseSellerId = houseSellerId;}
 }

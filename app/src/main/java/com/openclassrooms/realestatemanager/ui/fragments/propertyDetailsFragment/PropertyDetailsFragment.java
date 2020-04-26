@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager.ui.fragments.propertyDetailsFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -17,10 +18,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.chip.Chip;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.injection.Injection;
 import com.openclassrooms.realestatemanager.models.Media;
 import com.openclassrooms.realestatemanager.models.Property;
+import com.openclassrooms.realestatemanager.ui.activities.AddProperties.AddPropertyActivity;
 import com.openclassrooms.realestatemanager.utils.Utils;
 
 import java.util.List;
@@ -39,6 +42,7 @@ public class PropertyDetailsFragment extends Fragment
     // Data
     //----------------------------------------------------------------------------------------------
 
+    private String sProperty;
     private Property property;
     private TextView propertyType;
     private TextView propertyDescription;
@@ -53,6 +57,7 @@ public class PropertyDetailsFragment extends Fragment
     private PropertyDetailsViewModel viewModel;
     private PropertyDetailsPhotoAdapter adapter;
     private ImageView staticMap;
+    private ExtendedFloatingActionButton editButton;
 
     //----------------------------------------------------------------------------------------------
     // Constructor
@@ -78,6 +83,7 @@ public class PropertyDetailsFragment extends Fragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            this.sProperty = getArguments().getString(ARG_PARAM1);
             this.property = Utils.convertStringToProperty(getArguments().getString(ARG_PARAM1));
         }
 
@@ -103,6 +109,7 @@ public class PropertyDetailsFragment extends Fragment
         propertyForSellDate = fragmentResult.findViewById(R.id.property_details_fragment_sell_date_content);
         recyclerView = fragmentResult.findViewById(R.id.property_details_fragment_recyclerView);
         staticMap = fragmentResult.findViewById(R.id.property_details_fragment_address_map_image);
+        editButton = fragmentResult.findViewById(R.id.property_details_fragment_edit_floating_button);
 
 
         this.configureViewModel();
@@ -116,6 +123,7 @@ public class PropertyDetailsFragment extends Fragment
         this.getPropertyMediaData();
         this.setPropertyNearby();
         this.setStaticMap();
+        this.configureEditButton();
 
         return fragmentResult;
     }
@@ -189,6 +197,18 @@ public class PropertyDetailsFragment extends Fragment
         else {
             staticMap.setVisibility(View.GONE);
         }
+    }
+
+    private void configureEditButton(){
+
+        editButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), AddPropertyActivity.class);
+            intent.putExtra("property for details", sProperty);
+            startActivity(intent);
+        });
+
+
+
     }
 
     //----------------------------------------------------------------------------------------------
