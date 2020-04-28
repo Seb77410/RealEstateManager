@@ -27,11 +27,11 @@ import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.openclassrooms.realestatemanager.R;
-import com.openclassrooms.realestatemanager.injection.Injection;
-import com.openclassrooms.realestatemanager.models.HouseSeller;
-import com.openclassrooms.realestatemanager.models.InterestPoint;
-import com.openclassrooms.realestatemanager.models.Media;
-import com.openclassrooms.realestatemanager.models.Property;
+import com.openclassrooms.realestatemanager.database.injection.Injection;
+import com.openclassrooms.realestatemanager.models.database.HouseSeller;
+import com.openclassrooms.realestatemanager.models.database.InterestPoint;
+import com.openclassrooms.realestatemanager.models.database.Media;
+import com.openclassrooms.realestatemanager.models.database.Property;
 import com.openclassrooms.realestatemanager.utils.PropertyTypeEnum;
 import com.openclassrooms.realestatemanager.utils.Utils;
 

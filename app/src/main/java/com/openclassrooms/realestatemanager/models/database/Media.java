@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.models;
+package com.openclassrooms.realestatemanager.models.database;
 
 import android.net.Uri;
 

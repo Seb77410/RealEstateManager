@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.openclassrooms.realestatemanager.repositories.HouseSellerDataRepository;
+import com.openclassrooms.realestatemanager.database.repositories.HouseSellerDataRepository;
 
 import java.util.concurrent.Executor;
 

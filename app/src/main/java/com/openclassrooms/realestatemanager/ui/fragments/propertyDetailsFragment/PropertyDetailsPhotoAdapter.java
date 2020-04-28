@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.RequestManager;
 import com.openclassrooms.realestatemanager.R;
-import com.openclassrooms.realestatemanager.models.Media;
+import com.openclassrooms.realestatemanager.models.database.Media;
 
 import java.util.List;
 

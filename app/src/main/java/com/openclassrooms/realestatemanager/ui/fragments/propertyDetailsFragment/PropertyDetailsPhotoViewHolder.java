@@ -1,7 +1,5 @@
 package com.openclassrooms.realestatemanager.ui.fragments.propertyDetailsFragment;
 
-import android.speech.tts.TextToSpeech;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
 import com.openclassrooms.realestatemanager.R;
-import com.openclassrooms.realestatemanager.models.Media;
+import com.openclassrooms.realestatemanager.models.database.Media;
 
 public class PropertyDetailsPhotoViewHolder extends RecyclerView.ViewHolder {
     ImageView imageView;

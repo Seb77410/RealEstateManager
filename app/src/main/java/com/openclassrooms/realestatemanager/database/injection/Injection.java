@@ -1,16 +1,15 @@
-package com.openclassrooms.realestatemanager.injection;
+package com.openclassrooms.realestatemanager.database.injection;
 
 import android.content.Context;
-
-import androidx.fragment.app.FragmentActivity;
 
 import com.openclassrooms.realestatemanager.ui.activities.AddHouseSeller.AddHouseSellerViewModelFactory;
 import com.openclassrooms.realestatemanager.ui.activities.AddProperties.AddPropertiesViewModelFactory;
 import com.openclassrooms.realestatemanager.database.AppDatabase;
-import com.openclassrooms.realestatemanager.repositories.HouseSellerDataRepository;
-import com.openclassrooms.realestatemanager.repositories.InterestPointDataRepository;
-import com.openclassrooms.realestatemanager.repositories.MediaDataRepository;
-import com.openclassrooms.realestatemanager.repositories.PropertyDataRepository;
+import com.openclassrooms.realestatemanager.database.repositories.HouseSellerDataRepository;
+import com.openclassrooms.realestatemanager.database.repositories.InterestPointDataRepository;
+import com.openclassrooms.realestatemanager.database.repositories.MediaDataRepository;
+import com.openclassrooms.realestatemanager.database.repositories.PropertyDataRepository;
+import com.openclassrooms.realestatemanager.ui.activities.Map.MapViewModelFactory;
 import com.openclassrooms.realestatemanager.ui.fragments.propertiesLisFragment.PropertiesListViewModelFactory;
 import com.openclassrooms.realestatemanager.ui.fragments.propertyDetailsFragment.PropertyDetailsViewModelFactory;
 
@@ -71,5 +70,11 @@ public class Injection {
         MediaDataRepository dataSourceMedia = providerMediaDataSource(context);
         Executor executor = provideExecutor();
         return new PropertyDetailsViewModelFactory(dataSourceInterestPoint, dataSourceMedia, executor);
+    }
+
+    public static MapViewModelFactory providerMapViewModelFactory(Context context){
+        PropertyDataRepository dataSourceProperty = providerPropertyDataSource(context);
+        Executor executor = provideExecutor();
+        return new MapViewModelFactory(dataSourceProperty, executor);
     }
 }

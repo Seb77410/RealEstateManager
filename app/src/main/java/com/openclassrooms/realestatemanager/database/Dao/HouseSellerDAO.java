@@ -1,11 +1,13 @@
 package com.openclassrooms.realestatemanager.database.Dao;
 
+import android.database.Cursor;
+
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.openclassrooms.realestatemanager.models.HouseSeller;
+import com.openclassrooms.realestatemanager.models.database.HouseSeller;
 
 import java.util.List;
 
@@ -24,4 +26,6 @@ public interface HouseSellerDAO {
     @Query("DELETE FROM HouseSeller WHERE id = :houseSellerId")
     int deleteHouseSeller(long houseSellerId);
 
+    @Query("SELECT * FROM HouseSeller WHERE id = :houseSellerId")
+    Cursor getHouseSellerWithCursor(long houseSellerId);
 }

@@ -1,29 +1,8 @@
 package com.openclassrooms.realestatemanager;
 
-import android.content.Context;
-
-import androidx.annotation.Nullable;
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
-import androidx.room.Room;
-import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.openclassrooms.realestatemanager.database.AppDatabase;
-import com.openclassrooms.realestatemanager.models.HouseSeller;
-import com.openclassrooms.realestatemanager.models.InterestPoint;
-import com.openclassrooms.realestatemanager.models.Media;
-import com.openclassrooms.realestatemanager.models.Property;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 
 import static junit.framework.TestCase.assertEquals;
 

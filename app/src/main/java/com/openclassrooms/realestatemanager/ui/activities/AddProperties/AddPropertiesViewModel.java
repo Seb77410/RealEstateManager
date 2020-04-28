@@ -7,14 +7,14 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.openclassrooms.realestatemanager.R;
-import com.openclassrooms.realestatemanager.models.HouseSeller;
-import com.openclassrooms.realestatemanager.models.InterestPoint;
-import com.openclassrooms.realestatemanager.models.Media;
-import com.openclassrooms.realestatemanager.models.Property;
-import com.openclassrooms.realestatemanager.repositories.HouseSellerDataRepository;
-import com.openclassrooms.realestatemanager.repositories.InterestPointDataRepository;
-import com.openclassrooms.realestatemanager.repositories.MediaDataRepository;
-import com.openclassrooms.realestatemanager.repositories.PropertyDataRepository;
+import com.openclassrooms.realestatemanager.models.database.HouseSeller;
+import com.openclassrooms.realestatemanager.models.database.InterestPoint;
+import com.openclassrooms.realestatemanager.models.database.Media;
+import com.openclassrooms.realestatemanager.models.database.Property;
+import com.openclassrooms.realestatemanager.database.repositories.HouseSellerDataRepository;
+import com.openclassrooms.realestatemanager.database.repositories.InterestPointDataRepository;
+import com.openclassrooms.realestatemanager.database.repositories.MediaDataRepository;
+import com.openclassrooms.realestatemanager.database.repositories.PropertyDataRepository;
 import com.openclassrooms.realestatemanager.utils.Utils;
 
 import java.util.ArrayList;

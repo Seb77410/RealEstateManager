@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.models;
+package com.openclassrooms.realestatemanager.models.database;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -13,6 +13,8 @@ public class InterestPoint {
     private ArrayList<String> category;
 
     // --- CONSTRUCTORS ---
+    public InterestPoint(){}
+
     public InterestPoint(ArrayList<String> category) {
         this.category = category;
     }

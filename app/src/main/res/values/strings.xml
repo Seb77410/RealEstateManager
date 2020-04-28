@@ -6,6 +6,10 @@
     <string name="add_house_seller">Add house seller</string>
     <string name="add_property">Add property</string>
 
+    <!-- Main menu titles -->
+    <string name="map">map</string>
+    <string name="search">search</string>
+
     <!-- Add property activity .xml values -->
     <string name="price" translatable="true">Price</string>
     <string name="address" translatable="true">Address</string>
@@ -22,22 +26,19 @@
     <string name="save_house_seller">Save House Seller</string>
 
     <!-- For notifications -->
-        <!-- Save House Seller activity -->
+    <!-- Save House Seller activity -->
     <string name="notif_success_house_seller_title">House Seller saved</string>
     <string name="notif_success_house_seller_content">The house seller has been correctly saved</string>
     <string name="notif_error_house_seller_title">House Seller not saved</string>
     <string name="notif_error_house_seller_content">An error occurred</string>
-        <!-- Save Property activity -->
+    <!-- Save Property activity -->
     <string name="notif_success_property_title">Property saved</string>
     <string name="notif_success_property_content">The property has been correctly saved</string>
     <string name="notif_error_property_title">Property not saved</string>
     <string name="notif_error_property_content">An error occurred</string>
 
 
-
     <string name="map_api_key" translatable="false">AIzaSyBaAwomMKgWDHN0nAzAvlUR-VRDolCplKw</string>
-
-
 
 
 </resources>

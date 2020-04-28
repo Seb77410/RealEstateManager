@@ -26,13 +26,13 @@ public class Converters {
     }
 
     @TypeConverter
-    public static ArrayList<String> arrayListToString (String value){
+    public static ArrayList<String> stringToArray(String value){
         Type arrayType = new TypeToken<ArrayList<String>>() {}.getType();
         return new Gson().fromJson(value, arrayType);
     }
 
     @TypeConverter
-    public static String stringToArrayList (ArrayList<String> arrayList){
+    public static String arrayToString(ArrayList<String> arrayList){
         Gson gson = new Gson();
         return gson.toJson(arrayList);
     }

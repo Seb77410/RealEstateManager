@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.RequestManager;
 import com.openclassrooms.realestatemanager.R;
-import com.openclassrooms.realestatemanager.models.Property;
+import com.openclassrooms.realestatemanager.models.database.Property;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,6 @@
 package com.openclassrooms.realestatemanager.ui.fragments.propertiesLisFragment;
 
 import android.net.Uri;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
 import com.openclassrooms.realestatemanager.R;
-import com.openclassrooms.realestatemanager.models.Property;
+import com.openclassrooms.realestatemanager.models.database.Property;
 
 
 public class PropertiesListViewHolder extends RecyclerView.ViewHolder {

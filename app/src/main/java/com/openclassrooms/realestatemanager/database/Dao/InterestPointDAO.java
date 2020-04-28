@@ -1,14 +1,14 @@
 package com.openclassrooms.realestatemanager.database.Dao;
 
+import android.database.Cursor;
+
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.openclassrooms.realestatemanager.models.InterestPoint;
-
-import java.util.ArrayList;
+import com.openclassrooms.realestatemanager.models.database.InterestPoint;
 
 @Dao
 public interface InterestPointDAO {
@@ -26,9 +26,12 @@ public interface InterestPointDAO {
     LiveData<InterestPoint> getInterestPointById(long interestPointId);
 
     @Query("DELETE FROM InterestPoint WHERE id = :interestPointId")
-    void deleteInterestPoint(long interestPointId);
+    int deleteInterestPoint(long interestPointId);
 
     @Query("SELECT * FROM InterestPoint ORDER BY id DESC LIMIT 1")
     LiveData<InterestPoint> getLastInterestPointSaved();
+
+    @Query("SELECT * FROM InterestPoint WHERE id = :interestPointId")
+    Cursor getInterestPointWithCursor(long interestPointId);
 
 }

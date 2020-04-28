@@ -13,10 +13,10 @@ import com.openclassrooms.realestatemanager.database.Dao.HouseSellerDAO;
 import com.openclassrooms.realestatemanager.database.Dao.InterestPointDAO;
 import com.openclassrooms.realestatemanager.database.Dao.MediaDAO;
 import com.openclassrooms.realestatemanager.database.Dao.PropertyDAO;
-import com.openclassrooms.realestatemanager.models.HouseSeller;
-import com.openclassrooms.realestatemanager.models.InterestPoint;
-import com.openclassrooms.realestatemanager.models.Media;
-import com.openclassrooms.realestatemanager.models.Property;
+import com.openclassrooms.realestatemanager.models.database.HouseSeller;
+import com.openclassrooms.realestatemanager.models.database.InterestPoint;
+import com.openclassrooms.realestatemanager.models.database.Media;
+import com.openclassrooms.realestatemanager.models.database.Property;
 import com.openclassrooms.realestatemanager.utils.Converters;
 
 

@@ -20,9 +20,9 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.openclassrooms.realestatemanager.R;
-import com.openclassrooms.realestatemanager.injection.Injection;
-import com.openclassrooms.realestatemanager.models.Media;
-import com.openclassrooms.realestatemanager.models.Property;
+import com.openclassrooms.realestatemanager.database.injection.Injection;
+import com.openclassrooms.realestatemanager.models.database.Media;
+import com.openclassrooms.realestatemanager.models.database.Property;
 import com.openclassrooms.realestatemanager.ui.activities.AddProperties.AddPropertyActivity;
 import com.openclassrooms.realestatemanager.utils.Utils;
 
@@ -53,7 +53,7 @@ public class PropertyDetailsFragment extends Fragment
     private TextView propertyForSellDate;
     private RecyclerView recyclerView;
     private LinearLayout propertyNearbyContainer;
-    private LinearLayout propertyNearbyContentConainer;
+    private LinearLayout propertyNearbyContentContainer;
     private PropertyDetailsViewModel viewModel;
     private PropertyDetailsPhotoAdapter adapter;
     private ImageView staticMap;
@@ -105,7 +105,7 @@ public class PropertyDetailsFragment extends Fragment
         propertyRoomNumber = fragmentResult.findViewById(R.id.property_details_fragment_room_number_content);
         propertyAddress = fragmentResult.findViewById(R.id.property_details_fragment_address_content);
         propertyNearbyContainer = fragmentResult.findViewById(R.id.property_details_fragment_nearby_container);
-        propertyNearbyContentConainer = fragmentResult.findViewById(R.id.property_details_fragment_nearby_content_container);
+        propertyNearbyContentContainer = fragmentResult.findViewById(R.id.property_details_fragment_nearby_content_container);
         propertyForSellDate = fragmentResult.findViewById(R.id.property_details_fragment_sell_date_content);
         recyclerView = fragmentResult.findViewById(R.id.property_details_fragment_recyclerView);
         staticMap = fragmentResult.findViewById(R.id.property_details_fragment_address_map_image);
@@ -171,7 +171,7 @@ public class PropertyDetailsFragment extends Fragment
                     chip.setLayoutParams(params);
                     chip.setLayoutParams(params);
 
-                    propertyNearbyContentConainer.addView(chip);
+                    propertyNearbyContentContainer.addView(chip);
                 }
             }
             else{

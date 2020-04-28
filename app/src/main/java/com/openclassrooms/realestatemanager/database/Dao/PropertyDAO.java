@@ -1,12 +1,14 @@
 package com.openclassrooms.realestatemanager.database.Dao;
 
+import android.database.Cursor;
+
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.openclassrooms.realestatemanager.models.Property;
+import com.openclassrooms.realestatemanager.models.database.Property;
 
 import java.util.List;
 
@@ -19,14 +21,11 @@ public interface PropertyDAO {
     @Query("SELECT * FROM Property WHERE id = :propertyId")
     LiveData<Property> getPropertyById(long propertyId);
 
-    @Query("SELECT * FROM Property WHERE address = :address")
-    LiveData<Property> getPropertyByAddress(String address);
-
     @Insert
     long createProperty(Property property);
 
     @Update
-    void updateProperty(Property property);
+    int updateProperty(Property property);
 
     @Query("DELETE FROM Property WHERE id = :propertyId")
     int deleteProperty(long propertyId);
@@ -36,4 +35,7 @@ public interface PropertyDAO {
 
     @Query("SELECT * FROM Property")
     LiveData<List<Property>> getAllProperties();
+
+    @Query("SELECT * FROM Property WHERE id = :propertyId")
+    Cursor getPropertyWithCursor(long propertyId);
 }

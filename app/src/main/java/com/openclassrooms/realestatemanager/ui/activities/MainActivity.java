@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager.ui.activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,8 +18,11 @@ import android.widget.FrameLayout;
 import com.openclassrooms.realestatemanager.ui.activities.AddHouseSeller.AddHouseSellerActivity;
 import com.openclassrooms.realestatemanager.ui.activities.AddProperties.AddPropertyActivity;
 import com.openclassrooms.realestatemanager.R;
+import com.openclassrooms.realestatemanager.ui.activities.Map.MapActivity;
+import com.openclassrooms.realestatemanager.ui.activities.SearchProperty.SearchPropertyActivity;
 import com.openclassrooms.realestatemanager.ui.fragments.propertiesLisFragment.PropertiesListFragment;
 import com.openclassrooms.realestatemanager.ui.fragments.propertyDetailsFragment.PropertyDetailsFragment;
+import com.openclassrooms.realestatemanager.utils.Utils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -106,23 +111,28 @@ public class MainActivity extends AppCompatActivity {
         // Search button ==> Start SearchActivity
         switch (item.getItemId()) {
             case R.id.main_menu_add_property:
-                startAddPropertyActivity();
+                Intent intent = new Intent(this, AddPropertyActivity.class);
+                startActivity(intent);
                 break;
             case R.id.main_menu_add_house_seller:
-                startAddHouseSellerActivity();
+                Intent intent1 = new Intent(this, AddHouseSellerActivity.class);
+                startActivity(intent1);
                 break;
+            case R.id.main_menu_map:
+                if(Utils.isInternetAvailable(getApplicationContext())){
+                    Intent intent2 = new Intent(this, MapActivity.class);
+                    startActivity(intent2);
+                }else{
+                    AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
+                    builder.setMessage("You need a network connection to open the map")
+                            .setTitle("No network connection")
+                            .show();                }
+                break;
+            case R.id.main_menu_search:
+                Intent intent3 = new Intent(this, SearchPropertyActivity.class);
+                startActivity(intent3);;
         }
         return true;
-    }
-
-    private void startAddPropertyActivity(){
-        Intent intent = new Intent(this, AddPropertyActivity.class);
-        startActivity(intent);
-    }
-
-    private void startAddHouseSellerActivity(){
-        Intent intent = new Intent(this, AddHouseSellerActivity.class);
-        startActivity(intent);
     }
 
 

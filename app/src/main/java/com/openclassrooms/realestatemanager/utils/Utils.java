@@ -17,7 +17,7 @@ import androidx.core.app.NotificationCompat;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.openclassrooms.realestatemanager.R;
-import com.openclassrooms.realestatemanager.models.Property;
+import com.openclassrooms.realestatemanager.models.database.Property;
 import com.openclassrooms.realestatemanager.ui.activities.MainActivity;
 
 import java.lang.reflect.Type;
@@ -155,5 +155,7 @@ public class Utils {
         }
         else {return String.valueOf(date);}
     }
+
+
 
 }

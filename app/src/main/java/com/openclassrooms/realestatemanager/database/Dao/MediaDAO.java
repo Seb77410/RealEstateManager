@@ -6,7 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.openclassrooms.realestatemanager.models.Media;
+import com.openclassrooms.realestatemanager.models.database.Media;
 
 import java.util.List;
 

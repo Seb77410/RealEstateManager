@@ -17,8 +17,8 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.openclassrooms.realestatemanager.R;
-import com.openclassrooms.realestatemanager.injection.Injection;
-import com.openclassrooms.realestatemanager.models.Property;
+import com.openclassrooms.realestatemanager.database.injection.Injection;
+import com.openclassrooms.realestatemanager.models.database.Property;
 import com.openclassrooms.realestatemanager.ui.activities.PropertyDetailsActivity;
 import com.openclassrooms.realestatemanager.ui.fragments.propertyDetailsFragment.PropertyDetailsFragment;
 import com.openclassrooms.realestatemanager.utils.RecyclerViewClickSupport;
@@ -31,9 +31,7 @@ import java.util.Objects;
 public class PropertiesListFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private PropertiesListAdapter adapter;
     private PropertiesListViewModel viewModel;
-    private ArrayList<Uri> propertiesPreviewPhotoList = new ArrayList<>();
     private Uri[] propertiesPhotoList;
     private Fragment detailsFragment;
     private List<Property> propertiesList = new ArrayList<>();
@@ -75,9 +73,9 @@ public class PropertiesListFragment extends Fragment {
     // Configure RecyclerView
     //----------------------------------------------------------------------------------------------
 
-    private void configureRecyclerView(List<Property> propertyList, ArrayList<Uri> propertiesPreviewPhotoList){
+    private void configureRecyclerView(List<Property> propertyList){
             // Create adapter passing the list of articles
-            adapter = new PropertiesListAdapter(propertyList , propertiesPhotoList, Glide.with(this));
+            PropertiesListAdapter adapter = new PropertiesListAdapter(propertyList, propertiesPhotoList, Glide.with(this));
             // Attach the adapter to the recycler view to populate items
             recyclerView.setAdapter(adapter);
             // Set layout manager to position the items
@@ -92,7 +90,7 @@ public class PropertiesListFragment extends Fragment {
         // Get properties list
         viewModel.getPropertiesList().observe(getViewLifecycleOwner(), propertiesList ->{
             this.propertiesList = propertiesList;
-           // Log.e("Properties list Frag", " List size = " + propertiesList.size());
+            Log.e("Properties list Frag", " List size = " + propertiesList.size());
             propertiesPhotoList = new Uri[propertiesList.size()];
             // Get preview photo for all properties
             for(int x = 0; x < propertiesList.size(); x++){
@@ -101,7 +99,7 @@ public class PropertiesListFragment extends Fragment {
                     propertiesPhotoList[finalX] = media.get(0).getMediaUri();
                     if(finalX == propertiesList.size()-1){
                         // Start recycler view
-                        this.configureRecyclerView(propertiesList, propertiesPreviewPhotoList);
+                        this.configureRecyclerView(propertiesList);
                         this.configureOnClickRecyclerView(recyclerView);
                         this.startDefaultDetailsFragmentForTablet();
                     }
@@ -117,11 +115,7 @@ public class PropertiesListFragment extends Fragment {
      */
     private void configureOnClickRecyclerView(RecyclerView recyclerView) {
         RecyclerViewClickSupport.addTo(recyclerView, R.layout.fragment_properties_list_item)
-                .setOnItemClickListener((recyclerView1, mPosition, v) -> {
-                    // TODO : START DETAILS FRAGMENT
-                    configureAndShowDetailsFragment(propertiesList.get(mPosition));
-
-                });
+                .setOnItemClickListener((recyclerView1, mPosition, v) -> configureAndShowDetailsFragment(propertiesList.get(mPosition)));
     }
 
     private void configureAndShowDetailsFragment(Property property) {
@@ -139,12 +133,6 @@ public class PropertiesListFragment extends Fragment {
             String argument = gson.toJson(property);
             intent.putExtra("property", argument);
             startActivity(intent);
-            /*
-            detailsFragment = PropertyDetailsFragment.newInstance(property);
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.main_activity_list_frame_layout, detailsFragment)
-                    .commit();
-             */
         }
     }
 

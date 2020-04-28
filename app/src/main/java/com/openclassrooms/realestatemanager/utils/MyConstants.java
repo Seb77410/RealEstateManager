@@ -8,4 +8,6 @@ public class MyConstants {
     public static final String CHANNEL_1_ID = "channel1";
     public static final String CHANNEL_1_NAME= "Channel 1";
 
+    public static final int LOCATION_REQUEST_CODE = 1;
+
 }

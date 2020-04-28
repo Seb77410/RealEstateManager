@@ -13,7 +13,7 @@ import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.textfield.TextInputLayout;
 import com.openclassrooms.realestatemanager.R;
-import com.openclassrooms.realestatemanager.models.Media;
+import com.openclassrooms.realestatemanager.models.database.Media;
 
 import java.util.ArrayList;
 import java.util.Objects;

@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.models;
+package com.openclassrooms.realestatemanager.models.database;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -14,6 +14,8 @@ public class HouseSeller {
     private String email;
 
     // --- CONSTRUCTORS ---
+    public HouseSeller(){};
+
     public HouseSeller(String name, String email) {
         this.name = name;
         this.email = email;
