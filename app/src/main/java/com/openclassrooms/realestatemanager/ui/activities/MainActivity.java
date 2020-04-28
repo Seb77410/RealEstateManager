@@ -4,7 +4,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -19,9 +18,7 @@ import com.openclassrooms.realestatemanager.ui.activities.AddHouseSeller.AddHous
 import com.openclassrooms.realestatemanager.ui.activities.AddProperties.AddPropertyActivity;
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.ui.activities.Map.MapActivity;
-import com.openclassrooms.realestatemanager.ui.activities.SearchProperty.SearchPropertyActivity;
 import com.openclassrooms.realestatemanager.ui.fragments.propertiesLisFragment.PropertiesListFragment;
-import com.openclassrooms.realestatemanager.ui.fragments.propertyDetailsFragment.PropertyDetailsFragment;
 import com.openclassrooms.realestatemanager.utils.Utils;
 
 public class MainActivity extends AppCompatActivity {
@@ -50,8 +47,6 @@ public class MainActivity extends AppCompatActivity {
     Menu menu;
     FrameLayout listFrameLayout;
     FrameLayout detailsFrameLayout;
-    Fragment listFragment;
-    Fragment detailsFragment;
 
     //----------------------------------------------------------------------------------------------
     // onCreate
@@ -129,8 +124,8 @@ public class MainActivity extends AppCompatActivity {
                             .show();                }
                 break;
             case R.id.main_menu_search:
-                Intent intent3 = new Intent(this, SearchPropertyActivity.class);
-                startActivity(intent3);;
+                //Intent intent3 = new Intent(this, SearchPropertyActivity.class);
+                //startActivity(intent3);;
         }
         return true;
     }

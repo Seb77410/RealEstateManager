@@ -36,7 +36,7 @@ public class PropertyDetailsActivity extends AppCompatActivity {
     //----------------------------------------------------------------------------------------------
     private void configureFragment() {
         Bundle bundle = getIntent().getExtras();
-        String sProperty = null;
+        String sProperty;
         Property property = null;
         if (bundle != null) {
             sProperty = bundle.getString("property");
