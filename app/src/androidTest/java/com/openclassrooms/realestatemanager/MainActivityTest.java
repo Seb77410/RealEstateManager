@@ -33,7 +33,7 @@ public class MainActivityTest {
 
     @Test
     public void addHouseSellerTest() {
-        // Test add house seller
+        // Test AddHouseSellerActivity
         openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
         onView(withText(R.string.add_house_seller)).check(matches(isDisplayed())).perform(click());
         onView(withId(R.id.add_house_seller_activity_toolbar)).check(matches(isDisplayed()));
@@ -45,7 +45,7 @@ public class MainActivityTest {
 
     @Test
     public void addPropertyTest() {
-        // Test add property
+        // Test AddPropertyActivity
         openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
         onView(withText(R.string.add_property)).check(matches(isDisplayed())).perform(click());
         onView(withId(R.id.add_property_activity_toolbar)).check(matches(isDisplayed()));
@@ -61,18 +61,20 @@ public class MainActivityTest {
         onView(withId(R.id.add_house_seller_save_floating_button)).check(matches(isDisplayed()));
         onView(isRoot()).perform(pressBack());
     }
-
+/*
     @Test
     public void mapTest() {
-        // Test search
+        // Test MapActivity
         onView(withId(R.id.main_menu_map)).check(matches(isDisplayed())).perform(click());
         onView(withId(R.id.map_activity_toolbar)).check(matches(isDisplayed()));
         onView(withId(R.id.map_activity_map)).check(matches(isDisplayed()));
         onView(isRoot()).perform(pressBack());
     }
+ */
 
     @Test
     public void searchTest() {
+        // Test SearchPropertyActivity
         onView(withId(R.id.main_menu_search)).check(matches(isDisplayed())).perform(click());
         onView(withId(R.id.search_property_activity_toolbar)).check(matches(isDisplayed()));
         onView(withId(R.id.search_property_activity_property_sold)).check(matches(isDisplayed())).perform(click());
