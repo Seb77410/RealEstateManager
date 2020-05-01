@@ -18,6 +18,7 @@ import com.openclassrooms.realestatemanager.ui.activities.AddHouseSeller.AddHous
 import com.openclassrooms.realestatemanager.ui.activities.AddProperties.AddPropertyActivity;
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.ui.activities.Map.MapActivity;
+import com.openclassrooms.realestatemanager.ui.activities.SearchProperty.SearchPropertyActivity;
 import com.openclassrooms.realestatemanager.ui.fragments.propertiesLisFragment.PropertiesListFragment;
 import com.openclassrooms.realestatemanager.utils.Utils;
 
@@ -114,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent1);
                 break;
             case R.id.main_menu_map:
-                if(Utils.isInternetAvailable(getApplicationContext())){
+                if(Utils.isInternetAvailableNew(getApplicationContext())){
                     Intent intent2 = new Intent(this, MapActivity.class);
                     startActivity(intent2);
                 }else{
@@ -124,8 +125,8 @@ public class MainActivity extends AppCompatActivity {
                             .show();                }
                 break;
             case R.id.main_menu_search:
-                //Intent intent3 = new Intent(this, SearchPropertyActivity.class);
-                //startActivity(intent3);;
+                Intent intent3 = new Intent(this, SearchPropertyActivity.class);
+                startActivity(intent3);;
         }
         return true;
     }

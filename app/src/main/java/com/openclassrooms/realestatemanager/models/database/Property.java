@@ -1,11 +1,9 @@
 package com.openclassrooms.realestatemanager.models.database;
 
+import androidx.annotation.Nullable;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
-
-import com.openclassrooms.realestatemanager.models.database.HouseSeller;
-import com.openclassrooms.realestatemanager.models.database.InterestPoint;
 
 import java.util.Calendar;
 

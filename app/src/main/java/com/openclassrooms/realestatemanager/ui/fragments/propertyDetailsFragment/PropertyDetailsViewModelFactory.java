@@ -14,13 +14,11 @@ public class PropertyDetailsViewModelFactory implements ViewModelProvider.Factor
     // --- Repository ---
     private final InterestPointDataRepository interestPointDataSource;
     private final MediaDataRepository mediaDataSource;
-    private final Executor executor;
 
     // --- Constructor ---
-    public PropertyDetailsViewModelFactory(InterestPointDataRepository interestPointDataSource, MediaDataRepository mediaDataSource, Executor executor){
+    public PropertyDetailsViewModelFactory(InterestPointDataRepository interestPointDataSource, MediaDataRepository mediaDataSource){
         this.interestPointDataSource = interestPointDataSource;
         this.mediaDataSource = mediaDataSource;
-        this.executor = executor;
     }
 
        @SuppressWarnings("unchecked")
@@ -29,7 +27,7 @@ public class PropertyDetailsViewModelFactory implements ViewModelProvider.Factor
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if(modelClass.isAssignableFrom(PropertyDetailsViewModel.class)){
 
-            return (T) new PropertyDetailsViewModel(interestPointDataSource, mediaDataSource,executor);
+            return (T) new PropertyDetailsViewModel(interestPointDataSource, mediaDataSource);
         }
         throw new IllegalArgumentException("Unknown ViewModel class");
     }

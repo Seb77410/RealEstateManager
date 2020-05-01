@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager.models.database;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ public class InterestPoint {
     private ArrayList<String> category;
 
     // --- CONSTRUCTORS ---
+    @Ignore
     public InterestPoint(){}
 
     public InterestPoint(ArrayList<String> category) {

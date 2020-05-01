@@ -20,6 +20,7 @@ public class AddHouseSellerViewModelFactory implements ViewModelProvider.Factory
         this.executor = executor;
     }
 
+    @SuppressWarnings("unchecked")
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {

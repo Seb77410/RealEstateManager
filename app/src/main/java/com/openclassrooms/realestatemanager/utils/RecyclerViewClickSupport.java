@@ -2,6 +2,7 @@ package com.openclassrooms.realestatemanager.utils;
 
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class RecyclerViewClickSupport {
@@ -36,7 +37,7 @@ public class RecyclerViewClickSupport {
     private RecyclerView.OnChildAttachStateChangeListener mAttachListener
             = new RecyclerView.OnChildAttachStateChangeListener() {
         @Override
-        public void onChildViewAttachedToWindow(View view) {
+        public void onChildViewAttachedToWindow(@NonNull View view) {
             if (mOnItemClickListener != null) {
                 view.setOnClickListener(mOnClickListener);
             }
@@ -46,7 +47,7 @@ public class RecyclerViewClickSupport {
         }
 
         @Override
-        public void onChildViewDetachedFromWindow(View view) {
+        public void onChildViewDetachedFromWindow(@NonNull View view) {
 
         }
     };

@@ -7,9 +7,9 @@ import com.openclassrooms.realestatemanager.models.database.InterestPoint;
 import com.openclassrooms.realestatemanager.models.database.Property;
 import com.openclassrooms.realestatemanager.utils.Converters;
 
-public class ProviderContentValues {
+class ProviderContentValues {
 
-    public static Property fromPropertyContentValues(ContentValues values) {
+    static Property fromPropertyContentValues(ContentValues values) {
         final Property property = new Property();
         if (values.containsKey("id")) property.setId(values.getAsLong("id"));
         if (values.containsKey("price")) property.setPrice(values.getAsInteger("price"));
@@ -27,7 +27,7 @@ public class ProviderContentValues {
     }
 
 
-    public static HouseSeller fromHouseSellerContentValues(ContentValues values){
+    static HouseSeller fromHouseSellerContentValues(ContentValues values){
         final HouseSeller houseSeller = new HouseSeller();
         if (values.containsKey("id")) houseSeller.setId(values.getAsLong("id"));
         if (values.containsKey("name")) houseSeller.setName(values.getAsString("name"));
@@ -35,7 +35,7 @@ public class ProviderContentValues {
         return houseSeller;
     }
 
-    public static InterestPoint fromInterestPointContentValues(ContentValues values){
+    static InterestPoint fromInterestPointContentValues(ContentValues values){
         final InterestPoint interestPoint = new InterestPoint();
         if (values.containsKey("id")) interestPoint.setId(values.getAsLong("id"));
         if (values.containsKey("category")) interestPoint.setCategory(Converters.stringToArray(values.getAsString("category")));

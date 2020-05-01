@@ -18,27 +18,27 @@ import java.util.concurrent.Executors;
 
 public class Injection {
 
-    public static HouseSellerDataRepository provideHouseSellerDataSource(Context context){
+    private static HouseSellerDataRepository provideHouseSellerDataSource(Context context){
         AppDatabase database = AppDatabase.getInstance(context);
         return new HouseSellerDataRepository(database.houseSellerDAO());
     }
 
-    public static InterestPointDataRepository providerInterestPointDataSource(Context context){
+    private static InterestPointDataRepository providerInterestPointDataSource(Context context){
         AppDatabase database = AppDatabase.getInstance(context);
         return new InterestPointDataRepository(database.interestPointDAO());
     }
 
-    public static MediaDataRepository providerMediaDataSource(Context context){
+    private static MediaDataRepository providerMediaDataSource(Context context){
         AppDatabase database = AppDatabase.getInstance(context);
         return new MediaDataRepository(database.mediaDAO());
     }
 
-    public static PropertyDataRepository providerPropertyDataSource(Context context){
+    private static PropertyDataRepository providerPropertyDataSource(Context context){
         AppDatabase database = AppDatabase.getInstance(context);
         return new PropertyDataRepository(database.propertyDAO());
     }
 
-    public static Executor provideExecutor(){
+    private static Executor provideExecutor(){
         return Executors.newSingleThreadExecutor();
     }
 
@@ -61,20 +61,17 @@ public class Injection {
     public static PropertiesListViewModelFactory providerPropertiesListViewModelFactory(Context context) {
         PropertyDataRepository dataSourceProperty = providerPropertyDataSource(context);
         MediaDataRepository dataSourceMedia = providerMediaDataSource(context);
-        Executor executor = provideExecutor();
-        return new PropertiesListViewModelFactory(dataSourceProperty, dataSourceMedia, executor );
+        return new PropertiesListViewModelFactory(dataSourceProperty, dataSourceMedia );
     }
 
     public static PropertyDetailsViewModelFactory providerPropertyDetailsViewModelFactory(Context context) {
         InterestPointDataRepository dataSourceInterestPoint = providerInterestPointDataSource(context);
         MediaDataRepository dataSourceMedia = providerMediaDataSource(context);
-        Executor executor = provideExecutor();
-        return new PropertyDetailsViewModelFactory(dataSourceInterestPoint, dataSourceMedia, executor);
+        return new PropertyDetailsViewModelFactory(dataSourceInterestPoint, dataSourceMedia);
     }
 
     public static MapViewModelFactory providerMapViewModelFactory(Context context){
         PropertyDataRepository dataSourceProperty = providerPropertyDataSource(context);
-        Executor executor = provideExecutor();
-        return new MapViewModelFactory(dataSourceProperty, executor);
+        return new MapViewModelFactory(dataSourceProperty);
     }
 }

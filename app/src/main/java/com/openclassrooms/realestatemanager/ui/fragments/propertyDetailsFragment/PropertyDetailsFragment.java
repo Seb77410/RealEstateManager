@@ -24,6 +24,7 @@ import com.openclassrooms.realestatemanager.database.injection.Injection;
 import com.openclassrooms.realestatemanager.models.database.Media;
 import com.openclassrooms.realestatemanager.models.database.Property;
 import com.openclassrooms.realestatemanager.ui.activities.AddProperties.AddPropertyActivity;
+import com.openclassrooms.realestatemanager.utils.Converters;
 import com.openclassrooms.realestatemanager.utils.Utils;
 
 import java.util.List;
@@ -55,7 +56,6 @@ public class PropertyDetailsFragment extends Fragment
     private LinearLayout propertyNearbyContainer;
     private LinearLayout propertyNearbyContentContainer;
     private PropertyDetailsViewModel viewModel;
-    private PropertyDetailsPhotoAdapter adapter;
     private ImageView staticMap;
     private ExtendedFloatingActionButton editButton;
 
@@ -70,7 +70,7 @@ public class PropertyDetailsFragment extends Fragment
       public static PropertyDetailsFragment newInstance(Property property) {
         PropertyDetailsFragment fragment = new PropertyDetailsFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, Utils.convertPropertyToString(property));
+        args.putString(ARG_PARAM1, Converters.convertPropertyToString(property));
         fragment.setArguments(args);
         return fragment;
     }
@@ -84,7 +84,7 @@ public class PropertyDetailsFragment extends Fragment
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             this.sProperty = getArguments().getString(ARG_PARAM1);
-            this.property = Utils.convertStringToProperty(getArguments().getString(ARG_PARAM1));
+            this.property = Converters.convertStringToProperty(getArguments().getString(ARG_PARAM1));
         }
 
         Log.e("OnCreate", "OnCreate");
@@ -185,7 +185,7 @@ public class PropertyDetailsFragment extends Fragment
             String propertyAddress = property.getAddress().replaceAll("\\s", "+");
             Log.e("New address", "for static map api = " + propertyAddress);
 
-            String mapUrl = String.format("%s %s %s %s", "https://maps.googleapis.com/maps/api/staticmap?center=", propertyAddress, "&zoom=13&scale=1&size=600x300&maptype=roadmap&key=AIzaSyBaAwomMKgWDHN0nAzAvlUR-VRDolCplKw&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7C", propertyAddress);
+            String mapUrl = String.format("%s %s %s %s", "https://maps.googleapis.com/maps/api/staticmap?center=", propertyAddress, "&zoom=13&scale=1&size=600x300&maptype=roadmap&key=AIzaSyBaAwomMKgWDHN0nAzAvlUR-VRDolCplKw&format=jpeg&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7C", propertyAddress);
 
             Glide.with(Objects.requireNonNull(getContext()))
                     .load(mapUrl)
@@ -206,9 +206,6 @@ public class PropertyDetailsFragment extends Fragment
             intent.putExtra("property for details", sProperty);
             startActivity(intent);
         });
-
-
-
     }
 
     //----------------------------------------------------------------------------------------------
@@ -221,16 +218,11 @@ public class PropertyDetailsFragment extends Fragment
 
 
     private void getPropertyMediaData(){
-        viewModel.getMediasByPropertyId(property.getId()).observe(getViewLifecycleOwner(), mediaList -> {
-            for (Media media : mediaList){
-                // Log.e("Details fragment", "Get media data, media Uri = " + media.getMediaUri());
-            }
-            configureRecyclerView(mediaList);
-        });
+        viewModel.getMediasByPropertyId(property.getId()).observe(getViewLifecycleOwner(), this::configureRecyclerView);
     }
 
     private void setPropertyForSellDate(){
-        propertyForSellDate.setText(Utils.convertCalendarToString(property.getCreateDate()));
+        propertyForSellDate.setText(Converters.convertCalendarToFormatString(property.getCreateDate()));
     }
 
     //----------------------------------------------------------------------------------------------
@@ -239,7 +231,7 @@ public class PropertyDetailsFragment extends Fragment
 
     private void configureRecyclerView(List<Media> mediaList){
         // Create adapter passing the list of articles
-        adapter = new PropertyDetailsPhotoAdapter(mediaList , Glide.with(Objects.requireNonNull(getContext())));
+        PropertyDetailsPhotoAdapter adapter = new PropertyDetailsPhotoAdapter(mediaList, Glide.with(Objects.requireNonNull(getContext())));
         // Attach the adapter to the recycler view to populate items
         recyclerView.setAdapter(adapter);
         // Set layout manager to position the items

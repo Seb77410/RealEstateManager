@@ -21,13 +21,13 @@ public class AddPhotosRecyclerAdapter extends RecyclerView.Adapter<AddPhotosRecy
     private ArrayList<Boolean> mediaHaveComment;
     private ArrayList<Long> mediaToDelete;
 
-    public AddPhotosRecyclerAdapter (ArrayList<Media> mediaList, ArrayList<Boolean> mediaHaveComment,RequestManager glide){
+    AddPhotosRecyclerAdapter(ArrayList<Media> mediaList, ArrayList<Boolean> mediaHaveComment, RequestManager glide){
         this.mediaList = mediaList;
         this.mediaHaveComment = mediaHaveComment;
         this.glide = glide;
     }
 
-    public AddPhotosRecyclerAdapter (ArrayList<Media> mediaList, ArrayList<Boolean> mediaHaveComment, ArrayList<Long> mediaToDelete,RequestManager glide){
+    AddPhotosRecyclerAdapter(ArrayList<Media> mediaList, ArrayList<Boolean> mediaHaveComment, ArrayList<Long> mediaToDelete, RequestManager glide){
         this.mediaList = mediaList;
         this.mediaHaveComment = mediaHaveComment;
         this.mediaToDelete = mediaToDelete;

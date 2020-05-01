@@ -6,7 +6,9 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.RawQuery;
 import androidx.room.Update;
+import androidx.sqlite.db.SupportSQLiteQuery;
 
 import com.openclassrooms.realestatemanager.models.database.Property;
 
@@ -38,4 +40,8 @@ public interface PropertyDAO {
 
     @Query("SELECT * FROM Property WHERE id = :propertyId")
     Cursor getPropertyWithCursor(long propertyId);
+
+    @RawQuery(observedEntities = Property.class)
+    LiveData<List<Property>> searchProperty(SupportSQLiteQuery query);
+
 }

@@ -84,13 +84,9 @@ class AddPropertiesViewModel extends ViewModel {
     }
 
 
-    void updatePropertyAndData(InterestPoint interestPoint, Property property, ArrayList<Media> mediaList, ArrayList<Long> mediaToDelete,Context applicationContext) {
-        executor.execute(()->{
-           interestPointDataSource.updateInterestPoint(interestPoint);
-        });
-        executor.execute(()->{
-            propertyDataSource.updateProperty(property);
-        });
+    void updatePropertyAndData(InterestPoint interestPoint, Property property, ArrayList<Media> mediaList, ArrayList<Long> mediaToDelete) {
+        executor.execute(()-> interestPointDataSource.updateInterestPoint(interestPoint));
+        executor.execute(()-> propertyDataSource.updateProperty(property));
 
         for(Media media : mediaList) {
             executor.execute(() -> {
@@ -102,9 +98,7 @@ class AddPropertiesViewModel extends ViewModel {
                 }
             });
             for (Long mediaId : mediaToDelete) {
-                executor.execute(()->{
-                    mediaDataSource.deleteMedia(mediaId);
-                });
+                executor.execute(()-> mediaDataSource.deleteMedia(mediaId));
             }
         }
     }

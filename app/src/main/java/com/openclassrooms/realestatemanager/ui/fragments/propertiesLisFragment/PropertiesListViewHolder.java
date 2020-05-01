@@ -14,7 +14,7 @@ import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.models.database.Property;
 
 
-public class PropertiesListViewHolder extends RecyclerView.ViewHolder {
+class PropertiesListViewHolder extends RecyclerView.ViewHolder {
 
     private ImageView propertyImage;
     private TextView propertyPrice;
@@ -24,7 +24,7 @@ public class PropertiesListViewHolder extends RecyclerView.ViewHolder {
     private RequestManager glide;
     private Uri propertyPreviewPhoto;
 
-    public PropertiesListViewHolder(@NonNull View itemView) {
+    PropertiesListViewHolder(@NonNull View itemView) {
         super(itemView);
         propertyImage = itemView.findViewById(R.id.fragment_properties_list_item_imageView);
         propertyPrice = itemView.findViewById(R.id.fragment_properties_list_item_price);
@@ -33,7 +33,7 @@ public class PropertiesListViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-    public void updateWithPropertiesList(Property property, Uri propertyPreviewPhoto, RequestManager glide) {
+    void updateWithPropertiesList(Property property, Uri propertyPreviewPhoto, RequestManager glide) {
         this.property = property;
         this.glide = glide;
         this.propertyPreviewPhoto = propertyPreviewPhoto;

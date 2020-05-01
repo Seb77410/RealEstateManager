@@ -1,9 +1,8 @@
 package com.openclassrooms.realestatemanager.models.database;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
-
-import java.util.EnumMap;
 
 @Entity
 public class HouseSeller {
@@ -14,7 +13,8 @@ public class HouseSeller {
     private String email;
 
     // --- CONSTRUCTORS ---
-    public HouseSeller(){};
+    @Ignore
+    public HouseSeller(){}
 
     public HouseSeller(String name, String email) {
         this.name = name;

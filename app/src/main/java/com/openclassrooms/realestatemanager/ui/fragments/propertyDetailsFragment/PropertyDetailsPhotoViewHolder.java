@@ -12,13 +12,13 @@ import com.bumptech.glide.request.RequestOptions;
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.models.database.Media;
 
-public class PropertyDetailsPhotoViewHolder extends RecyclerView.ViewHolder {
-    ImageView imageView;
-    RequestManager glide;
-    Media media;
-    TextView title;
+class PropertyDetailsPhotoViewHolder extends RecyclerView.ViewHolder {
+    private ImageView imageView;
+    private RequestManager glide;
+    private Media media;
+    private TextView title;
 
-    public PropertyDetailsPhotoViewHolder(@NonNull View itemView) {
+    PropertyDetailsPhotoViewHolder(@NonNull View itemView) {
         super(itemView);
 
         imageView = itemView.findViewById(R.id.fragment_property_details_item_image_view);

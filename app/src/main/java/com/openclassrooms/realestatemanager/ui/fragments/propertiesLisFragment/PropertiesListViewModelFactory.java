@@ -7,20 +7,17 @@ import androidx.lifecycle.ViewModelProvider;
 import com.openclassrooms.realestatemanager.database.repositories.MediaDataRepository;
 import com.openclassrooms.realestatemanager.database.repositories.PropertyDataRepository;
 
-import java.util.concurrent.Executor;
 
 public class PropertiesListViewModelFactory implements ViewModelProvider.Factory {
 
     // --- Repository ---
     private final PropertyDataRepository propertyDataSource;
     private final MediaDataRepository mediaDataSource;
-    private final Executor executor;
 
     // --- Constructor ---
-    public PropertiesListViewModelFactory(PropertyDataRepository propertyDataSource, MediaDataRepository mediaDataSource, Executor executor){
+    public PropertiesListViewModelFactory(PropertyDataRepository propertyDataSource, MediaDataRepository mediaDataSource){
         this.propertyDataSource = propertyDataSource;
         this.mediaDataSource = mediaDataSource;
-        this.executor = executor;
     }
 
     @SuppressWarnings("unchecked")
@@ -29,7 +26,7 @@ public class PropertiesListViewModelFactory implements ViewModelProvider.Factory
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if(modelClass.isAssignableFrom(PropertiesListViewModel.class)){
 
-            return (T) new PropertiesListViewModel(propertyDataSource, mediaDataSource,executor);
+            return (T) new PropertiesListViewModel(propertyDataSource, mediaDataSource);
         }
         throw new IllegalArgumentException("Unknown ViewModel class");
     }

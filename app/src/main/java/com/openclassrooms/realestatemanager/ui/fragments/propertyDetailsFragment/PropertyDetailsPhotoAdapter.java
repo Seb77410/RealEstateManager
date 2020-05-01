@@ -15,10 +15,10 @@ import com.openclassrooms.realestatemanager.models.database.Media;
 import java.util.List;
 
 public class PropertyDetailsPhotoAdapter extends RecyclerView.Adapter<PropertyDetailsPhotoViewHolder> {
-    RequestManager glide;
-    List<Media> mediaList;
+    private RequestManager glide;
+    private List<Media> mediaList;
 
-    public PropertyDetailsPhotoAdapter (List<Media> mediaList, RequestManager glide){
+    PropertyDetailsPhotoAdapter (List<Media> mediaList, RequestManager glide){
         this.mediaList = mediaList;
         this.glide = glide;
     }

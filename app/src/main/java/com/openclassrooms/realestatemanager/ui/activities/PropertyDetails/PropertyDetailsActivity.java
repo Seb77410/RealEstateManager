@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.ui.activities;
+package com.openclassrooms.realestatemanager.ui.activities.PropertyDetails;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;

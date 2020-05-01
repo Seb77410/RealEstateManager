@@ -1,32 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activities.PropertyDetails.PropertyDetailsActivity">
+    tools:context=".ui.activities.SearchProperty.SearchPropertyResultActivity"
+    >
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/property_details_activity_toolbar"
+        android:id="@+id/search_property_result_activity_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/primaryColor"
+        android:theme="@style/ToolbarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/primaryColor"
-        android:theme="@style/ToolbarTheme"
-        app:title="@string/app_name"
-        />
+        app:title="Search property result" />
 
     <FrameLayout
-        android:id="@+id/property_details_activity_frame_layout"
+        android:id="@+id/search_property_result_activity_frame_layout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/property_details_activity_toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/search_property_result_activity_toolbar" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-

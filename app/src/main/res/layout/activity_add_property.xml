@@ -22,11 +22,12 @@
     <androidx.core.widget.NestedScrollView
         android:id="@+id/add_property_activity_scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="56dp"
+        android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_property_activity_toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/add_property_activity_toolbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -333,5 +334,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:rippleColor="@android:color/white" />
+        app:rippleColor="@android:color/white"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

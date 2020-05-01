@@ -31,15 +31,12 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" 
-                />
+                android:resource="@xml/file_paths" />
         </provider>
-        
         <provider
-            android:authorities="com.openclassrooms.realestatemanager.provider"
             android:name=".provider.ContentProvider"
-            android:exported="true"
-        />
+            android:authorities="com.openclassrooms.realestatemanager.provider"
+            android:exported="true" />
 
         <activity android:name=".ui.activities.SearchProperty.SearchPropertyActivity">
             <meta-data
@@ -51,7 +48,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.activities.MainActivity" />
         </activity>
-
         <activity android:name=".ui.activities.AddHouseSeller.AddHouseSellerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -69,10 +65,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activities.PropertyDetailsActivity">
+        <activity android:name=".ui.activities.PropertyDetails.PropertyDetailsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.activities.MainActivity" />
+        </activity>
+
+        <activity android:name=".ui.activities.SearchProperty.SearchPropertyResultActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activities.SearchProperty.SearchPropertyActivity" />
         </activity>
 
         <meta-data

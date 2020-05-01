@@ -312,18 +312,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:rippleColor="@android:color/white" />
 
-    <!--
-        <fragment
-            android:id="@+id/property_details_fragment_map_fragment"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline3"
-            app:layout_constraintTop_toTopOf="@+id/guideline2"
-            map:cameraZoom="13"
-            map:liteMode="true"
-            map:mapType="normal"/>
--->
 </androidx.constraintlayout.widget.ConstraintLayout>

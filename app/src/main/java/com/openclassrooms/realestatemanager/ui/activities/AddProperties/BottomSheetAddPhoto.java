@@ -26,6 +26,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
@@ -39,7 +40,7 @@ public class BottomSheetAddPhoto extends BottomSheetDialogFragment {
     private Uri imageUri;
     private AddPropertyActivity.OnBottomSheetInteractionListener callback;
 
-    public BottomSheetAddPhoto(AddPropertyActivity.OnBottomSheetInteractionListener callback) {
+    BottomSheetAddPhoto(AddPropertyActivity.OnBottomSheetInteractionListener callback) {
         this.callback = callback;
     }
 
@@ -123,7 +124,7 @@ public class BottomSheetAddPhoto extends BottomSheetDialogFragment {
 
     private File createImageFile() throws IOException {
         // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = Objects.requireNonNull(getContext()).getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(

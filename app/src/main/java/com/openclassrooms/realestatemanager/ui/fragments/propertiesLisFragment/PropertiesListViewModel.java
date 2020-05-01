@@ -11,21 +11,19 @@ import com.openclassrooms.realestatemanager.database.repositories.PropertyDataRe
 import java.util.List;
 import java.util.concurrent.Executor;
 
-public class PropertiesListViewModel extends ViewModel {
+class PropertiesListViewModel extends ViewModel {
 
     private final PropertyDataRepository propertyDataSource;
     private final MediaDataRepository mediaDataSource;
-    private final Executor executor;
 
-    public PropertiesListViewModel(PropertyDataRepository propertyDataSource, MediaDataRepository mediaDataSource,Executor executor){
+    PropertiesListViewModel(PropertyDataRepository propertyDataSource, MediaDataRepository mediaDataSource){
         this.propertyDataSource = propertyDataSource;
         this.mediaDataSource = mediaDataSource;
-        this.executor = executor;
     }
 
     // --- For Properties ---
-    public LiveData<List<Property>> getPropertiesList(){return propertyDataSource.getAllProperties();}
+    LiveData<List<Property>> getPropertiesList(){return propertyDataSource.getAllProperties();}
 
     // --- For Media ---
-    public LiveData<List<Media>> getMediasByPropertyId(long propertyId){return mediaDataSource.getMediaByPropertyId(propertyId);}
+    LiveData<List<Media>> getMediasByPropertyId(long propertyId){return mediaDataSource.getMediaByPropertyId(propertyId);}
 }

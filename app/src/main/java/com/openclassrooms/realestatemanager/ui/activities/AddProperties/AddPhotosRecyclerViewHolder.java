@@ -18,7 +18,7 @@ import com.openclassrooms.realestatemanager.models.database.Media;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class AddPhotosRecyclerViewHolder extends RecyclerView.ViewHolder {
+class AddPhotosRecyclerViewHolder extends RecyclerView.ViewHolder {
 
     private ImageView imageView;
     private TextInputLayout textInputLayout;

@@ -25,6 +25,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 
 /**
@@ -65,7 +66,7 @@ public class Utils {
 
     // ----- Correction -----
     public static String getTodayDateNew(){
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         return dateFormat.format(new Date());
     }
 
@@ -106,7 +107,7 @@ public class Utils {
         PendingIntent resultPendingIntent = PendingIntent.getActivity(context, 0,
                 resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context);
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, MyConstants.CHANNEL_1_ID);
         mBuilder.setSmallIcon(R.drawable.ic_home_24px)
                 .setContentTitle(title)
                 .setContentText(messageContent)
@@ -128,33 +129,6 @@ public class Utils {
         Objects.requireNonNull(mNotificationManager).notify(0, mBuilder.build());
     }
 
-
-    public static String convertPropertyToString(Property property) {
-        Gson gson = new Gson();
-        return gson.toJson(property);
-    }
-
-    public static Property convertStringToProperty(String property) {
-        Type propertyType = new TypeToken<Property>() {
-        }.getType();
-        return new Gson().fromJson(property, propertyType);
-    }
-
-    public static String convertCalendarToString(Calendar calendar){
-
-        String dayOfMonth = convertDateIntToString(calendar.get(Calendar.DAY_OF_MONTH));
-        String month = convertDateIntToString(calendar.get(Calendar.MONTH));
-        String year = String.valueOf(calendar.get(Calendar.YEAR));
-
-        return dayOfMonth+"-"+month+"-"+year;
-    }
-
-    private static String convertDateIntToString(int date){
-        if (date<10){
-            return  "0" + date;
-        }
-        else {return String.valueOf(date);}
-    }
 
 
 

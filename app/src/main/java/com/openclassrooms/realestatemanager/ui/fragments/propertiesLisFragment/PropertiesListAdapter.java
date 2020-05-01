@@ -13,18 +13,16 @@ import com.bumptech.glide.RequestManager;
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.models.database.Property;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PropertiesListAdapter extends RecyclerView.Adapter<PropertiesListViewHolder> {
 
     private RequestManager glide;
     private List<Property> propertiesList;
-    private ArrayList<Uri> propertiesPreviewPhotoList;
     private Uri[] propertiesPhoto;
 
 
-    public PropertiesListAdapter (List<Property> propertiesList, Uri[] propertiesPreviewPhotoList, RequestManager glide){
+    PropertiesListAdapter (List<Property> propertiesList, Uri[] propertiesPreviewPhotoList, RequestManager glide){
         this.propertiesList = propertiesList;
         this.propertiesPhoto = propertiesPreviewPhotoList;
         this.glide = glide;

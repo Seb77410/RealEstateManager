@@ -32,6 +32,7 @@ import com.openclassrooms.realestatemanager.models.database.HouseSeller;
 import com.openclassrooms.realestatemanager.models.database.InterestPoint;
 import com.openclassrooms.realestatemanager.models.database.Media;
 import com.openclassrooms.realestatemanager.models.database.Property;
+import com.openclassrooms.realestatemanager.utils.Converters;
 import com.openclassrooms.realestatemanager.utils.PropertyTypeEnum;
 import com.openclassrooms.realestatemanager.utils.Utils;
 
@@ -62,11 +63,9 @@ public class AddPropertyActivity extends AppCompatActivity {
     private ArrayList<Media> mediaList = new ArrayList<>();
     private ArrayList<Long> mediaToDelete =  new ArrayList<>();
     private ArrayList<Boolean> mediaHaveComment = new ArrayList<>();
-    private ArrayList<String> interestsPointList = new ArrayList<>();
     private Boolean isEditActivity = false;
     private Switch propertySold;
     private LinearLayout houseSellerContainer;
-    private DatePickerDialog selector;
 
 
     //----------------------------------------------------------------------------------------------
@@ -174,7 +173,7 @@ public class AddPropertyActivity extends AppCompatActivity {
     }
 
     private void configureAndShowDatePicker(){
-        selector = new DatePickerDialog (AddPropertyActivity.this, R.style.TimePickerTheme , (view, year, month, dayOfMonth) -> {
+        DatePickerDialog selector = new DatePickerDialog(AddPropertyActivity.this, R.style.TimePickerTheme, (view, year, month, dayOfMonth) -> {
             Calendar calendar = Calendar.getInstance();
             calendar.set(Calendar.YEAR, year);
             calendar.set(Calendar.MONTH, month);
@@ -189,10 +188,6 @@ public class AddPropertyActivity extends AppCompatActivity {
         });
 
         selector.show();
-        selector.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.primaryColor));
-        selector.getButton(DatePickerDialog.BUTTON_NEGATIVE).setBackgroundColor(getResources().getColor(R.color.transparent));
-        selector.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.primaryColor));
-        selector.getButton(DatePickerDialog.BUTTON_POSITIVE).setBackgroundColor(getResources().getColor(R.color.transparent));
     }
 
 
@@ -385,7 +380,7 @@ public class AddPropertyActivity extends AppCompatActivity {
     }
 
     private void createPropertyAndData(){
-        interestsPointList = new ArrayList<>();
+        ArrayList<String> interestsPointList = new ArrayList<>();
         if(schoolCheckbox.isChecked()){
             interestsPointList.add(schoolCheckbox.getText().toString());
         }
@@ -413,7 +408,7 @@ public class AddPropertyActivity extends AppCompatActivity {
             property.setDescription(getStringFromInputLayoutValue(descriptionEditText));
             property.setAddress(getStringFromInputLayoutValue(addressEditText));
 
-            viewModel.updatePropertyAndData(interestPoint, property, mediaList, mediaToDelete, getApplicationContext());
+            viewModel.updatePropertyAndData(interestPoint, property, mediaList, mediaToDelete);
         }
         else{
 
@@ -436,7 +431,7 @@ public class AddPropertyActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             isEditActivity = true;
-            property = Utils.convertStringToProperty(bundle.getString("property for details"));
+            property = Converters.convertStringToProperty(bundle.getString("property for details"));
         }
 
     }
