@@ -20,7 +20,7 @@ import java.util.Objects;
 public class Converters {
 
     @TypeConverter
-    public static Calendar StringToCalendar (String value){
+    public static Calendar stringToCalendar(String value){
         if (value!=null){
             Calendar calendar = Calendar.getInstance();
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
@@ -34,10 +34,10 @@ public class Converters {
     }
 
     @TypeConverter
-    public static String CalendarToString (Calendar calendar){
+    public static String calendarToString(Calendar calendar){
         if (calendar != null){
             return calendar.get(Calendar.YEAR) +
-                convertDateIntToString(calendar.get(Calendar.MONTH)+1)+
+                convertDateIntToString(calendar.get(Calendar.MONTH))+
                 convertDateIntToString(calendar.get(Calendar.DAY_OF_MONTH));
         }else {
             return null;
@@ -84,6 +84,13 @@ public class Converters {
         return gson.toJson(properties);
     }
 
+    public static List<Property> convertStringToPropertiesList(String propertiesList) {
+        Type propertyType = new TypeToken<List<Property>>() {
+        }.getType();
+        return new Gson().fromJson(propertiesList, propertyType);
+    }
+
+
     public static String convertCalendarToFormatString(Calendar calendar){
 
         String dayOfMonth = convertDateIntToString(calendar.get(Calendar.DAY_OF_MONTH));
@@ -100,9 +107,5 @@ public class Converters {
         else {return String.valueOf(date);}
     }
 
-    public static List<Property> convertStringToPropertyList(String propertiesList) {
-        Type propertyType = new TypeToken<List<Property>>() {
-        }.getType();
-        return new Gson().fromJson(propertiesList, propertyType);
-    }
+
 }

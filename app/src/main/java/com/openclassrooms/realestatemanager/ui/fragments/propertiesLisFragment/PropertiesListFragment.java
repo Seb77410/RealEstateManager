@@ -103,7 +103,7 @@ public class PropertiesListFragment extends Fragment {
     //----------------------------------------------------------------------------------------------
     private void startRecyclerView(){
         if (getArguments() != null) {
-            propertiesList = Converters.convertStringToPropertyList(getArguments().getString(ARG_PARAM1));
+            propertiesList = Converters.convertStringToPropertiesList(getArguments().getString(ARG_PARAM1));
             Log.e("Search Result fragment", propertiesList.toString());
             getDataForSearchResultAndSTartRecyclerView();
         }else{

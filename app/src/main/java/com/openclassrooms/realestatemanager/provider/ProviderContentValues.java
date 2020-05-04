@@ -19,8 +19,8 @@ class ProviderContentValues {
         if (values.containsKey("description")) property.setDescription(values.getAsString("description"));
         if (values.containsKey("address")) property.setAddress(values.getAsString("address"));
         if (values.containsKey("sold")) property.setSold(values.getAsBoolean("sold"));
-        if (values.containsKey("createDate")) property.setCreateDate(Converters.StringToCalendar(values.getAsString("createDate")));
-        if (values.containsKey("sellDate")) property.setSellDate(Converters.StringToCalendar(values.getAsString("sellDate")));
+        if (values.containsKey("createDate")) property.setCreateDate(Converters.stringToCalendar(values.getAsString("createDate")));
+        if (values.containsKey("sellDate")) property.setSellDate(Converters.stringToCalendar(values.getAsString("sellDate")));
         if (values.containsKey("interestPointId")) property.setInterestPointId(values.getAsLong("interestPointId"));
         if (values.containsKey("houseSellerId")) property.setHouseSellerId(values.getAsLong("houseSellerId"));
         return property;

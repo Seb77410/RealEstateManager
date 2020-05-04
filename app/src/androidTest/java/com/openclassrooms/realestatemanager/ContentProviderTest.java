@@ -127,7 +127,7 @@ public class ContentProviderTest {
          values.put("description", "Petite maison avec 2 chambre, un petit jardin");
          values.put("address", "10 rue jean jaures, 77410 CLAYE SOUILLY");
          values.put("sold", "false");
-         values.put("createDate", Converters.CalendarToString(Calendar.getInstance()));
+         values.put("createDate", Converters.calendarToString(Calendar.getInstance()));
          values.put("interestPointId", INTEREST_POINT_ID);
          values.put("houseSellerId", HOUSE_SELLER_ID);
          values.put("type", "Home");

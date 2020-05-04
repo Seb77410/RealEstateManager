@@ -26,6 +26,7 @@ public class MainActivityTest {
 
     @Test
     public void mainActivityTest() {
+        // Test main Activity
         onView(withId(R.id.main_activity_toolbar)).check(matches(isDisplayed()));
         onView(withText(R.string.app_name)).check(matches(isDisplayed()));
         onView(withId(R.id.main_activity_list_frame_layout)).check(matches(isDisplayed()));
