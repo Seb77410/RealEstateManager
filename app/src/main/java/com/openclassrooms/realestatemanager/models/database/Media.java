@@ -2,19 +2,22 @@ package com.openclassrooms.realestatemanager.models.database;
 
 import android.net.Uri;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 @Entity(foreignKeys = @ForeignKey(entity = Property.class,
-                    parentColumns = "id",
-                    childColumns = "propertyId"))
+                    parentColumns = "property_id",
+                    childColumns = "media_property_id"))
 public class Media {
 
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "media_id")
     private long id;
     private String comment;
     private Uri mediaUri;
+    @ColumnInfo(name = "media_property_id", index = true)
     private long propertyId;
 
     // --- CONSTRUCTORS ---

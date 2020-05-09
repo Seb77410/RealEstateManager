@@ -5,6 +5,7 @@
     <!-- Toolbar titles -->
     <string name="add_house_seller">Add house seller</string>
     <string name="add_property">Add property</string>
+    <string name="loan_calculator">Loan calculator</string>
 
     <!-- Main menu titles -->
     <string name="map">map</string>

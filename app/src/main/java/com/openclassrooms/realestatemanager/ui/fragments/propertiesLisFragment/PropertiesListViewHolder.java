@@ -20,6 +20,7 @@ class PropertiesListViewHolder extends RecyclerView.ViewHolder {
     private TextView propertyPrice;
     private TextView propertyType;
     private TextView propertyAddress;
+    private TextView propertySold;
     private Property property;
     private RequestManager glide;
     private Uri propertyPreviewPhoto;
@@ -30,6 +31,7 @@ class PropertiesListViewHolder extends RecyclerView.ViewHolder {
         propertyPrice = itemView.findViewById(R.id.fragment_properties_list_item_price);
         propertyType = itemView.findViewById(R.id.fragment_properties_list_item_type);
         propertyAddress = itemView.findViewById(R.id.fragment_properties_list_item_address);
+        propertySold = itemView.findViewById(R.id.fragment_properties_list_item_sold);
 
     }
 
@@ -41,6 +43,7 @@ class PropertiesListViewHolder extends RecyclerView.ViewHolder {
         setPropertyImage();
         setPropertyType();
         setPropertyAddress();
+        setPropertySold();
     }
 
     private void setPropertyPrice(){
@@ -63,6 +66,14 @@ class PropertiesListViewHolder extends RecyclerView.ViewHolder {
     private void setPropertyAddress(){
         propertyAddress.setText(property.getAddress());
     }
+
+    private void setPropertySold(){
+        if(!property.getSold()){
+            propertySold.setVisibility(View.GONE);
+        }
+    }
+
+
 
 
 }

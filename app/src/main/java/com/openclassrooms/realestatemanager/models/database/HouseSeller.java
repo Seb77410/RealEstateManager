@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager.models.database;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
@@ -8,6 +9,7 @@ import androidx.room.PrimaryKey;
 public class HouseSeller {
 
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "house_seller_id")
     private long id;
     private String name;
     private String email;

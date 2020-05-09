@@ -40,7 +40,7 @@ public class AddPhotosRecyclerAdapter extends RecyclerView.Adapter<AddPhotosRecy
         // Create view holder and inflating its xml layout
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.add_property_acitivity_recycler_item, parent, false);
+        View view = inflater.inflate(R.layout.activity_add_property_recycler_item, parent, false);
         return new AddPhotosRecyclerViewHolder(view);
     }
 

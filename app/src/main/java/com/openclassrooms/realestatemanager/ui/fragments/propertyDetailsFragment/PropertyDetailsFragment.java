@@ -1,6 +1,8 @@
 package com.openclassrooms.realestatemanager.ui.fragments.propertyDetailsFragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -181,7 +183,8 @@ public class PropertyDetailsFragment extends Fragment
     }
 
     private void setStaticMap(){
-        if (Utils.isInternetAvailableNew(Objects.requireNonNull(getContext()))) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) Objects.requireNonNull(getContext()).getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (Utils.isInternetAvailableNew(connectivityManager)) {
             String propertyAddress = property.getAddress().replaceAll("\\s", "+");
             Log.e("New address", "for static map api = " + propertyAddress);
 

@@ -37,7 +37,7 @@ public class Converters {
     public static String calendarToString(Calendar calendar){
         if (calendar != null){
             return calendar.get(Calendar.YEAR) +
-                convertDateIntToString(calendar.get(Calendar.MONTH))+
+                convertDateIntToString(calendar.get(Calendar.MONTH)+1)+
                 convertDateIntToString(calendar.get(Calendar.DAY_OF_MONTH));
         }else {
             return null;

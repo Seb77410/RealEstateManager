@@ -17,10 +17,10 @@ import java.util.List;
 @Dao
 public interface PropertyDAO {
 
-    @Query("SELECT * FROM Property WHERE houseSellerId = :houseSellerId")
+    @Query("SELECT * FROM Property WHERE property_house_seller_id = :houseSellerId")
     LiveData<List<Property>> getPropertiesByHouseSellerId(long houseSellerId);
 
-    @Query("SELECT * FROM Property WHERE id = :propertyId")
+    @Query("SELECT * FROM Property WHERE property_id = :propertyId")
     LiveData<Property> getPropertyById(long propertyId);
 
     @Insert
@@ -29,16 +29,16 @@ public interface PropertyDAO {
     @Update
     int updateProperty(Property property);
 
-    @Query("DELETE FROM Property WHERE id = :propertyId")
+    @Query("DELETE FROM Property WHERE property_id = :propertyId")
     int deleteProperty(long propertyId);
 
-    @Query("SELECT * FROM Property ORDER BY id DESC LIMIT 1")
+    @Query("SELECT * FROM Property ORDER BY property_id DESC LIMIT 1")
     LiveData<Property> getLastPropertySaved();
 
     @Query("SELECT * FROM Property")
     LiveData<List<Property>> getAllProperties();
 
-    @Query("SELECT * FROM Property WHERE id = :propertyId")
+    @Query("SELECT * FROM Property WHERE property_id = :propertyId")
     Cursor getPropertyWithCursor(long propertyId);
 
     @RawQuery(observedEntities = Property.class)

@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager.models.database;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 public class InterestPoint {
 
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "interest_point_id", index = true)
     private long id;
     private ArrayList<String> category;
 

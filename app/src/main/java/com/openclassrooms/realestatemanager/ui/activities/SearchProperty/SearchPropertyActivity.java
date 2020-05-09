@@ -202,7 +202,7 @@ public class SearchPropertyActivity extends AppCompatActivity {
     private void getDataForNearbySearch(){
 
         if (checkboxLayout.getVisibility() == View.VISIBLE) {
-            interestPointUnderRequest = " AND interestPointId IN (SELECT InterestPoint.id FROM InterestPoint WHERE InterestPoint.category LIKE ";
+            interestPointUnderRequest = " AND property_interest_point_id IN (SELECT InterestPoint.interest_point_id FROM InterestPoint WHERE InterestPoint.category LIKE ";
             checkForCheckbox(schoolCheckbox);
             checkForCheckbox(businessCheckbox);
             checkForCheckbox(transportCheckbox);
@@ -225,7 +225,7 @@ public class SearchPropertyActivity extends AppCompatActivity {
     private void getDataForMediaSearch(){
         if(!Objects.requireNonNull(minMedia.getEditText()).getText().toString().equals("")){
             String sMinMedia = minMedia.getEditText().getText().toString();
-            mediaUnderRequest = " AND (SELECT count(*)  FROM Media WHERE Media.propertyId = Property.id) >=" + sMinMedia;
+            mediaUnderRequest = " AND (SELECT count(*)  FROM Media WHERE Media.media_property_id = Property.property_id) >=" + sMinMedia;
             propertySQLiteRequest = propertySQLiteRequest + mediaUnderRequest;
             Log.e("SEARCH ACTIVITY", "SQLite search request = " + propertySQLiteRequest);
         }

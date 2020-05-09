@@ -38,8 +38,11 @@ public class AddHouseSellerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_house_seller);
+
         configureBackStack();
         configureViewModel();
+
+
     }
 
 
@@ -145,6 +148,8 @@ public class AddHouseSellerActivity extends AppCompatActivity {
         HouseSeller houseSeller = new HouseSeller(name, email);
          this.viewModel.createHouseSeller(houseSeller, getApplicationContext());
     }
+
+
 
 
 

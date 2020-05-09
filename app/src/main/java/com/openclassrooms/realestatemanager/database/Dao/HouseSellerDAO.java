@@ -23,9 +23,9 @@ public interface HouseSellerDAO {
     @Query("SELECT * FROM HouseSeller")
     LiveData<List<HouseSeller>> getHouseSellersList();
 
-    @Query("DELETE FROM HouseSeller WHERE id = :houseSellerId")
+    @Query("DELETE FROM HouseSeller WHERE house_seller_id = :houseSellerId")
     int deleteHouseSeller(long houseSellerId);
 
-    @Query("SELECT * FROM HouseSeller WHERE id = :houseSellerId")
+    @Query("SELECT * FROM HouseSeller WHERE house_seller_id = :houseSellerId")
     Cursor getHouseSellerWithCursor(long houseSellerId);
 }

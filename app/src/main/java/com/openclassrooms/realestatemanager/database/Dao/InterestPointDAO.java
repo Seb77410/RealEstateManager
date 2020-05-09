@@ -22,16 +22,16 @@ public interface InterestPointDAO {
     @Query("SELECT * FROM InterestPoint WHERE category = :list")
     LiveData<InterestPoint> getInterestPointByList(String list);
 
-    @Query("SELECT * FROM InterestPoint WHERE id = :interestPointId")
+    @Query("SELECT * FROM InterestPoint WHERE interest_point_id = :interestPointId")
     LiveData<InterestPoint> getInterestPointById(long interestPointId);
 
-    @Query("DELETE FROM InterestPoint WHERE id = :interestPointId")
+    @Query("DELETE FROM InterestPoint WHERE interest_point_id = :interestPointId")
     int deleteInterestPoint(long interestPointId);
 
-    @Query("SELECT * FROM InterestPoint ORDER BY id DESC LIMIT 1")
+    @Query("SELECT * FROM InterestPoint ORDER BY interest_point_id DESC LIMIT 1")
     LiveData<InterestPoint> getLastInterestPointSaved();
 
-    @Query("SELECT * FROM InterestPoint WHERE id = :interestPointId")
+    @Query("SELECT * FROM InterestPoint WHERE interest_point_id = :interestPointId")
     Cursor getInterestPointWithCursor(long interestPointId);
 
 }

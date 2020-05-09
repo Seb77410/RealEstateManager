@@ -21,7 +21,6 @@
     <item
         android:id="@+id/main_menu_add_property"
         app:showAsAction="never"
-        android:orderInCategory="1"
         android:title="@string/add_property"
         />
 
@@ -31,4 +30,9 @@
         android:title="@string/add_house_seller"
         />
 
+    <item
+        android:id="@+id/main_menu_loan_calculator"
+        app:showAsAction="never"
+        android:title="@string/loan_calculator"
+        />
 </menu>

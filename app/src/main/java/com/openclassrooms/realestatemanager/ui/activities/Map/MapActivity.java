@@ -24,6 +24,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.openclassrooms.realestatemanager.BuildConfig;
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.database.injection.Injection;
 import com.openclassrooms.realestatemanager.models.ApiResponse.GeocodeResponse;
@@ -169,7 +170,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
 
-
     /**
      * This method define app comportment when user allow app to get user location
      * @param requestCode is a request code
@@ -218,7 +218,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         viewModel.getProperties().observe(this, properties -> {
             for(Property property : properties){
                 String propertyAddress = property.getAddress().replaceAll("\\s", "+");
-                DisposableObserver observer = streamFetchLatLang(propertyAddress, getResources().getString(R.string.map_api_key)).subscribeWith(new DisposableObserver<GeocodeResponse>() {
+                DisposableObserver observer = streamFetchLatLang(propertyAddress, BuildConfig.GEOCODING_API_KEY).subscribeWith(new DisposableObserver<GeocodeResponse>() {
 
                     @Override
                     public void onNext(GeocodeResponse geocodeResponse) {

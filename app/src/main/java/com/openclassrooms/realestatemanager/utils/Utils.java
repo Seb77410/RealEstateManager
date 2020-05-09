@@ -14,16 +14,11 @@ import android.provider.Settings;
 
 import androidx.core.app.NotificationCompat;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.openclassrooms.realestatemanager.R;
-import com.openclassrooms.realestatemanager.models.database.Property;
 import com.openclassrooms.realestatemanager.ui.activities.MainActivity;
 
-import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
@@ -84,8 +79,7 @@ public class Utils {
     }
 
     // ----- Correction -----
-    public static Boolean isInternetAvailableNew(Context context){
-        ConnectivityManager connectivityManager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+    public static Boolean isInternetAvailableNew(ConnectivityManager connectivityManager){
         NetworkInfo networkInfo;
         if (connectivityManager != null) {
             networkInfo = connectivityManager.getActiveNetworkInfo();
@@ -128,8 +122,5 @@ public class Utils {
         }
         Objects.requireNonNull(mNotificationManager).notify(0, mBuilder.build());
     }
-
-
-
 
 }

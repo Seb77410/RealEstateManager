@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager.models.database;
 
 import androidx.annotation.Nullable;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
@@ -9,16 +10,17 @@ import java.util.Calendar;
 
 @Entity(foreignKeys ={
             @ForeignKey(entity = InterestPoint.class,
-                parentColumns = "id",
-                childColumns = "interestPointId"),
+                parentColumns = "interest_point_id",
+                childColumns = "property_interest_point_id"),
             @ForeignKey(entity = HouseSeller.class,
-                parentColumns = "id",
-                childColumns = "houseSellerId")
+                parentColumns = "house_seller_id",
+                childColumns = "property_house_seller_id")
             }
        )
 public class Property {
 
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "property_id")
     private long id;
     private int price;
     private int area;
@@ -29,7 +31,9 @@ public class Property {
     private boolean sold;
     private Calendar createDate;
     private Calendar sellDate;
+    @ColumnInfo(name = "property_interest_point_id", index = true)
     private long interestPointId;
+    @ColumnInfo(name = "property_house_seller_id", index = true)
     private long houseSellerId;
 
     // --- CONSTRUCTORS ---

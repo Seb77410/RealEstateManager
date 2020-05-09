@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.Menu;
@@ -17,6 +19,7 @@ import android.widget.FrameLayout;
 import com.openclassrooms.realestatemanager.ui.activities.AddHouseSeller.AddHouseSellerActivity;
 import com.openclassrooms.realestatemanager.ui.activities.AddProperties.AddPropertyActivity;
 import com.openclassrooms.realestatemanager.R;
+import com.openclassrooms.realestatemanager.ui.activities.LoanCalculator.LoanCalculatorActivity;
 import com.openclassrooms.realestatemanager.ui.activities.Map.MapActivity;
 import com.openclassrooms.realestatemanager.ui.activities.SearchProperty.SearchPropertyActivity;
 import com.openclassrooms.realestatemanager.ui.fragments.propertiesLisFragment.PropertiesListFragment;
@@ -106,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Search button ==> Start SearchActivity
         switch (item.getItemId()) {
+
             case R.id.main_menu_add_property:
                 Intent intent = new Intent(this, AddPropertyActivity.class);
                 startActivity(intent);
@@ -115,7 +119,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent1);
                 break;
             case R.id.main_menu_map:
-                if(Utils.isInternetAvailableNew(getApplicationContext())){
+                ConnectivityManager connectivityManager = (ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                if(Utils.isInternetAvailableNew(connectivityManager)){
                     Intent intent2 = new Intent(this, MapActivity.class);
                     startActivity(intent2);
                 }else{
@@ -126,7 +131,12 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.main_menu_search:
                 Intent intent3 = new Intent(this, SearchPropertyActivity.class);
-                startActivity(intent3);;
+                startActivity(intent3);
+                break;
+            case R.id.main_menu_loan_calculator:
+                Intent intent4 = new Intent(this, LoanCalculatorActivity.class);
+                startActivity(intent4);
+                break;
         }
         return true;
     }
