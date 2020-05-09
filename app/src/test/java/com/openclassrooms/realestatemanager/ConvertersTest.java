@@ -31,7 +31,7 @@ public class ConvertersTest {
         calendar.set(Calendar.MONTH, 11);
         calendar.set(Calendar.DAY_OF_MONTH, 27);
 
-        assertEquals(Converters.calendarToString(calendar), "19861127");
+        assertEquals(Converters.calendarToString(calendar), "19861227");
     }
 
     @Test

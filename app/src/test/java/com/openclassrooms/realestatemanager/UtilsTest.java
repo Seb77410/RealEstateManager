@@ -1,8 +1,13 @@
 package com.openclassrooms.realestatemanager;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
 import com.openclassrooms.realestatemanager.utils.Utils;
 
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -37,5 +42,17 @@ public class UtilsTest {
         String currentDate = dateFormat.format(new Date());
         assertEquals(currentDate, Utils.getTodayDateNew());
     }
+
+    @Test
+    public void isInternetAvailableTest() {
+        final NetworkInfo networkInfo = Mockito.mock( NetworkInfo.class );
+        final ConnectivityManager connectivityManager = Mockito.mock( ConnectivityManager.class );
+        Mockito.when( connectivityManager.getActiveNetworkInfo() ).thenReturn( networkInfo );
+        Mockito.when( networkInfo.isConnected() ).thenReturn( false );
+
+        assertEquals(false, Utils.isInternetAvailableNew(connectivityManager));
+    }
+
+
 
 }

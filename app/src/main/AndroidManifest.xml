@@ -21,8 +21,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-
+        <activity android:name=".ui.activities.LoanCalculator.LoanCalculatorActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activities.MainActivity"
+                />
+        </activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -70,7 +74,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.activities.MainActivity" />
         </activity>
-
         <activity android:name=".ui.activities.SearchProperty.SearchPropertyResultActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

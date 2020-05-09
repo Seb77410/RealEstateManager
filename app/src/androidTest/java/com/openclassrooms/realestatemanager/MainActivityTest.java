@@ -1,10 +1,15 @@
 package com.openclassrooms.realestatemanager;
 
+import android.view.View;
+
 import androidx.test.InstrumentationRegistry;
+import androidx.test.espresso.UiController;
+import androidx.test.espresso.ViewAction;
 import androidx.test.espresso.intent.rule.IntentsTestRule;
 
 import com.openclassrooms.realestatemanager.ui.activities.MainActivity;
 
+import org.hamcrest.Matcher;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -26,7 +31,7 @@ public class MainActivityTest {
 
     @Test
     public void mainActivityTest() {
-/*
+
         // Test main Activity
         onView(withId(R.id.main_activity_toolbar)).check(matches(isDisplayed()));
         onView(withText(R.string.app_name)).check(matches(isDisplayed()));
@@ -58,12 +63,14 @@ public class MainActivityTest {
         onView(isRoot()).perform(pressBack());
 
         // Test MapActivity
+        onView(isRoot()).perform(waitFor());
         onView(withId(R.id.main_menu_map)).check(matches(isDisplayed())).perform(click());
         onView(withId(R.id.map_activity_toolbar)).check(matches(isDisplayed()));
         onView(withId(R.id.map_activity_map)).check(matches(isDisplayed()));
         onView(isRoot()).perform(pressBack());
 
         // Test SearchPropertyActivity
+        onView(isRoot()).perform(waitFor());
         onView(withId(R.id.main_menu_search)).check(matches(isDisplayed())).perform(click());
         onView(withId(R.id.search_property_activity_toolbar)).check(matches(isDisplayed()));
         onView(withId(R.id.search_property_activity_property_sold)).check(matches(isDisplayed())).perform(click());
@@ -76,10 +83,30 @@ public class MainActivityTest {
         onView(withId(R.id.search_property_activity_min_media)).check(matches(isDisplayed()));
         onView(withId(R.id.search_property_activity_button)).check(matches(isDisplayed()));
         onView(isRoot()).perform(pressBack());
- */
-
 
     }
 
+
+    /**
+     * Perform action of waiting for a specific time.
+     */
+    private static ViewAction waitFor() {
+        return new ViewAction() {
+            @Override
+            public Matcher<View> getConstraints() {
+                return isRoot();
+            }
+
+            @Override
+            public String getDescription() {
+                return "Wait for " + (long) 3000 + " milliseconds.";
+            }
+
+            @Override
+            public void perform(UiController uiController, final View view) {
+                uiController.loopMainThreadForAtLeast((long) 3000);
+            }
+        };
+    }
 
 }

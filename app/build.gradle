@@ -19,17 +19,17 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
         testFunctionalTest = false
+        buildConfigField("String", "GEOCODING_API_KEY", GEOCODING_API_KEY)
     }
 
-    dataBinding {
-        enabled true
-    }
 
     compileOptions { // for java 8
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
+
     buildTypes {
         debug { testCoverageEnabled true }
         release {
@@ -46,7 +46,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
     // Image style
     implementation 'com.github.siyamed:android-shape-imageview:0.9.3@aar'
     // Gson
@@ -76,11 +75,13 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     implementation 'com.google.android.material:material:1.1.0'
-
-
+    // Espresso
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     androidTestImplementation 'androidx.test:rules:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.2.0'
+    // Mockito
+    testImplementation 'org.mockito:mockito-core:2.19.0'
+
 
 }
