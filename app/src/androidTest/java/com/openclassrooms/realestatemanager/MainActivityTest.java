@@ -36,7 +36,10 @@ public class MainActivityTest {
         onView(withId(R.id.main_activity_toolbar)).check(matches(isDisplayed()));
         onView(withText(R.string.app_name)).check(matches(isDisplayed()));
         onView(withId(R.id.main_activity_list_frame_layout)).check(matches(isDisplayed()));
+    }
 
+    @Test
+    public void addHouseSellerActivityTest() {
         // Test AddHouseSellerActivity
         openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
         onView(withText(R.string.add_house_seller)).check(matches(isDisplayed())).perform(click());
@@ -45,7 +48,10 @@ public class MainActivityTest {
         onView(withId(R.id.add_house_seller_activity_mail)).check(matches(isDisplayed()));
         onView(withId(R.id.add_house_seller_save_floating_button)).check(matches(isDisplayed()));
         onView(isRoot()).perform(pressBack());
+    }
 
+    @Test
+    public void addPropertyActivityTest() {
         // Test AddPropertyActivity
         openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
         onView(withText(R.string.add_property)).check(matches(isDisplayed())).perform(click());
@@ -61,14 +67,20 @@ public class MainActivityTest {
         onView(withId(R.id.add_property_checkbox_layout)).check(matches(isDisplayed()));
         onView(withId(R.id.add_house_seller_save_floating_button)).check(matches(isDisplayed()));
         onView(isRoot()).perform(pressBack());
+    }
 
+    @Test
+    public void MapActivityTest() {
         // Test MapActivity
         onView(isRoot()).perform(waitFor());
         onView(withId(R.id.main_menu_map)).check(matches(isDisplayed())).perform(click());
         onView(withId(R.id.map_activity_toolbar)).check(matches(isDisplayed()));
         onView(withId(R.id.map_activity_map)).check(matches(isDisplayed()));
         onView(isRoot()).perform(pressBack());
+    }
 
+    @Test
+    public void SearchActivityTest() {
         // Test SearchPropertyActivity
         onView(isRoot()).perform(waitFor());
         onView(withId(R.id.main_menu_search)).check(matches(isDisplayed())).perform(click());
@@ -83,7 +95,6 @@ public class MainActivityTest {
         onView(withId(R.id.search_property_activity_min_media)).check(matches(isDisplayed()));
         onView(withId(R.id.search_property_activity_button)).check(matches(isDisplayed()));
         onView(isRoot()).perform(pressBack());
-
     }
 
 
@@ -104,7 +115,7 @@ public class MainActivityTest {
 
             @Override
             public void perform(UiController uiController, final View view) {
-                uiController.loopMainThreadForAtLeast((long) 3000);
+                uiController.loopMainThreadForAtLeast( 3000);
             }
         };
     }
