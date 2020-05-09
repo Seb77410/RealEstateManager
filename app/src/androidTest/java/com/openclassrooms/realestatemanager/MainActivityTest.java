@@ -68,7 +68,7 @@ public class MainActivityTest {
         onView(withId(R.id.add_house_seller_save_floating_button)).check(matches(isDisplayed()));
         onView(isRoot()).perform(pressBack());
     }
-
+/*
     @Test
     public void MapActivityTest() {
         // Test MapActivity
@@ -78,6 +78,7 @@ public class MainActivityTest {
         onView(withId(R.id.map_activity_map)).check(matches(isDisplayed()));
         onView(isRoot()).perform(pressBack());
     }
+
 
     @Test
     public void SearchActivityTest() {
@@ -96,7 +97,7 @@ public class MainActivityTest {
         onView(withId(R.id.search_property_activity_button)).check(matches(isDisplayed()));
         onView(isRoot()).perform(pressBack());
     }
-
+ */
 
     /**
      * Perform action of waiting for a specific time.
