@@ -22,7 +22,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.Matchers.not;
 
 public class MainActivityTest {
 
@@ -49,7 +48,7 @@ public class MainActivityTest {
         onView(withId(R.id.add_house_seller_save_floating_button)).check(matches(isDisplayed()));
         onView(isRoot()).perform(pressBack());
     }
-
+/*
     @Test
     public void addPropertyActivityTest() {
         // Test AddPropertyActivity
@@ -68,7 +67,7 @@ public class MainActivityTest {
         onView(withId(R.id.add_house_seller_save_floating_button)).check(matches(isDisplayed()));
         onView(isRoot()).perform(pressBack());
     }
-/*
+
     @Test
     public void MapActivityTest() {
         // Test MapActivity
@@ -97,12 +96,12 @@ public class MainActivityTest {
         onView(withId(R.id.search_property_activity_button)).check(matches(isDisplayed()));
         onView(isRoot()).perform(pressBack());
     }
- */
+
 
     /**
      * Perform action of waiting for a specific time.
      */
-    private static ViewAction waitFor() {
+/*    private static ViewAction waitFor() {
         return new ViewAction() {
             @Override
             public Matcher<View> getConstraints() {
@@ -120,5 +119,6 @@ public class MainActivityTest {
             }
         };
     }
+ */
 
 }
