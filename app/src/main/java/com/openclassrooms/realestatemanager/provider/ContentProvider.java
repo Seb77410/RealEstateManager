@@ -11,32 +11,22 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.openclassrooms.realestatemanager.database.AppDatabase;
-import com.openclassrooms.realestatemanager.models.database.HouseSeller;
-import com.openclassrooms.realestatemanager.models.database.InterestPoint;
-import com.openclassrooms.realestatemanager.models.database.Property;
+import com.openclassrooms.realestatemanager.utils.MyConstants;
 
 import java.util.Objects;
 
+import static com.openclassrooms.realestatemanager.utils.MyConstants.AUTHORITY;
+import static com.openclassrooms.realestatemanager.utils.MyConstants.HOUSE_SELLER_ITEM_MATCHER_CODE;
+import static com.openclassrooms.realestatemanager.utils.MyConstants.HOUSE_SELLER_TABLE_MATCHER_CODE;
+import static com.openclassrooms.realestatemanager.utils.MyConstants.HOUSE_SELLER_TABLE_NAME;
+import static com.openclassrooms.realestatemanager.utils.MyConstants.INTEREST_POINT_ITEM_MATCHER_CODE;
+import static com.openclassrooms.realestatemanager.utils.MyConstants.INTEREST_POINT_TABLE_MATCHER_CODE;
+import static com.openclassrooms.realestatemanager.utils.MyConstants.INTEREST_POINT_TABLE_NAME;
+import static com.openclassrooms.realestatemanager.utils.MyConstants.PROPERTY_ITEM_MATCHER_CODE;
+import static com.openclassrooms.realestatemanager.utils.MyConstants.PROPERTY_TABLE_MATCHER_CODE;
+import static com.openclassrooms.realestatemanager.utils.MyConstants.PROPERTY_TABLE_NAME;
+
 public class ContentProvider extends android.content.ContentProvider {
-
-    // FOR DATA
-    public static final String AUTHORITY = "com.openclassrooms.realestatemanager.provider";
-
-    public static final String PROPERTY_TABLE_NAME = Property.class.getSimpleName();
-    public static final Uri URI_PROPERTY = Uri.parse("content://" + AUTHORITY + "/" + PROPERTY_TABLE_NAME);
-    public static final int PROPERTY_TABLE_MATCHER_CODE = 0;
-    public static final int PROPERTY_ITEM_MATCHER_CODE = 1;
-
-    public static final String HOUSE_SELLER_TABLE_NAME = HouseSeller.class.getSimpleName();
-    public static final Uri URI_HOUSE_SELLER = Uri.parse("content://" + AUTHORITY + "/" + HOUSE_SELLER_TABLE_NAME);
-    public static final int HOUSE_SELLER_TABLE_MATCHER_CODE = 2;
-    public static final int  HOUSE_SELLER_ITEM_MATCHER_CODE = 3;
-
-    public static final String INTEREST_POINT_TABLE_NAME = InterestPoint.class.getSimpleName();
-    public static final Uri URI_INTEREST_POINT = Uri.parse("content://" + AUTHORITY + "/" + INTEREST_POINT_TABLE_NAME);
-    public static final int INTEREST_POINT_TABLE_MATCHER_CODE = 4;
-    public static final int INTEREST_POINT_ITEM_MATCHER_CODE = 5;
-
 
     private static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
     static {
@@ -114,19 +104,19 @@ public class ContentProvider extends android.content.ContentProvider {
             case HOUSE_SELLER_TABLE_MATCHER_CODE:
                 final long houseSellerId = AppDatabase.getInstance(getContext()).houseSellerDAO().createHouseSeller(ProviderContentValues.fromHouseSellerContentValues(Objects.requireNonNull(values)));
                 if (houseSellerId != 0) {
-                    mUri = ContentUris.withAppendedId(URI_HOUSE_SELLER, houseSellerId);
+                    mUri = ContentUris.withAppendedId(MyConstants.URI_HOUSE_SELLER, houseSellerId);
                     Objects.requireNonNull(getContext()).getContentResolver().notifyChange(mUri, null); }
                 break;
             case PROPERTY_TABLE_MATCHER_CODE:
                 final long propertyId = AppDatabase.getInstance(getContext()).propertyDAO().createProperty(ProviderContentValues.fromPropertyContentValues(Objects.requireNonNull(values)));
                 if (propertyId != 0){
-                    mUri =  ContentUris.withAppendedId(URI_PROPERTY, propertyId);
+                    mUri =  ContentUris.withAppendedId(MyConstants.URI_PROPERTY, propertyId);
                     Objects.requireNonNull(getContext()).getContentResolver().notifyChange(mUri, null); }
                 break;
             case INTEREST_POINT_TABLE_MATCHER_CODE:
                 final long interestPointId = AppDatabase.getInstance(getContext()).interestPointDAO().createInterestPoint(ProviderContentValues.fromInterestPointContentValues(Objects.requireNonNull(values)));
                 if (interestPointId != 0){
-                    mUri =  ContentUris.withAppendedId(URI_INTEREST_POINT, interestPointId);
+                    mUri =  ContentUris.withAppendedId(MyConstants.URI_INTEREST_POINT, interestPointId);
                     Objects.requireNonNull(getContext()).getContentResolver().notifyChange(mUri, null); }
                 break;
 

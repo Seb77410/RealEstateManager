@@ -22,6 +22,7 @@ import com.openclassrooms.realestatemanager.models.database.Property;
 import com.openclassrooms.realestatemanager.ui.activities.PropertyDetails.PropertyDetailsActivity;
 import com.openclassrooms.realestatemanager.ui.fragments.propertyDetailsFragment.PropertyDetailsFragment;
 import com.openclassrooms.realestatemanager.utils.Converters;
+import com.openclassrooms.realestatemanager.utils.MyConstants;
 import com.openclassrooms.realestatemanager.utils.RecyclerViewClickSupport;
 
 import java.util.ArrayList;
@@ -40,18 +41,14 @@ public class PropertiesListFragment extends Fragment {
     private Fragment detailsFragment;
     private List<Property> propertiesList = new ArrayList<>();
 
-    private static final String ARG_PARAM1 = "properties list";
-
     //----------------------------------------------------------------------------------------------
     // Constructors
     //----------------------------------------------------------------------------------------------
-    public PropertiesListFragment() {
-        // Required empty public constructor
-    }
+    public PropertiesListFragment() {}
 
     public static PropertiesListFragment newInstance(String propertiesList) {
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, propertiesList);
+        args.putString(MyConstants.SEARCH_RESULT_ACTIVITY_PARAM, propertiesList);
         PropertiesListFragment fragment = new PropertiesListFragment();
         fragment.setArguments(args);
         return fragment;
@@ -60,7 +57,6 @@ public class PropertiesListFragment extends Fragment {
     //----------------------------------------------------------------------------------------------
     // OnCreate
     //----------------------------------------------------------------------------------------------
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,8 +69,8 @@ public class PropertiesListFragment extends Fragment {
 
         recyclerView = fragmentResult.findViewById(R.id.properties_list_fragment_recyclerView);
 
-        configureViewModel();
-        startRecyclerView();
+        this.configureViewModel();
+        this.startRecyclerView();
         return fragmentResult;
     }
 
@@ -90,11 +86,8 @@ public class PropertiesListFragment extends Fragment {
     // Configure RecyclerView
     //----------------------------------------------------------------------------------------------
     private void configureRecyclerView(List<Property> propertyList){
-            // Create adapter passing the list of articles
             PropertiesListAdapter adapter = new PropertiesListAdapter(propertyList, propertiesPhotoList, Glide.with(this));
-            // Attach the adapter to the recycler view to populate items
             recyclerView.setAdapter(adapter);
-            // Set layout manager to position the items
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
@@ -103,19 +96,17 @@ public class PropertiesListFragment extends Fragment {
     //----------------------------------------------------------------------------------------------
     private void startRecyclerView(){
         if (getArguments() != null) {
-            propertiesList = Converters.convertStringToPropertiesList(getArguments().getString(ARG_PARAM1));
-            Log.e("Search Result fragment", propertiesList.toString());
-            getDataForSearchResultAndSTartRecyclerView();
-        }else{
-            getDataAndSTartRecyclerView();
-        }
+            propertiesList = Converters.convertStringToPropertiesList(getArguments().getString(MyConstants.SEARCH_RESULT_ACTIVITY_PARAM));
+            Log.i("SearchResultFragment", propertiesList.toString());
+            getDataAndSTartRecyclerViewForSearchResult();
+        }else{getDataAndSTartRecyclerView();}
     }
 
     private void getDataAndSTartRecyclerView(){
         // Get properties list
         viewModel.getPropertiesList().observe(getViewLifecycleOwner(), propertiesList ->{
             this.propertiesList = propertiesList;
-            Log.e("Properties list Frag", " List size = " + propertiesList.size());
+            Log.i("PropertiesListFragment", " List size = " + propertiesList.size());
             propertiesPhotoList = new Uri[propertiesList.size()];
             // Get preview photo for all properties
             for(int x = 0; x < propertiesList.size(); x++){
@@ -130,11 +121,10 @@ public class PropertiesListFragment extends Fragment {
                     }
                 });
             }
-            // Log.e("PropertiesPhotosList", "Inside fragment, preview photo list = " + propertiesPreviewPhotoList);
         });
     }
 
-    private void getDataForSearchResultAndSTartRecyclerView(){
+    private void getDataAndSTartRecyclerViewForSearchResult(){
         // Get properties list
             propertiesPhotoList = new Uri[propertiesList.size()];
             // Get preview photo for all properties
@@ -150,13 +140,8 @@ public class PropertiesListFragment extends Fragment {
                     }
                 });
             }
-            // Log.e("PropertiesPhotosList", "Inside fragment, preview photo list = " + propertiesPreviewPhotoList);
     }
 
-    /**
-     *Configure item click on RecyclerView
-     * @param recyclerView is item recycler view
-     */
     private void configureOnClickRecyclerView(RecyclerView recyclerView) {
         RecyclerViewClickSupport.addTo(recyclerView, R.layout.fragment_properties_list_item)
                 .setOnItemClickListener((recyclerView1, mPosition, v) -> configureAndShowDetailsFragment(propertiesList.get(mPosition)));
@@ -167,7 +152,7 @@ public class PropertiesListFragment extends Fragment {
     //----------------------------------------------------------------------------------------------
     private void configureAndShowDetailsFragment(Property property) {
         detailsFragment = Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.main_activity_details_frame_layout);
-        //A - We only add DetailFragment in Tablet mode (If found frame_layout_detail)
+        // We only add DetailFragment in Tablet mode (If found frame_layout_detail)
         if (getActivity().findViewById(R.id.main_activity_details_frame_layout) != null) {
             detailsFragment = PropertyDetailsFragment.newInstance(property);
             getActivity().getSupportFragmentManager().beginTransaction()
@@ -178,7 +163,7 @@ public class PropertiesListFragment extends Fragment {
             Intent intent = new Intent(getContext(), PropertyDetailsActivity.class);
             Gson gson = new Gson();
             String argument = gson.toJson(property);
-            intent.putExtra("property", argument);
+            intent.putExtra(MyConstants.PROPERTY_DETAILS_ACTIVITY_PARAM, argument);
             startActivity(intent);
         }
     }

@@ -3,19 +3,23 @@ package com.openclassrooms.realestatemanager.ui.activities.SearchProperty;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.res.ResourcesCompat;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.ui.fragments.propertiesLisFragment.PropertiesListFragment;
+import com.openclassrooms.realestatemanager.utils.MyConstants;
 
 public class SearchPropertyResultActivity extends AppCompatActivity {
 
+    //----------------------------------------------------------------------------------------------
+    // For data
+    //----------------------------------------------------------------------------------------------
     String propertiesList;
 
+    //----------------------------------------------------------------------------------------------
+    // One Create
+    //----------------------------------------------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,15 +29,17 @@ public class SearchPropertyResultActivity extends AppCompatActivity {
         this.configureAndShowListFragment();
     }
 
+    //----------------------------------------------------------------------------------------------
+    // Configure Views
+    //----------------------------------------------------------------------------------------------
     private void configureToolbar(){
         Toolbar mToolbar = findViewById(R.id.main_activity_toolbar);
-        mToolbar.setTitle("Search property result");
+        mToolbar.setTitle(getResources().getString(R.string.search_result));
         setSupportActionBar(mToolbar);
         // Set back stack
-        Drawable upArrow = ResourcesCompat.getDrawable(this.getResources(), R.drawable.ic_arrow_back_white_24dp, null);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setHomeAsUpIndicator(upArrow);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
     }
@@ -45,11 +51,13 @@ public class SearchPropertyResultActivity extends AppCompatActivity {
                 .commit();
     }
 
+    //----------------------------------------------------------------------------------------------
+    // Get activity args
+    //----------------------------------------------------------------------------------------------
     private void getArgs(){
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            propertiesList = bundle.getString("properties list");
-            Log.e("Search Result Activity", propertiesList);
+            propertiesList = bundle.getString(MyConstants.SEARCH_RESULT_ACTIVITY_PARAM);
         }
     }
 

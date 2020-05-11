@@ -39,13 +39,14 @@
                 app:layout_constraintGuide_percent="0.5"
                 />
 
-            <androidx.appcompat.widget.SwitchCompat
+            <Switch
                 android:id="@+id/search_property_activity_property_sold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="15dp"
-                android:text="Property is sold   "
+                android:text="@string/property_is_sold"
+                android:switchPadding = "20dp"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -67,7 +68,7 @@
                     android:id="@+id/search_property_activity_create_date_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Create date"
+                    android:text="@string/create_date"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="@android:color/black"
@@ -80,7 +81,7 @@
                     android:drawableEnd="@drawable/ic_keyboard_arrow_down_24px"
                     android:gravity="center_vertical"
                     android:layout_marginTop="5dp"
-                    android:text="Select date" />
+                    android:text="@string/select_date" />
             </LinearLayout>
 
             <LinearLayout
@@ -100,7 +101,7 @@
                     android:id="@+id/search_property_activity_sell_date_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Sell date"
+                    android:text="@string/sell_date"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="@android:color/black"
@@ -113,8 +114,7 @@
                     android:drawableEnd="@drawable/ic_keyboard_arrow_down_24px"
                     android:gravity="center_vertical"
                     android:layout_marginTop="5dp"
-                    android:text="Select date"
-
+                    android:text="@string/select_date"
                     />
             </LinearLayout>
 
@@ -123,7 +123,7 @@
                 android:id="@+id/search_property_activity_min_price"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="Min price"
+                android:hint="@string/min_price"
                 app:endIconDrawable="@drawable/ic_euro_24px"
                 app:endIconMode="custom"
                 app:layout_constraintEnd_toStartOf="@+id/guideline3"
@@ -142,7 +142,7 @@
                 android:id="@+id/search_property_activity_max_price"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="Max price"
+                android:hint="@string/max_price"
                 app:endIconDrawable="@drawable/ic_euro_24px"
                 app:endIconMode="custom"
                 app:layout_constraintBottom_toBottomOf="@+id/search_property_activity_min_price"
@@ -164,7 +164,7 @@
                 android:id="@+id/search_property_activity_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Location"
+                android:hint="@string/location"
                 app:endIconDrawable="@drawable/ic_home_marker_40"
                 app:endIconMode="custom"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -199,7 +199,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="20dp"
-                    android:text="Nearby  "
+                    android:gravity="center"
+                    android:text="@string/search_nearby"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintTop_toTopOf="parent"
@@ -225,7 +226,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="School"
+                        android:text="@string/school"
                         android:theme="@style/Checkbox"
                         app:layout_constraintEnd_toStartOf="@+id/guideline4"
                         app:layout_constraintStart_toStartOf="parent"
@@ -236,7 +237,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="Garden"
+                        android:text="@string/garden"
                         android:theme="@style/Checkbox"
                         app:layout_constraintStart_toStartOf="@+id/search_property_activity_school_checkbox"
                         app:layout_constraintTop_toBottomOf="@+id/search_property_activity_school_checkbox" />
@@ -246,7 +247,7 @@
                         android:id="@+id/search_property_activity_business_checkbox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Business"
+                        android:text="@string/business"
                         android:theme="@style/Checkbox"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/guideline4"
@@ -256,7 +257,7 @@
                         android:id="@+id/search_property_activity_transport_checkbox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Transports"
+                        android:text="@string/transports"
                         android:theme="@style/Checkbox"
                         app:layout_constraintStart_toStartOf="@+id/search_property_activity_business_checkbox"
                         app:layout_constraintTop_toTopOf="@+id/search_property_activity_garden_checkbox" />
@@ -270,7 +271,7 @@
                 android:id="@+id/search_property_activity_min_media"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="Min media"
+                android:hint="@string/min_media"
                 app:endIconDrawable="@drawable/ic_photo_black_24dp"
                 app:endIconMode="custom"
                 app:layout_constraintEnd_toStartOf="@+id/guideline3"
@@ -306,10 +307,9 @@
         android:id="@+id/search_property_activity_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Search"
-        android:backgroundTint="@android:color/black"
+        android:text="@string/search_button"
+        app:backgroundTint="@android:color/black"
         android:textColor="@android:color/white"
-        app:backgroundTint="@android:color/white"
         app:icon="@drawable/ic_search_white_24dp"
         app:iconTint="@android:color/white"
         app:rippleColor="@android:color/white"

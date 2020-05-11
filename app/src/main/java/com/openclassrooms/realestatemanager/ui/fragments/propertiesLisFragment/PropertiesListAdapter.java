@@ -31,11 +31,9 @@ public class PropertiesListAdapter extends RecyclerView.Adapter<PropertiesListVi
     @NonNull
     @Override
     public PropertiesListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Create view holder and inflating its xml layout
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.fragment_properties_list_item, parent, false);
-
         return new PropertiesListViewHolder(view);
     }
 

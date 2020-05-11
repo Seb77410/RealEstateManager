@@ -70,21 +70,13 @@ public class MainActivity extends AppCompatActivity {
     //----------------------------------------------------------------------------------------------
     // Configure Toolbar
     //----------------------------------------------------------------------------------------------
-    /**
-     * This method configure activity toolbar
-     */
     private void configureToolbar(){
         setSupportActionBar(toolbar);
     }
 
     //----------------------------------------------------------------------------------------------
-    // Configure Add menu
+    // Configure menu
     //----------------------------------------------------------------------------------------------
-    /**We create a menu by inflate an .xml
-     *
-     * @param menu is a the new menu we will glue to our layout
-     * @return true to show menu
-     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         inflateAddMenu(menu);
@@ -99,17 +91,9 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setOverflowIcon(drawable);
     }
 
-    /**This method will allow to manage the clicks on the menu
-     * buttons.
-     *
-     * @param item is the selected button in the menu
-     * @return true to able on click item
-     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Search button ==> Start SearchActivity
         switch (item.getItemId()) {
-
             case R.id.main_menu_add_property:
                 Intent intent = new Intent(this, AddPropertyActivity.class);
                 startActivity(intent);
@@ -125,9 +109,10 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent2);
                 }else{
                     AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
-                    builder.setMessage("You need a network connection to open the map")
-                            .setTitle("No network connection")
-                            .show();                }
+                    builder.setMessage(getResources().getString(R.string.alert_no_network_connection_content))
+                            .setTitle(getResources().getString(R.string.alert_no_network_connection_title))
+                            .show();
+                }
                 break;
             case R.id.main_menu_search:
                 Intent intent3 = new Intent(this, SearchPropertyActivity.class);
@@ -141,7 +126,9 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-
+    //----------------------------------------------------------------------------------------------
+    // Configure properties list fragment
+    //----------------------------------------------------------------------------------------------
     private void configureAndShowListFragment(){
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_activity_list_frame_layout, new PropertiesListFragment())

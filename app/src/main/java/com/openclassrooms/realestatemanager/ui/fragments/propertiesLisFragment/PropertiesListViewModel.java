@@ -9,7 +9,6 @@ import com.openclassrooms.realestatemanager.database.repositories.MediaDataRepos
 import com.openclassrooms.realestatemanager.database.repositories.PropertyDataRepository;
 
 import java.util.List;
-import java.util.concurrent.Executor;
 
 class PropertiesListViewModel extends ViewModel {
 

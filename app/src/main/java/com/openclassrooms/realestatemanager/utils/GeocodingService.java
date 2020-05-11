@@ -14,11 +14,11 @@ public interface GeocodingService {
     //----------------------------------------------------------------------------------------------
     // Most Popular request
     //----------------------------------------------------------------------------------------------
-    @GET("json?")
-    Observable<GeocodeResponse> getLatLngFromAddress(@Query("address") String address, @Query("key") String apiKey);
+    @GET(MyConstants.GEOCODE_JSON_FORMAT)
+    Observable<GeocodeResponse> getLatLngFromAddress(@Query(MyConstants.GEOCODE_ADDRESS_QUERY) String address, @Query(MyConstants.GEOCODE_KEY_QUERY) String apiKey);
 
     Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("https://maps.googleapis.com/maps/api/geocode/")
+            .baseUrl(MyConstants.GEOCODE_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build();

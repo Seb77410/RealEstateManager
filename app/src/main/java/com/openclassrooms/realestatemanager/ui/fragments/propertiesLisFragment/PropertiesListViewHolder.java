@@ -51,7 +51,6 @@ class PropertiesListViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void setPropertyImage(){
-       // Log.e("Properties List", "image uri = " + propertyPreviewPhoto );
             glide.load(propertyPreviewPhoto)
                     .apply(RequestOptions.centerCropTransform())
                     .placeholder(R.drawable.ic_home_24px)
@@ -68,7 +67,7 @@ class PropertiesListViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void setPropertySold(){
-        if(!property.getSold()){
+        if(!property.isSold()){
             propertySold.setVisibility(View.GONE);
         }
     }

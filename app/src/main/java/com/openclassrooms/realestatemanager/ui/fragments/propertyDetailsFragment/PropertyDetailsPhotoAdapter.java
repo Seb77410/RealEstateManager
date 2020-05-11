@@ -39,7 +39,6 @@ public class PropertyDetailsPhotoAdapter extends RecyclerView.Adapter<PropertyDe
 
     @Override
     public void onBindViewHolder(@NonNull PropertyDetailsPhotoViewHolder holder, int position) {
-
         holder.updateWithMedia(mediaList.get(position),glide);
     }
 

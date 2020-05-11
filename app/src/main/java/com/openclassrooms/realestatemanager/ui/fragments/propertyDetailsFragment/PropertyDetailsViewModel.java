@@ -20,7 +20,6 @@ class PropertyDetailsViewModel extends ViewModel {
         this.mediaDataSource = mediaDataSource;
     }
 
-
     // --- For interest points ---
     LiveData<InterestPoint> getInterestPointById(long interestPointId){return interestPointDataSource.getInterestPoint(interestPointId); }
 

@@ -41,8 +41,6 @@ public class AddHouseSellerActivity extends AppCompatActivity {
 
         configureBackStack();
         configureViewModel();
-
-
     }
 
 
@@ -103,16 +101,16 @@ public class AddHouseSellerActivity extends AppCompatActivity {
 
     private void checkForInputError(){
         if (!nameIsWrite && !emailIsWrite){
-            emailTextInputLayout.setError("Enter an e-mail");
-            nameTextInputLayout.setError("Enter a name");
+            emailTextInputLayout.setError(getResources().getString(R.string.wrong_email));
+            nameTextInputLayout.setError(getResources().getString(R.string.wrong_name));
         }
         else if (!nameIsWrite){
-            nameTextInputLayout.setError("Enter a name");
+            nameTextInputLayout.setError(getResources().getString(R.string.wrong_name));
             emailTextInputLayout.setError(null);
             emailAsGoodFormat();
         }
         else if (!emailIsWrite){
-            emailTextInputLayout.setError("Enter an e-mail");
+            emailTextInputLayout.setError(getResources().getString(R.string.wrong_email));
             nameTextInputLayout.setError(null);
         }
         else{
@@ -124,7 +122,7 @@ public class AddHouseSellerActivity extends AppCompatActivity {
     private boolean emailAsGoodFormat(){
         emailIsCorrect = !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
         if (!emailIsCorrect){
-            emailTextInputLayout.setError("Pls enter a valid e-mail");
+            emailTextInputLayout.setError(getResources().getString(R.string.wrong_email_format));
             return false;
         }
         else {

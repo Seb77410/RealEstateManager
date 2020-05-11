@@ -4,13 +4,11 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,6 +31,7 @@ import com.openclassrooms.realestatemanager.models.database.InterestPoint;
 import com.openclassrooms.realestatemanager.models.database.Media;
 import com.openclassrooms.realestatemanager.models.database.Property;
 import com.openclassrooms.realestatemanager.utils.Converters;
+import com.openclassrooms.realestatemanager.utils.MyConstants;
 import com.openclassrooms.realestatemanager.utils.PropertyTypeEnum;
 
 import java.util.ArrayList;
@@ -93,13 +92,24 @@ public class AddPropertyActivity extends AppCompatActivity {
         this.configureToolbar();
         this.configureViewModel();
         this.configurePropertyTypeSpinner();
-        this.configurePropertyHouseSellerSpinner();
+        this.configureHouseSellerSpinner();
+        this.configurePropertySoldSwitch();
         this.configureAddPhotoButton();
         this.configureRecyclerView();
         this.updatingPhotoList();
         this.configurePropertyUiData();
-        configureSavePropertyButton();
+        this.configureSavePropertyButton();
+    }
 
+    //----------------------------------------------------------------------------------------------
+    // For edit property
+    //----------------------------------------------------------------------------------------------
+    private void getArguments(){
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            isEditActivity = true;
+            property = Converters.convertStringToProperty(bundle.getString(MyConstants.EDIT_ACTIVITY_PARAM));
+        }
     }
 
     //----------------------------------------------------------------------------------------------
@@ -109,15 +119,13 @@ public class AddPropertyActivity extends AppCompatActivity {
         Toolbar mToolbar = findViewById(R.id.add_property_activity_toolbar);
         setSupportActionBar(mToolbar);
         // Set back stack
-        Drawable upArrow = ResourcesCompat.getDrawable(this.getResources(), R.drawable.ic_arrow_back_white_24dp, null);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setHomeAsUpIndicator(upArrow);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        if(isEditActivity){
-            mToolbar.setTitle("Edit property");
-        }
+        // Set title
+        if(isEditActivity){mToolbar.setTitle(getResources().getString(R.string.edit_property_title));}
     }
 
     //----------------------------------------------------------------------------------------------
@@ -125,53 +133,48 @@ public class AddPropertyActivity extends AppCompatActivity {
     //----------------------------------------------------------------------------------------------
     private void configurePropertyTypeSpinner(){
         propertyTypeSpinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, PropertyTypeEnum.values()));
+        // Set default selection
         if (isEditActivity){
-            if (property.getType().equals(PropertyTypeEnum.LOFT.toString())) {
-                  propertyTypeSpinner.setSelection(0);
-              }else if(property.getType().equals(PropertyTypeEnum.DUPLEX.toString())) {
-                  propertyTypeSpinner.setSelection(1);
-              }else if (property.getType().equals(PropertyTypeEnum.HOME.toString())) {
-                propertyTypeSpinner.setSelection(2);
-              }else if (property.getType().equals(PropertyTypeEnum.STUDIO.toString())) {
-                  propertyTypeSpinner.setSelection(3);
-              }else if (property.getType().equals(PropertyTypeEnum.APARTMENT.toString())) {
-                  propertyTypeSpinner.setSelection(4);
-              }
-            }
+            if (property.getType().equals(PropertyTypeEnum.LOFT.toString())) {propertyTypeSpinner.setSelection(0);}
+            else if(property.getType().equals(PropertyTypeEnum.DUPLEX.toString())) {propertyTypeSpinner.setSelection(1);}
+            else if (property.getType().equals(PropertyTypeEnum.HOME.toString())) {propertyTypeSpinner.setSelection(2);}
+            else if (property.getType().equals(PropertyTypeEnum.STUDIO.toString())) {propertyTypeSpinner.setSelection(3);}
+            else if (property.getType().equals(PropertyTypeEnum.APARTMENT.toString())) {propertyTypeSpinner.setSelection(4);}
+        }
     }
 
-    private void configurePropertyHouseSellerSpinner(){
-        if(isEditActivity){
-            houseSellerContainer.setVisibility(View.GONE);
-            this.configurePropertySoldSwitch();
-        }else {
-            propertySold.setVisibility(View.GONE);
-            // Get House Seller list name into ArrayList
-        ArrayList<CharSequence> houseSellerNameArray = new ArrayList<>();
-        viewModel.getHouseSellersLIst().observe(this, houseSellers -> {
+    private void configureHouseSellerSpinner(){
+        if(isEditActivity){houseSellerContainer.setVisibility(View.GONE);}
+        else {
+            // Get all House Seller names into ArrayList
+            ArrayList<CharSequence> houseSellerNameArray = new ArrayList<>();
+            viewModel.getHouseSellersLIst().observe(this, houseSellers -> {
             for (HouseSeller houseSeller : houseSellers){
                 houseSellerList.add(houseSeller);
                 houseSellerNameArray.add(houseSeller.getName());
             }
+            // Show this list inside spinner
             propertyHouseSellerSpinner.setAdapter(new ArrayAdapter<>(getApplicationContext(),android.R.layout.simple_spinner_dropdown_item, houseSellerNameArray));
-        });
+            });
         }
     }
 
     private void configurePropertySoldSwitch(){
-
-        if (property.getSold()){propertySold.setChecked(true);}
-        else {propertySold.setChecked(false);}
-
-        propertySold.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked){
-                this.configureAndShowDatePicker();
-            }
-            else{ property.setSold(false); }
-        });
+        if(isEditActivity) {
+            // Set default position
+            if (property.isSold()) {propertySold.setChecked(true);}
+            else {propertySold.setChecked(false);}
+            // Configure switch reaction
+            propertySold.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                if (isChecked) {this.configureAndShowDatePicker();}
+                else {property.setSold(false);}
+            });
+        }
+        else {propertySold.setVisibility(View.GONE);}
     }
 
     private void configureAndShowDatePicker(){
+        // Create date picker dialog
         DatePickerDialog selector = new DatePickerDialog(AddPropertyActivity.this, R.style.TimePickerTheme, (view, year, month, dayOfMonth) -> {
             Calendar calendar = Calendar.getInstance();
             calendar.set(Calendar.YEAR, year);
@@ -181,16 +184,15 @@ public class AddPropertyActivity extends AppCompatActivity {
             property.setSellDate(calendar);
         }, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
 
+        // Configure cancel reaction
         selector.setOnCancelListener(dialogInterface -> {
             propertySold.setChecked(false);
             property.setSold(false);
         });
 
+        // Show date picker
         selector.show();
     }
-
-
-
 
     //----------------------------------------------------------------------------------------------
     //  Add photo button
@@ -209,7 +211,6 @@ public class AddPropertyActivity extends AppCompatActivity {
     //----------------------------------------------------------------------------------------------
     //  Edit Property data UI
     //----------------------------------------------------------------------------------------------
-
     private void configurePropertyUiData(){
         if(isEditActivity){
             Objects.requireNonNull(descriptionEditText.getEditText()).setText(property.getDescription());
@@ -219,31 +220,19 @@ public class AddPropertyActivity extends AppCompatActivity {
             Objects.requireNonNull(addressEditText.getEditText()).setText(property.getAddress());
             this.configureCheckboxes();
         }
-
     }
 
     private void configureCheckboxes(){
         viewModel.getInterestPointById(property.getInterestPointId()).observe(this, interestPoint1 -> {
             interestPoint = interestPoint1;
             if(interestPoint.getCategory() != null && interestPoint.getCategory().size()>0){
-
-                if (interestPoint.getCategory().contains(schoolCheckbox.getText().toString())){
-                    schoolCheckbox.setChecked(true);
-                }
-                if (interestPoint.getCategory().contains(businessCheckbox.getText().toString())){
-                    businessCheckbox.setChecked(true);
-                }
-                if (interestPoint.getCategory().contains(gardenCheckbox.getText().toString())){
-                    gardenCheckbox.setChecked(true);
-                }
-                if (interestPoint.getCategory().contains(transportCheckbox.getText().toString())){
-                    transportCheckbox.setChecked(true);
-                }
+                if (interestPoint.getCategory().contains(schoolCheckbox.getText().toString())){schoolCheckbox.setChecked(true);}
+                if (interestPoint.getCategory().contains(businessCheckbox.getText().toString())){businessCheckbox.setChecked(true);}
+                if (interestPoint.getCategory().contains(gardenCheckbox.getText().toString())){gardenCheckbox.setChecked(true);}
+                if (interestPoint.getCategory().contains(transportCheckbox.getText().toString())){transportCheckbox.setChecked(true);}
             }
         });
     }
-
-
 
     //----------------------------------------------------------------------------------------------
     //  Recycler view for photos
@@ -254,22 +243,14 @@ public class AddPropertyActivity extends AppCompatActivity {
         if (isEditActivity){
             viewModel.getMediaByPropertyId(property.getId()).observe(this, medias -> {
                 mediaList = new ArrayList<>(medias);
-                for(Media media : medias){
-                    this.mediaHaveComment.add(true);
-                }
-                // Create adapter passing the list of articles
-                adapter = new AddPhotosRecyclerAdapter(mediaList, mediaHaveComment,mediaToDelete ,Glide.with(this));
-                // Attach the adapter to the recycler view to populate items
+                for(int x = 0; x<=medias.size(); x++){this.mediaHaveComment.add(true);}
+                adapter = new AddPhotosRecyclerAdapter(getApplicationContext() ,mediaList, mediaHaveComment,mediaToDelete ,Glide.with(this));
                 recyclerView.setAdapter(adapter);
-                // Set layout manager to position the items
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
             });
         }else{
-            // Create adapter passing the list of articles
-            adapter = new AddPhotosRecyclerAdapter(mediaList, mediaHaveComment,Glide.with(this));
-            // Attach the adapter to the recycler view to populate items
+            adapter = new AddPhotosRecyclerAdapter(getApplicationContext() ,mediaList, mediaHaveComment,Glide.with(this));
             recyclerView.setAdapter(adapter);
-            // Set layout manager to position the items
             recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         }
     }
@@ -291,7 +272,7 @@ public class AddPropertyActivity extends AppCompatActivity {
 
     private void updatingPhotoList(){
         callback = imageUri -> {
-            Log.e("AddPropertyActivity", "image uri = " + imageUri);
+            Log.i("AddPropertyActivity", "image uri added = " + imageUri);
             mediaList.add(new Media(null, imageUri, 0));
             mediaHaveComment.add(true);
             adapter.notifyDataSetChanged();
@@ -304,22 +285,47 @@ public class AddPropertyActivity extends AppCompatActivity {
 
     private void configureSavePropertyButton(){
         ExtendedFloatingActionButton floatingActionButton = findViewById(R.id.add_house_seller_save_floating_button);
-        if(isEditActivity){floatingActionButton.setText("Update property");}
+        if(isEditActivity){floatingActionButton.setText(getResources().getString(R.string.update_property));}
+
         floatingActionButton.setOnClickListener(v -> {
             boolean editTextContentAsNoError = checkForEditTextError();
             boolean photoContentAsNoError = photoContentIsOK(mediaList);
             boolean photoCommentAsNoError = photosCommentsAreOK();
             if (editTextContentAsNoError && photoContentAsNoError && photoCommentAsNoError){
-                createPropertyAndData();
-                if (mediaList.get(0).getComment() == null) {
-                    Log.e("MEDIA LIST", " comment = null" );
-                }else {
-                    Log.e("MEDIA LIST", " comment =" + mediaList.get(0).getComment());
-                }
-            }
-
+                createOrUpdatePropertyData();}
         });
+    }
 
+    private void createOrUpdatePropertyData(){
+        ArrayList<String> interestsPointList = new ArrayList<>();
+        if(schoolCheckbox.isChecked()){interestsPointList.add(schoolCheckbox.getText().toString());}
+        if(businessCheckbox.isChecked()){interestsPointList.add(businessCheckbox.getText().toString());}
+        if(gardenCheckbox.isChecked()){interestsPointList.add(gardenCheckbox.getText().toString());}
+        if(transportCheckbox.isChecked()){interestsPointList.add(transportCheckbox.getText().toString());}
+
+        if (isEditActivity){
+            Log.i("EditActivity", "MediaId list to delete  = " + mediaToDelete);
+            interestPoint.setCategory(interestsPointList);
+
+            property.setPrice(getIntFromInputLayoutValue(priceEditText));
+            property.setArea(getIntFromInputLayoutValue(surfaceEditText));
+            property.setRooms(getIntFromInputLayoutValue(roomNumberEditText));
+            property.setType(propertyTypeSpinner.getSelectedItem().toString());
+            property.setDescription(getStringFromInputLayoutValue(descriptionEditText));
+            property.setAddress(getStringFromInputLayoutValue(addressEditText));
+
+            viewModel.updatePropertyAndData(interestPoint, property, mediaList, mediaToDelete);
+        }
+        else{
+            interestPoint = new InterestPoint(interestsPointList);
+            Property property1 = new Property(getIntFromInputLayoutValue(priceEditText), getIntFromInputLayoutValue(surfaceEditText),
+                    getIntFromInputLayoutValue(roomNumberEditText), propertyTypeSpinner.getSelectedItem().toString(),
+                    getStringFromInputLayoutValue(descriptionEditText), getStringFromInputLayoutValue(addressEditText),
+                    false, Calendar.getInstance(), null, interestPoint.getId(),
+                    houseSellerList.get(propertyHouseSellerSpinner.getSelectedItemPosition()).getId());
+
+            viewModel.createPropertyAndData(interestPoint, property1, mediaList, getApplicationContext());
+        }
     }
 
     private String getStringFromInputLayoutValue(TextInputLayout textInputLayout){
@@ -330,10 +336,14 @@ public class AddPropertyActivity extends AppCompatActivity {
         return Integer.parseInt(getStringFromInputLayoutValue(textInputLayout));
     }
 
+    //----------------------------------------------------------------------------------------------
+    // Error check
+    //----------------------------------------------------------------------------------------------
+
     private boolean editTextContentIsOK(TextInputLayout textInputLayout){
         String value = getStringFromInputLayoutValue(textInputLayout);
         if (value.equals("")){
-            textInputLayout.setError("Required");
+            textInputLayout.setError(getResources().getString(R.string.required));
             return false;
         }
         else{
@@ -356,8 +366,8 @@ public class AddPropertyActivity extends AppCompatActivity {
     private boolean photoContentIsOK(ArrayList<Media> mediaList){
         if (mediaList.size() == 0){
             AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
-            builder.setMessage("You have to add at least one photo")
-                    .setTitle("No photo")
+            builder.setMessage(getResources().getString(R.string.alert_no_photo_content))
+                    .setTitle(getResources().getString(R.string.alert_no_photo_title))
                     .show();
             return false;
         }
@@ -377,63 +387,5 @@ public class AddPropertyActivity extends AppCompatActivity {
         }
         return allMediaHaveComment;
     }
-
-    private void createPropertyAndData(){
-        ArrayList<String> interestsPointList = new ArrayList<>();
-        if(schoolCheckbox.isChecked()){
-            interestsPointList.add(schoolCheckbox.getText().toString());
-        }
-        if(businessCheckbox.isChecked()){
-            interestsPointList.add(businessCheckbox.getText().toString());
-        }
-        if(gardenCheckbox.isChecked()){
-            interestsPointList.add(gardenCheckbox.getText().toString());
-        }
-        if(transportCheckbox.isChecked()){
-            interestsPointList.add(transportCheckbox.getText().toString());
-        }
-
-        //Log.e("Interest Array", String.valueOf(interestsPointList));
-
-        if (isEditActivity){
-
-            Log.e("EDIT ACTIVITY", "MEDIA TO DELETE LIS = " + mediaToDelete);
-            interestPoint.setCategory(interestsPointList);
-
-            property.setPrice(getIntFromInputLayoutValue(priceEditText));
-            property.setArea(getIntFromInputLayoutValue(surfaceEditText));
-            property.setRooms(getIntFromInputLayoutValue(roomNumberEditText));
-            property.setType(propertyTypeSpinner.getSelectedItem().toString());
-            property.setDescription(getStringFromInputLayoutValue(descriptionEditText));
-            property.setAddress(getStringFromInputLayoutValue(addressEditText));
-
-            viewModel.updatePropertyAndData(interestPoint, property, mediaList, mediaToDelete);
-        }
-        else{
-
-            interestPoint = new InterestPoint(interestsPointList);
-
-            Property property1 = new Property(getIntFromInputLayoutValue(priceEditText), getIntFromInputLayoutValue(surfaceEditText),
-                    getIntFromInputLayoutValue(roomNumberEditText), propertyTypeSpinner.getSelectedItem().toString(),
-                    getStringFromInputLayoutValue(descriptionEditText), getStringFromInputLayoutValue(addressEditText),
-                    false, Calendar.getInstance(), null, interestPoint.getId(),
-                    houseSellerList.get(propertyHouseSellerSpinner.getSelectedItemPosition()).getId());
-        viewModel.createPropertyAndData(interestPoint, property1, mediaList, getApplicationContext());
-        }
-    }
-
-    //----------------------------------------------------------------------------------------------
-    // For edit property
-    //----------------------------------------------------------------------------------------------
-
-    private void getArguments(){
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
-            isEditActivity = true;
-            property = Converters.convertStringToProperty(bundle.getString("property for details"));
-        }
-
-    }
-
 }
 

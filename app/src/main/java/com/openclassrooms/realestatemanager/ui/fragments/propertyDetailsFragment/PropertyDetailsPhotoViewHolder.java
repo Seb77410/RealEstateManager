@@ -20,7 +20,6 @@ class PropertyDetailsPhotoViewHolder extends RecyclerView.ViewHolder {
 
     PropertyDetailsPhotoViewHolder(@NonNull View itemView) {
         super(itemView);
-
         imageView = itemView.findViewById(R.id.fragment_property_details_item_image_view);
         title = itemView.findViewById(R.id.fragment_property_details_item_title);
     }
@@ -33,9 +32,6 @@ class PropertyDetailsPhotoViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void setImageView(){
-        //Log.e("Properties List", "image uri = " + media.getMediaUri() );
-        //Log.e("Properties List", "image uri = "  );
-
         glide.load(media.getMediaUri())
                 .apply(RequestOptions.centerCropTransform())
                 .placeholder(R.drawable.ic_home_marker_40)

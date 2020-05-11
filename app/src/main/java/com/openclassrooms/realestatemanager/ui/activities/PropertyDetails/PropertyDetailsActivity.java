@@ -3,9 +3,7 @@ package com.openclassrooms.realestatemanager.ui.activities.PropertyDetails;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.res.ResourcesCompat;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import com.google.gson.Gson;
@@ -13,13 +11,20 @@ import com.google.gson.reflect.TypeToken;
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.models.database.Property;
 import com.openclassrooms.realestatemanager.ui.fragments.propertyDetailsFragment.PropertyDetailsFragment;
+import com.openclassrooms.realestatemanager.utils.MyConstants;
 
 import java.lang.reflect.Type;
 
 public class PropertyDetailsActivity extends AppCompatActivity {
 
+    //----------------------------------------------------------------------------------------------
+    // For data
+    //----------------------------------------------------------------------------------------------
     Toolbar toolbar;
 
+    //----------------------------------------------------------------------------------------------
+    // On Create
+    //----------------------------------------------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,12 +39,27 @@ public class PropertyDetailsActivity extends AppCompatActivity {
     //----------------------------------------------------------------------------------------------
     // Configure Toolbar
     //----------------------------------------------------------------------------------------------
+    /**
+     * This method configure activity toolbar
+     */
+    private void configureToolbar(){
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    //----------------------------------------------------------------------------------------------
+    // Configure Fragment
+    //----------------------------------------------------------------------------------------------
     private void configureFragment() {
         Bundle bundle = getIntent().getExtras();
         String sProperty;
         Property property = null;
         if (bundle != null) {
-            sProperty = bundle.getString("property");
+            sProperty = bundle.getString(MyConstants.PROPERTY_DETAILS_ACTIVITY_PARAM);
             Type type = new TypeToken<Property>() {}.getType();
             property = new Gson().fromJson(sProperty, type);
         }
@@ -47,23 +67,6 @@ public class PropertyDetailsActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                     .add(R.id.property_details_activity_frame_layout, PropertyDetailsFragment.newInstance(property))
                     .commit();
-
     }
 
-    //----------------------------------------------------------------------------------------------
-    // Configure Toolbar
-    //----------------------------------------------------------------------------------------------
-    /**
-     * This method configure activity toolbar
-     */
-    private void configureToolbar(){
-        setSupportActionBar(toolbar);
-
-        Drawable upArrow = ResourcesCompat.getDrawable(this.getResources(), R.drawable.ic_arrow_back_white_24dp, null);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setHomeAsUpIndicator(upArrow);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-    }
 }

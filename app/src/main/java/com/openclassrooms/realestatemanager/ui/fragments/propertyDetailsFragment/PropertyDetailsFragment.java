@@ -27,24 +27,17 @@ import com.openclassrooms.realestatemanager.models.database.Media;
 import com.openclassrooms.realestatemanager.models.database.Property;
 import com.openclassrooms.realestatemanager.ui.activities.AddProperties.AddPropertyActivity;
 import com.openclassrooms.realestatemanager.utils.Converters;
+import com.openclassrooms.realestatemanager.utils.MyConstants;
 import com.openclassrooms.realestatemanager.utils.Utils;
 
 import java.util.List;
 import java.util.Objects;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link PropertyDetailsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class PropertyDetailsFragment extends Fragment
-{
-    private static final String ARG_PARAM1 = "property";
+public class PropertyDetailsFragment extends Fragment {
 
     //----------------------------------------------------------------------------------------------
     // Data
     //----------------------------------------------------------------------------------------------
-
     private String sProperty;
     private Property property;
     private TextView propertyType;
@@ -64,15 +57,12 @@ public class PropertyDetailsFragment extends Fragment
     //----------------------------------------------------------------------------------------------
     // Constructor
     //----------------------------------------------------------------------------------------------
-
-    public PropertyDetailsFragment() {
-        // Required empty public constructor
-    }
+    public PropertyDetailsFragment() {}
 
       public static PropertyDetailsFragment newInstance(Property property) {
         PropertyDetailsFragment fragment = new PropertyDetailsFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, Converters.convertPropertyToString(property));
+        args.putString(MyConstants.PROPERTY_DETAILS_ACTIVITY_PARAM, Converters.convertPropertyToString(property));
         fragment.setArguments(args);
         return fragment;
     }
@@ -80,25 +70,19 @@ public class PropertyDetailsFragment extends Fragment
     //----------------------------------------------------------------------------------------------
     // On Create
     //----------------------------------------------------------------------------------------------
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            this.sProperty = getArguments().getString(ARG_PARAM1);
-            this.property = Converters.convertStringToProperty(getArguments().getString(ARG_PARAM1));
+            this.sProperty = getArguments().getString(MyConstants.PROPERTY_DETAILS_ACTIVITY_PARAM);
+            this.property = Converters.convertStringToProperty(getArguments().getString(MyConstants.PROPERTY_DETAILS_ACTIVITY_PARAM));
         }
-
-        Log.e("OnCreate", "OnCreate");
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View fragmentResult = inflater.inflate(R.layout.fragment_property_details, container, false);
-
-        Log.e("OnCreateView", "OnCreateView");
 
         propertyType = fragmentResult.findViewById(R.id.property_details_fragment_type);
         propertyDescription = fragmentResult.findViewById(R.id.property_details_fragment_description_content);
@@ -137,21 +121,15 @@ public class PropertyDetailsFragment extends Fragment
         propertyType.setText(String.valueOf(property.getType()));
     }
 
-    private void setPropertyDescription(){
-        propertyDescription.setText(property.getDescription());
-    }
+    private void setPropertyDescription(){propertyDescription.setText(property.getDescription());}
 
     private void setPropertyPrice(){
         propertyPrice.setText(String.valueOf(property.getPrice()));
     }
 
-    private void setPropertySurface(){
-        propertySurface.setText(String.format("%s %s", String.valueOf(property.getArea()), "m²") );
-    }
+    private void setPropertySurface(){propertySurface.setText(String.format("%s %s", String.valueOf(property.getArea()), "m²") );}
 
-    private void setPropertyRoomNumber(){
-        propertyRoomNumber.setText(String.valueOf(property.getRooms()));
-    }
+    private void setPropertyRoomNumber(){propertyRoomNumber.setText(String.valueOf(property.getRooms()));}
 
     private void setPropertyAddress(){
         propertyAddress.setText(property.getAddress());
@@ -160,25 +138,24 @@ public class PropertyDetailsFragment extends Fragment
     private void setPropertyNearby(){
         viewModel.getInterestPointById(property.getId()).observe(getViewLifecycleOwner(), interestPoint -> {
             if(interestPoint.getCategory().size() > 0 ){
-                for(String nearby : interestPoint.getCategory()){
 
+                for(String nearby : interestPoint.getCategory()){
+                    // Create params for chip
                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                             LinearLayout.LayoutParams.WRAP_CONTENT,
                             LinearLayout.LayoutParams.WRAP_CONTENT);
                     params.setMargins(20, 0, 0, 0);
-
+                    // Create chip with params
                     Chip chip = new Chip(Objects.requireNonNull(getContext()));
                     chip.setText(nearby);
                     chip.setClickable(false);
                     chip.setLayoutParams(params);
                     chip.setLayoutParams(params);
-
+                    // Show chip
                     propertyNearbyContentContainer.addView(chip);
                 }
             }
-            else{
-                propertyNearbyContainer.setVisibility(View.GONE);
-            }
+            else{propertyNearbyContainer.setVisibility(View.GONE);}
         });
     }
 
@@ -186,9 +163,10 @@ public class PropertyDetailsFragment extends Fragment
         ConnectivityManager connectivityManager = (ConnectivityManager) Objects.requireNonNull(getContext()).getSystemService(Context.CONNECTIVITY_SERVICE);
         if (Utils.isInternetAvailableNew(connectivityManager)) {
             String propertyAddress = property.getAddress().replaceAll("\\s", "+");
-            Log.e("New address", "for static map api = " + propertyAddress);
+            Log.i("PropertyDetailsFragment", "Address for static map api = " + propertyAddress);
 
-            String mapUrl = String.format("%s %s %s %s", "https://maps.googleapis.com/maps/api/staticmap?center=", propertyAddress, "&zoom=13&scale=1&size=600x300&maptype=roadmap&key=AIzaSyBaAwomMKgWDHN0nAzAvlUR-VRDolCplKw&format=jpeg&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7C", propertyAddress);
+            String mapUrl = String.format("%s %s %s %s", MyConstants.STATIC_MAP_BASE_URL, propertyAddress,
+                    MyConstants.STATIC_MAP_PARAMS_URL_1 + getResources().getString(R.string.map_api_key) + MyConstants.STATIC_MAP_PARAMS_URL_2, propertyAddress);
 
             Glide.with(Objects.requireNonNull(getContext()))
                     .load(mapUrl)
@@ -197,16 +175,16 @@ public class PropertyDetailsFragment extends Fragment
                     .error(R.drawable.ic_home_24px)
                     .into(staticMap);
         }
-        else {
-            staticMap.setVisibility(View.GONE);
-        }
+        else {staticMap.setVisibility(View.GONE);}
     }
 
+    //----------------------------------------------------------------------------------------------
+    // Edit button
+    //----------------------------------------------------------------------------------------------
     private void configureEditButton(){
-
         editButton.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), AddPropertyActivity.class);
-            intent.putExtra("property for details", sProperty);
+            intent.putExtra(MyConstants.EDIT_ACTIVITY_PARAM, sProperty);
             startActivity(intent);
         });
     }
@@ -219,7 +197,6 @@ public class PropertyDetailsFragment extends Fragment
         this.viewModel = new ViewModelProvider(this, propertyDetailsViewModelFactory).get(PropertyDetailsViewModel.class);
     }
 
-
     private void getPropertyMediaData(){
         viewModel.getMediasByPropertyId(property.getId()).observe(getViewLifecycleOwner(), this::configureRecyclerView);
     }
@@ -231,15 +208,10 @@ public class PropertyDetailsFragment extends Fragment
     //----------------------------------------------------------------------------------------------
     // Configure RecyclerView
     //----------------------------------------------------------------------------------------------
-
     private void configureRecyclerView(List<Media> mediaList){
-        // Create adapter passing the list of articles
         PropertyDetailsPhotoAdapter adapter = new PropertyDetailsPhotoAdapter(mediaList, Glide.with(Objects.requireNonNull(getContext())));
-        // Attach the adapter to the recycler view to populate items
         recyclerView.setAdapter(adapter);
-        // Set layout manager to position the items
-        LinearLayoutManager layoutManager
-                = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
     }
 

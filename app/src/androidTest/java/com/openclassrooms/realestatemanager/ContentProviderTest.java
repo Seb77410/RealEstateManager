@@ -11,8 +11,8 @@ import androidx.test.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.openclassrooms.realestatemanager.database.AppDatabase;
-import com.openclassrooms.realestatemanager.provider.ContentProvider;
 import com.openclassrooms.realestatemanager.utils.Converters;
+import com.openclassrooms.realestatemanager.utils.MyConstants;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -48,43 +48,43 @@ public class ContentProviderTest {
      @Test
      public void verifyDataDoesNotExist() {
          // Get house seller when house seller doesn't exist
-         checkForItemDoesNotExist(ContentProvider.URI_HOUSE_SELLER, HOUSE_SELLER_ID);
+         checkForItemDoesNotExist(MyConstants.URI_HOUSE_SELLER, HOUSE_SELLER_ID);
          // Get interest point when interest point doesn't exist
-         checkForItemDoesNotExist(ContentProvider.URI_INTEREST_POINT, INTEREST_POINT_ID);
+         checkForItemDoesNotExist(MyConstants.URI_INTEREST_POINT, INTEREST_POINT_ID);
          // Get property when property doesn't exist
-         checkForItemDoesNotExist(ContentProvider.URI_PROPERTY, PROPERTY_ID);
+         checkForItemDoesNotExist(MyConstants.URI_PROPERTY, PROPERTY_ID);
      }
 
      @Test
      public void InsertAndDeleteDataTest() {
          // Insert house seller
-         mContentResolver.insert(ContentProvider.URI_HOUSE_SELLER, generateHouseSeller());
-         Cursor cursor1 = checkItemCorrectlyInsert(ContentProvider.URI_HOUSE_SELLER, HOUSE_SELLER_ID);
+         mContentResolver.insert(MyConstants.URI_HOUSE_SELLER, generateHouseSeller());
+         Cursor cursor1 = checkItemCorrectlyInsert(MyConstants.URI_HOUSE_SELLER, HOUSE_SELLER_ID);
          Assert.assertThat(cursor1.getString(cursor1.getColumnIndexOrThrow("name")), is("kalakala"));
          cursor1.close();
          // Insert interest point
-         mContentResolver.insert(ContentProvider.URI_INTEREST_POINT, generateInterestPoint());
-         Cursor cursor2 = checkItemCorrectlyInsert(ContentProvider.URI_INTEREST_POINT, INTEREST_POINT_ID);
+         mContentResolver.insert(MyConstants.URI_INTEREST_POINT, generateInterestPoint());
+         Cursor cursor2 = checkItemCorrectlyInsert(MyConstants.URI_INTEREST_POINT, INTEREST_POINT_ID);
          Assert.assertThat(cursor2.getString(cursor2.getColumnIndexOrThrow("category")), is(Converters.arrayToString(new ArrayList<>())));
          cursor2.close();
          // insert property
-         mContentResolver.insert(ContentProvider.URI_PROPERTY, generateProperty());
-         Cursor cursor3 = checkItemCorrectlyInsert(ContentProvider.URI_PROPERTY, PROPERTY_ID);
+         mContentResolver.insert(MyConstants.URI_PROPERTY, generateProperty());
+         Cursor cursor3 = checkItemCorrectlyInsert(MyConstants.URI_PROPERTY, PROPERTY_ID);
          Assert.assertThat(cursor3.getString(cursor3.getColumnIndexOrThrow("address")), is("10 rue jean jaures, 77410 CLAYE SOUILLY"));
          cursor3.close();
 
          // Delete property
-         int rows = mContentResolver.delete(ContentUris.withAppendedId(ContentProvider.URI_PROPERTY, PROPERTY_ID), null, null);
+         int rows = mContentResolver.delete(ContentUris.withAppendedId(MyConstants.URI_PROPERTY, PROPERTY_ID), null, null);
          Assert.assertEquals(rows, 1);
-         checkForItemDoesNotExist(ContentProvider.URI_PROPERTY, PROPERTY_ID);
+         checkForItemDoesNotExist(MyConstants.URI_PROPERTY, PROPERTY_ID);
          // Delete house seller
-         int rows2 = mContentResolver.delete(ContentUris.withAppendedId(ContentProvider.URI_HOUSE_SELLER, HOUSE_SELLER_ID), null, null);
+         int rows2 = mContentResolver.delete(ContentUris.withAppendedId(MyConstants.URI_HOUSE_SELLER, HOUSE_SELLER_ID), null, null);
          Assert.assertEquals(rows2, 1);
-         checkForItemDoesNotExist(ContentProvider.URI_HOUSE_SELLER, HOUSE_SELLER_ID);
+         checkForItemDoesNotExist(MyConstants.URI_HOUSE_SELLER, HOUSE_SELLER_ID);
          // Delete interest point
-         int rows3 = mContentResolver.delete(ContentUris.withAppendedId(ContentProvider.URI_INTEREST_POINT, INTEREST_POINT_ID), null, null);
+         int rows3 = mContentResolver.delete(ContentUris.withAppendedId(MyConstants.URI_INTEREST_POINT, INTEREST_POINT_ID), null, null);
          Assert.assertEquals(rows3, 1);
-         checkForItemDoesNotExist(ContentProvider.URI_INTEREST_POINT, INTEREST_POINT_ID);
+         checkForItemDoesNotExist(MyConstants.URI_INTEREST_POINT, INTEREST_POINT_ID);
      }
 
      private void checkForItemDoesNotExist(Uri uri, long id){

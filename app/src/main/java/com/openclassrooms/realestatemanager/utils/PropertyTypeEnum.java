@@ -12,7 +12,7 @@ public enum PropertyTypeEnum {
         APARTMENT("Apartment");
 
         // --- FOR DATA ---
-        private String type = "";
+        private String type;
 
         // --- CONSTRUCTOR ---
         PropertyTypeEnum(String type){

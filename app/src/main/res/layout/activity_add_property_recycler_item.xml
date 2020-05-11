@@ -24,7 +24,7 @@
         android:layout_width="225dp"
         android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        android:hint="Photo title"
+        android:hint="@string/photo_title"
         app:layout_constraintBottom_toBottomOf="@+id/add_property_activity_item_image"
         app:layout_constraintEnd_toStartOf="@+id/add_property_activity_item_delete_button"
         app:layout_constraintStart_toEndOf="@+id/add_property_activity_item_image"
@@ -44,7 +44,8 @@
         android:src="@drawable/ic_remove_black_24dp"
         app:layout_constraintBottom_toTopOf="@+id/add_property_activity_item_edit_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_property_activity_item_edit_text" />
+        app:layout_constraintTop_toBottomOf="@+id/add_property_activity_item_edit_text"
+        android:contentDescription="@string/delete_button" />
 
     <TextView
         android:id="@+id/dividers"

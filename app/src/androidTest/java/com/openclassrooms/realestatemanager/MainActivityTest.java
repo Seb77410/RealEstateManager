@@ -1,15 +1,11 @@
 package com.openclassrooms.realestatemanager;
 
-import android.view.View;
 
 import androidx.test.InstrumentationRegistry;
-import androidx.test.espresso.UiController;
-import androidx.test.espresso.ViewAction;
 import androidx.test.espresso.intent.rule.IntentsTestRule;
 
 import com.openclassrooms.realestatemanager.ui.activities.MainActivity;
 
-import org.hamcrest.Matcher;
 import org.junit.Rule;
 import org.junit.Test;
 

@@ -1,6 +1,5 @@
 package com.openclassrooms.realestatemanager.models.database;
 
-import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -64,7 +63,7 @@ public class Property {
     public String getType() {return type;}
     public String getDescription() {return description;}
     public String getAddress() {return address;}
-    public boolean getSold() {return sold;}
+    public boolean isSold() {return sold;}
     public Calendar getCreateDate() {return createDate;}
     public Calendar getSellDate() {return sellDate;}
     public long getInterestPointId() {return interestPointId;}

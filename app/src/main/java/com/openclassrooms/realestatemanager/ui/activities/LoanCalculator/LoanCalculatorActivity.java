@@ -74,7 +74,7 @@ public class LoanCalculatorActivity extends AppCompatActivity {
     //----------------------------------------------------------------------------------------------
     // Calculate and show loan result
     //----------------------------------------------------------------------------------------------
-    public void showResult(View view){
+    public void calculateAndShowResult(View view){
         if (checkForEditTextError()) {
             this.getData();
             this.calculateLoan();
@@ -87,7 +87,7 @@ public class LoanCalculatorActivity extends AppCompatActivity {
         contribution = Integer.parseInt(String.valueOf(Objects.requireNonNull(personalContribution.getEditText()).getText()));
         periodYear = Integer.parseInt(String.valueOf(Objects.requireNonNull(loanPeriod.getEditText()).getText()));
         rate = Double.parseDouble(String.valueOf(Objects.requireNonNull(loanRate.getEditText()).getText()));
-        Log.e("Loan Calculator", "price = " + price + "$, contribution = " + contribution + "$, period = " + periodYear + "years, rate = " + rate + "%");
+        Log.i("Loan Calculator", "getData() => price = " + price + "$, contribution = " + contribution + "$, period = " + periodYear + "years, rate = " + rate + "%");
     }
 
     private void calculateLoan() {
@@ -95,10 +95,10 @@ public class LoanCalculatorActivity extends AppCompatActivity {
         rate = (float) rate/100;
 
         iMonthlyPayment = (int) Math.round((((price * ((float)rate/12) * Math.pow(1+((float)rate/12), periodYear*12)))) / (Math.pow((1 + ((float)rate/12)), periodYear*12)-1));
-        Log.e("Loan Calculator", "mensualité  = " + iMonthlyPayment);
+        Log.i("Loan Calculator", "monthly payment  = " + iMonthlyPayment);
 
         iLoanInterest = Math.round(12 * periodYear * iMonthlyPayment - price);
-        Log.e("Loan Calculator", "interets  = " + iLoanInterest);
+        Log.i("Loan Calculator", "loan interest  = " + iLoanInterest);
     }
 
     private void showResult(){
@@ -124,7 +124,7 @@ public class LoanCalculatorActivity extends AppCompatActivity {
     private boolean editTextContentIsOK(TextInputLayout textInputLayout){
         String value = String.valueOf(Objects.requireNonNull(textInputLayout.getEditText()).getText());
         if (value.equals("")){
-            textInputLayout.setError("Required");
+            textInputLayout.setError(getResources().getString(R.string.required));
             return false;
         }
         else{

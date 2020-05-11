@@ -24,11 +24,8 @@ public class Converters {
         if (value!=null){
             Calendar calendar = Calendar.getInstance();
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
-            try {
-                calendar.setTime(Objects.requireNonNull(simpleDateFormat.parse(value)));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            try {calendar.setTime(Objects.requireNonNull(simpleDateFormat.parse(value)));}
+            catch (ParseException e) {e.printStackTrace();}
             return calendar;
         }else {return null;}
     }
@@ -39,9 +36,7 @@ public class Converters {
             return calendar.get(Calendar.YEAR) +
                 convertDateIntToString(calendar.get(Calendar.MONTH)+1)+
                 convertDateIntToString(calendar.get(Calendar.DAY_OF_MONTH));
-        }else {
-            return null;
-        }
+        }else {return null;}
     }
 
     @TypeConverter
@@ -66,16 +61,13 @@ public class Converters {
         return Uri.parse(uri);
     }
 
-
-
     public static String convertPropertyToString(Property property) {
         Gson gson = new Gson();
         return gson.toJson(property);
     }
 
     public static Property convertStringToProperty(String property) {
-        Type propertyType = new TypeToken<Property>() {
-        }.getType();
+        Type propertyType = new TypeToken<Property>() {}.getType();
         return new Gson().fromJson(property, propertyType);
     }
 
@@ -85,25 +77,20 @@ public class Converters {
     }
 
     public static List<Property> convertStringToPropertiesList(String propertiesList) {
-        Type propertyType = new TypeToken<List<Property>>() {
-        }.getType();
+        Type propertyType = new TypeToken<List<Property>>() {}.getType();
         return new Gson().fromJson(propertiesList, propertyType);
     }
 
 
     public static String convertCalendarToFormatString(Calendar calendar){
-
         String dayOfMonth = convertDateIntToString(calendar.get(Calendar.DAY_OF_MONTH));
         String month = convertDateIntToString(calendar.get(Calendar.MONTH)+1);
         String year = String.valueOf(calendar.get(Calendar.YEAR));
-
         return dayOfMonth+"-"+month+"-"+year;
     }
 
     public static String convertDateIntToString(int date){
-        if (date<10){
-            return  "0" + date;
-        }
+        if (date<10){return  "0" + date;}
         else {return String.valueOf(date);}
     }
 

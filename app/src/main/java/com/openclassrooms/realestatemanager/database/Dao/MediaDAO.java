@@ -16,18 +16,12 @@ public interface MediaDAO {
     @Insert
     long createMedia(Media media);
 
-    @Query("SELECT * FROM Media WHERE media_id = :mediaId")
-    LiveData<Media> getMediaById(long mediaId);
-
-    @Query("SELECT * FROM Media WHERE media_property_id = :propertyId")
-    LiveData<Media> getMediaByProperty(long propertyId);
-
     @Query("DELETE FROM Media WHERE media_id = :mediaId")
-    int deleteMedia(long mediaId);
+    void deleteMedia(long mediaId);
 
     @Query("SELECT * FROM Media WHERE media_property_id = :propertyId")
     LiveData<List<Media>> getMediaByPropertyId(long propertyId);
 
     @Update
-    int updateMedia(Media media);
+    void updateMedia(Media media);
 }

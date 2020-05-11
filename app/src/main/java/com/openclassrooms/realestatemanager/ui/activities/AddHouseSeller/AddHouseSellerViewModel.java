@@ -31,9 +31,9 @@ class AddHouseSellerViewModel extends ViewModel {
         void createHouseSeller(HouseSeller houseSeller, Context context){
         executor.execute(()->{
             long id =  houseSellerDataSource.createHouSeller(houseSeller);
-            Log.e("HouseSellerId", String.valueOf(id));
+            Log.i("HouseSellerId", String.valueOf(id));
             if(id >= 0){
-                Utils.startNotification(context.getString(R.string.notif_success_house_seller_title), context.getString(R.string.notif_success_house_seller_content) + "ID = " + id, context);
+                Utils.startNotification(context.getString(R.string.notif_success_house_seller_title), context.getString(R.string.notif_success_house_seller_content), context);
             }else{
                 Utils.startNotification(context.getString(R.string.notif_error_house_seller_title), context.getString(R.string.notif_error_house_seller_content), context);
             }

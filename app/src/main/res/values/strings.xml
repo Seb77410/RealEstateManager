@@ -1,17 +1,39 @@
 <resources>
     <string name="app_name" translatable="false">Real Estate Manager</string>
-    <string name="add_menu_title">Add menu main</string>
+    <string name="map_api_key" translatable="false">AIzaSyBaAwomMKgWDHN0nAzAvlUR-VRDolCplKw</string>
 
+    <!--/////////////////////////////////////////////////////////////////////////////////////////-->
     <!-- Toolbar titles -->
+    <!--/////////////////////////////////////////////////////////////////////////////////////////-->
     <string name="add_house_seller">Add house seller</string>
     <string name="add_property">Add property</string>
     <string name="loan_calculator">Loan calculator</string>
+    <string name="search_result">Search property result</string>
+    <string name="edit_property_title">Edit property</string>
 
-    <!-- Main menu titles -->
+    MyConstants
+    <!--/////////////////////////////////////////////////////////////////////////////////////////-->
+    <!-- Main menu titles-->
+    <!--/////////////////////////////////////////////////////////////////////////////////////////-->
+    <string name="add_menu_title">Add menu main</string>
     <string name="map">map</string>
     <string name="search">search</string>
 
-    <!-- Add property activity .xml values -->
+    <!--/////////////////////////////////////////////////////////////////////////////////////////-->
+    <!-- xml values -->
+    <!--/////////////////////////////////////////////////////////////////////////////////////////-->
+        <!-- Edit text error messages -->
+    <string name="wrong_email">Enter an e-mail</string>
+    <string name="wrong_email_format">Pls enter a valid e-mail</string>
+    <string name="wrong_name">Enter a name</string>
+    <string name="required">Required</string>
+        <!-- Add House seller activity -->
+    <string name="e_mail">E-mail</string>
+    <string name="name">Name</string>
+    <string name="save_house_seller">Save House Seller</string>
+        <!-- Add property activity -->
+    <string name="property_is_sold">Property is sold</string>
+    <string name="spinner_house_seller">House seller :</string>
     <string name="price" translatable="true">Price</string>
     <string name="address" translatable="true">Address</string>
     <string name="surface" translatable="true">Surface</string>
@@ -20,26 +42,74 @@
     <string name="description" translatable="true">Description</string>
     <string name="add_photo" translatable="true">Add photo</string>
     <string name="house_seller" translatable="true">House seller</string>
+    <string name="update_property">Update property</string>
+    <string name="add_property_nearby">Nearby :</string>
+    <string name="school">School</string>
+    <string name="garden">Garden</string>
+    <string name="business">Business</string>
+    <string name="transports">Transports</string>
+    <string name="save_property">save property</string>
+        <!-- Add property activity recycler view item -->
+    <string name="photo_title">Photo title</string>
+    <string name="delete_button">delete button</string>
+        <!-- Loan calculator activity -->
+    <string name="contribution">Contribution</string>
+    <string name="period">Period</string>
+    <string name="interest_rate">Interest rate</string>
+    <string name="result">Result</string>
+    <string name="monthly_payment">Monthly payment :</string>
+    <string name="total_interest">Total interest :</string>
+    <string name="calculate">Calculate</string>
+        <!-- Search activity -->
+    <string name="create_date">Create date</string>
+    <string name="sell_date">Sell date</string>
+    <string name="min_price">Min price</string>
+    <string name="max_price">Max price</string>
+    <string name="select_date">Select date</string>
+    <string name="location">Location</string>
+    <string name="search_nearby">Nearby</string>
+    <string name="min_media">Min media</string>
+    <string name="search_button">Search</string>
+        <!-- Bottom sheet -->
+    <string name="from_gallery">From gallery</string>
+    <string name="from_camera">From camera</string>
+        <!-- Properties list fragment recycler view item -->
+    <string name="sold">SOLD</string>
+        <!-- Property details fragment -->
+    <string name="for_sell_since">For sell since</string>
+    <string name="rooms_number">Rooms number</string>
+    <string name="nearby">Nearby</string>
+    <string name="edit_property">edit property</string>
+    <string name="static_map">static_map</string>
 
-    <!-- Add House seller activity .xml values -->
-    <string name="e_mail">E-mail</string>
-    <string name="name">Name</string>
-    <string name="save_house_seller">Save House Seller</string>
 
-    <!-- For notifications -->
-    <!-- Save House Seller activity -->
+    <!--/////////////////////////////////////////////////////////////////////////////////////////-->
+    <!-- Notifications -->
+    <!--/////////////////////////////////////////////////////////////////////////////////////////-->
+        <!-- Save House Seller activity -->
     <string name="notif_success_house_seller_title">House Seller saved</string>
     <string name="notif_success_house_seller_content">The house seller has been correctly saved</string>
     <string name="notif_error_house_seller_title">House Seller not saved</string>
     <string name="notif_error_house_seller_content">An error occurred</string>
-    <!-- Save Property activity -->
+        <!-- Save Property activity -->
     <string name="notif_success_property_title">Property saved</string>
     <string name="notif_success_property_content">The property has been correctly saved</string>
     <string name="notif_error_property_title">Property not saved</string>
     <string name="notif_error_property_content">An error occurred</string>
 
+    <!--/////////////////////////////////////////////////////////////////////////////////////////-->
+    <!-- Alert Dialog -->
+    <!--/////////////////////////////////////////////////////////////////////////////////////////-->
+        <!-- Add property activity -->
+    <string name="alert_no_photo_content">You have to add at least one photo</string>
+    <string name="alert_no_photo_title">No photo</string>
+        <!-- Search property activity -->
+    <string name="alert_no_search_result_content">No result found, retry wit other parameters</string>
+    <string name="alert_no_search_result_title">No result</string>
+        <!-- Main activity -->
+    <string name="alert_no_network_connection_content">You need a network connection to open the map</string>
+    <string name="alert_no_network_connection_title">No network connection</string>
 
-    <string name="map_api_key" translatable="false">AIzaSyBaAwomMKgWDHN0nAzAvlUR-VRDolCplKw</string>
 
 
 </resources>

@@ -16,11 +16,8 @@ public class InterestPointDataRepository {
 
     // --- GET ---
     public LiveData<InterestPoint> getInterestPoint(long interestPointId){return this.interestPointDAO.getInterestPointById((interestPointId));}
-    public LiveData<InterestPoint> getInterestPointByList(String list){return this.interestPointDAO.getInterestPointByList(list);}
-    public LiveData<InterestPoint> getLastInterestPointSaved(){return this.interestPointDAO.getLastInterestPointSaved();}
+
     // --- UPDATE ---
     public void updateInterestPoint(InterestPoint interestPoint){this.interestPointDAO.updateInterestPoint(interestPoint);}
 
-    // --- DELETE ---
-    public void deleteInterestPoint(long interestPointId){this.interestPointDAO.deleteInterestPoint(interestPointId);}
 }

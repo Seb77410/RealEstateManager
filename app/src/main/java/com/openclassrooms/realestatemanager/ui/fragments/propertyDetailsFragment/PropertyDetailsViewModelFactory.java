@@ -7,8 +7,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.openclassrooms.realestatemanager.database.repositories.InterestPointDataRepository;
 import com.openclassrooms.realestatemanager.database.repositories.MediaDataRepository;
 
-import java.util.concurrent.Executor;
-
 public class PropertyDetailsViewModelFactory implements ViewModelProvider.Factory {
 
     // --- Repository ---

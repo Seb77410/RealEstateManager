@@ -62,16 +62,16 @@ class AddPropertiesViewModel extends ViewModel {
     void createPropertyAndData(InterestPoint interestPoint, Property property, ArrayList<Media> photoList, Context context){
         executor.execute(()->{
             long interestPointId = interestPointDataSource.createInterestPoint(interestPoint);
-            Log.e("InterestPointId", String.valueOf(interestPointId));
+            Log.i("InterestPointId", String.valueOf(interestPointId));
             property.setInterestPointId(interestPointId);
             executor.execute(()->{
                 long propertyId = propertyDataSource.createProperty(property);
-                Log.e("propetyId", String.valueOf(propertyId));
+                Log.i("PropertyId", String.valueOf(propertyId));
                 for(Media media : photoList){
                 executor.execute(()->{
                     media.setPropertyId(propertyId);
                     long mediaId = mediaDataSource.createMedia(media);
-                    Log.e("mediaId", String.valueOf(mediaId));
+                    Log.i("MediaId", String.valueOf(mediaId));
                     if(mediaId >= 0){
                         Utils.startNotification(context.getString(R.string.notif_success_property_title), context.getString(R.string.notif_success_property_content), context);
                     }else{

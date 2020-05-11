@@ -3,42 +3,41 @@ package com.openclassrooms.realestatemanager.ui.activities.SearchProperty;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.sqlite.db.SimpleSQLiteQuery;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.DatePicker;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.gson.Gson;
 import com.openclassrooms.realestatemanager.R;
 import com.openclassrooms.realestatemanager.database.AppDatabase;
 import com.openclassrooms.realestatemanager.models.database.Property;
 import com.openclassrooms.realestatemanager.utils.Converters;
+import com.openclassrooms.realestatemanager.utils.MyConstants;
 
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
 public class SearchPropertyActivity extends AppCompatActivity {
 
-    SwitchCompat propertySold;
+    //----------------------------------------------------------------------------------------------
+    // For data
+    //----------------------------------------------------------------------------------------------
+    Switch propertySold;
     TextView createDate;
     LinearLayout sellDateContainer;
     TextView sellDate;
@@ -60,7 +59,9 @@ public class SearchPropertyActivity extends AppCompatActivity {
     ConstraintLayout checkboxLayout;
     String mediaUnderRequest;
 
-
+    //----------------------------------------------------------------------------------------------
+    // One Create
+    //----------------------------------------------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,25 +95,21 @@ public class SearchPropertyActivity extends AppCompatActivity {
     //----------------------------------------------------------------------------------------------
     // Configure Views
     //----------------------------------------------------------------------------------------------
-
     private void configureToolbar(){
         Toolbar mToolbar = findViewById(R.id.search_property_activity_toolbar);
         setSupportActionBar(mToolbar);
         // Set back stack
-        Drawable upArrow = ResourcesCompat.getDrawable(this.getResources(), R.drawable.ic_arrow_back_white_24dp, null);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setHomeAsUpIndicator(upArrow);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
     }
 
     private void configurePropertySoldSwitch(){
         propertySold.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked){
-                sellDateContainer.setVisibility(View.VISIBLE);
-            }
-            else{ sellDateContainer.setVisibility(View.GONE); }
+            if (isChecked){sellDateContainer.setVisibility(View.VISIBLE);}
+            else{ sellDateContainer.setVisibility(View.GONE);}
         });
     }
 
@@ -126,34 +123,24 @@ public class SearchPropertyActivity extends AppCompatActivity {
     }
 
     private void showDatePicker(TextView textView, Calendar calendar) {
-
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                DatePickerDialog datePickerDialog = new DatePickerDialog(SearchPropertyActivity.this, R.style.TimePickerTheme, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        textView.setText(String.format("%s %s %s %s %s", Converters.convertDateIntToString(dayOfMonth), "/", Converters.convertDateIntToString(month+1), "/", year));
-                        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                        calendar.set(Calendar.MONTH, month);
-                        calendar.set(Calendar.YEAR, year);
-                    }
-                }, Calendar.getInstance().get(Calendar.YEAR),
-                        Calendar.getInstance().get(Calendar.MONTH),
-                        Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
-                datePickerDialog.show();
-            }
+        textView.setOnClickListener(v -> {
+            DatePickerDialog datePickerDialog = new DatePickerDialog(SearchPropertyActivity.this, R.style.TimePickerTheme, (view, year, month, dayOfMonth) -> {
+                textView.setText(String.format("%s %s %s %s %s", Converters.convertDateIntToString(dayOfMonth), "/", Converters.convertDateIntToString(month+1), "/", year));
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.YEAR, year);
+            }, Calendar.getInstance().get(Calendar.YEAR),
+                    Calendar.getInstance().get(Calendar.MONTH),
+                    Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+            datePickerDialog.show();
         });
     }
 
     private void configureNearby(){
         nearby.setOnClickListener(v -> {
-            if(checkboxLayout.getVisibility() == View.GONE){
-                checkboxLayout.setVisibility(View.VISIBLE); }
-            else { checkboxLayout.setVisibility(View.GONE); }
+            if(checkboxLayout.getVisibility() == View.GONE){checkboxLayout.setVisibility(View.VISIBLE);}
+            else { checkboxLayout.setVisibility(View.GONE);}
         });
-
     }
 
     private void configureSearchButton(){
@@ -168,7 +155,6 @@ public class SearchPropertyActivity extends AppCompatActivity {
     //----------------------------------------------------------------------------------------------
     // Get data and execute search request
     //----------------------------------------------------------------------------------------------
-
     private void getDataForPropertySearch(){
         propertySQLiteRequest =  "SELECT * FROM Property WHERE sold = ";
 
@@ -190,36 +176,29 @@ public class SearchPropertyActivity extends AppCompatActivity {
         }
 
         if(!Objects.requireNonNull(minPrice.getEditText()).getText().toString().equals("")){
-            propertySQLiteRequest = propertySQLiteRequest + " AND price >= " + minPrice.getEditText().getText().toString(); }
+            propertySQLiteRequest = propertySQLiteRequest + " AND price >= " + minPrice.getEditText().getText().toString();}
         if(!Objects.requireNonNull(maxPrice.getEditText()).getText().toString().equals("")){
-            propertySQLiteRequest = propertySQLiteRequest + " AND price <= " + maxPrice.getEditText().getText().toString(); }
+            propertySQLiteRequest = propertySQLiteRequest + " AND price <= " + maxPrice.getEditText().getText().toString();}
         if(!Objects.requireNonNull(location.getEditText()).getText().toString().equals("")){
             propertySQLiteRequest = propertySQLiteRequest + " AND address LIKE '%" + location.getEditText().getText().toString()+"%'"; }
-        Log.e("SEARCH ACTIVITY", "SQLite search request = " + propertySQLiteRequest);
-
+        Log.i("SearchActivity", "SQLite search request = " + propertySQLiteRequest);
     }
 
     private void getDataForNearbySearch(){
-
         if (checkboxLayout.getVisibility() == View.VISIBLE) {
             interestPointUnderRequest = " AND property_interest_point_id IN (SELECT InterestPoint.interest_point_id FROM InterestPoint WHERE InterestPoint.category LIKE ";
             checkForCheckbox(schoolCheckbox);
             checkForCheckbox(businessCheckbox);
             checkForCheckbox(transportCheckbox);
             checkForCheckbox(gardenCheckBox);
-            if (!interestPointUnderRequest.contains("%")) {
-                interestPointUnderRequest = interestPointUnderRequest + "'%%' )";
-            } else {
-                interestPointUnderRequest = interestPointUnderRequest + ")";
-            }
-            Log.e("SEARCH ACTIVITY", "interest Point under request = " + interestPointUnderRequest);
 
-            if(atLeastOneCategoryIsCheck) {
-                propertySQLiteRequest = propertySQLiteRequest + interestPointUnderRequest;
-            }
-            Log.e("SEARCH ACTIVITY", "SQLite search request = " + propertySQLiteRequest);
+            if (!interestPointUnderRequest.contains("%")) {interestPointUnderRequest = interestPointUnderRequest + "'%%' )";}
+            else {interestPointUnderRequest = interestPointUnderRequest + ")";}
+            Log.i("SearchActivity", "interest Point under request = " + interestPointUnderRequest);
+
+            if(atLeastOneCategoryIsCheck) {propertySQLiteRequest = propertySQLiteRequest + interestPointUnderRequest;}
+            Log.i("SearchActivity", "SQLite search request = " + propertySQLiteRequest);
         }
-
     }
 
     private void getDataForMediaSearch(){
@@ -227,9 +206,8 @@ public class SearchPropertyActivity extends AppCompatActivity {
             String sMinMedia = minMedia.getEditText().getText().toString();
             mediaUnderRequest = " AND (SELECT count(*)  FROM Media WHERE Media.media_property_id = Property.property_id) >=" + sMinMedia;
             propertySQLiteRequest = propertySQLiteRequest + mediaUnderRequest;
-            Log.e("SEARCH ACTIVITY", "SQLite search request = " + propertySQLiteRequest);
+            Log.i("SearchActivity", "SQLite search request = " + propertySQLiteRequest);
         }
-
     }
 
     private void checkForCheckbox(CheckBox checkBox){
@@ -238,25 +216,20 @@ public class SearchPropertyActivity extends AppCompatActivity {
             if(interestPointUnderRequest.contains("%")){
                 interestPointUnderRequest = interestPointUnderRequest + " AND category LIKE '%"+checkBox.getText().toString()+"%'";
             }
-            else {
-                interestPointUnderRequest = interestPointUnderRequest + "'%"+checkBox.getText().toString()+"%'";}
+            else {interestPointUnderRequest = interestPointUnderRequest + "'%"+checkBox.getText().toString()+"%'";
+            }
         }
     }
 
     private void executePropertySearch(){
-        // Usage of RawDao
         SimpleSQLiteQuery query = new SimpleSQLiteQuery(propertySQLiteRequest);
         AppDatabase.getInstance(this).propertyDAO().searchProperty(query).observe(this, properties -> {
-            Log.e("SEARCH ACTIVITY", "resultList size = " + properties.size());
-            for (Property property : properties) {
-                Log.e("SEARCH ACTIVITY", "property id = " + property.getId());
-            }
-
+            Log.i("SearchActivity", "resultList size = " + properties.size());
             if(properties.size()>0){ this.startSearchResultActivity(properties);}
             else {
                 AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
-                builder.setMessage("No result found, retry wit other parameters")
-                        .setTitle("No result")
+                builder.setMessage(getResources().getString(R.string.alert_no_search_result_content))
+                        .setTitle(getResources().getString(R.string.alert_no_search_result_title))
                         .show();
             }
         });
@@ -265,10 +238,9 @@ public class SearchPropertyActivity extends AppCompatActivity {
     //----------------------------------------------------------------------------------------------
     // Start Result activity
     //----------------------------------------------------------------------------------------------
-
     private void startSearchResultActivity(List<Property> properties){
         Intent intent = new Intent(this, SearchPropertyResultActivity.class);
-        intent.putExtra("properties list", Converters.convertPropertiesListToString(properties));
+        intent.putExtra(MyConstants.SEARCH_RESULT_ACTIVITY_PARAM, Converters.convertPropertiesListToString(properties));
         startActivity(intent);
     }
 }
