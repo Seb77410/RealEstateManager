@@ -11,13 +11,14 @@
     <string name="search_result">Search property result</string>
     <string name="edit_property_title">Edit property</string>
 
-    MyConstants
+
     <!--/////////////////////////////////////////////////////////////////////////////////////////-->
     <!-- Main menu titles-->
     <!--/////////////////////////////////////////////////////////////////////////////////////////-->
     <string name="add_menu_title">Add menu main</string>
     <string name="map">map</string>
     <string name="search">search</string>
+
 
     <!--/////////////////////////////////////////////////////////////////////////////////////////-->
     <!-- xml values -->
@@ -96,6 +97,11 @@
     <string name="notif_success_property_content">The property has been correctly saved</string>
     <string name="notif_error_property_title">Property not saved</string>
     <string name="notif_error_property_content">An error occurred</string>
+        <!-- Update property -->
+    <string name="notif_success_property_update_title">Property updated</string>
+    <string name="notif_success_property_update_content">The property has been correctly updated</string>
+
+
 
     <!--/////////////////////////////////////////////////////////////////////////////////////////-->
     <!-- Alert Dialog -->
@@ -103,13 +109,14 @@
         <!-- Add property activity -->
     <string name="alert_no_photo_content">You have to add at least one photo</string>
     <string name="alert_no_photo_title">No photo</string>
-        <!-- Search property activity -->
+    <string name="alert_no_house_seller_title">No house seller</string>
+    <string name="alert_no_house_seller_content">You have to register at least one House Seller to register a property</string>
+    <!-- Search property activity -->
     <string name="alert_no_search_result_content">No result found, retry wit other parameters</string>
     <string name="alert_no_search_result_title">No result</string>
         <!-- Main activity -->
     <string name="alert_no_network_connection_content">You need a network connection to open the map</string>
     <string name="alert_no_network_connection_title">No network connection</string>
-
 
 
 </resources>

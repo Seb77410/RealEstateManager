@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,6 +31,7 @@ import com.openclassrooms.realestatemanager.models.database.HouseSeller;
 import com.openclassrooms.realestatemanager.models.database.InterestPoint;
 import com.openclassrooms.realestatemanager.models.database.Media;
 import com.openclassrooms.realestatemanager.models.database.Property;
+import com.openclassrooms.realestatemanager.ui.activities.AddHouseSeller.AddHouseSellerActivity;
 import com.openclassrooms.realestatemanager.utils.Converters;
 import com.openclassrooms.realestatemanager.utils.MyConstants;
 import com.openclassrooms.realestatemanager.utils.PropertyTypeEnum;
@@ -60,10 +62,10 @@ public class AddPropertyActivity extends AppCompatActivity {
     private MaterialCheckBox transportCheckbox;
     private ArrayList<Media> mediaList = new ArrayList<>();
     private ArrayList<Long> mediaToDelete =  new ArrayList<>();
-    private ArrayList<Boolean> mediaHaveComment = new ArrayList<>();
     private Boolean isEditActivity = false;
     private Switch propertySold;
     private LinearLayout houseSellerContainer;
+    private RecyclerView recyclerView;
 
 
     //----------------------------------------------------------------------------------------------
@@ -73,6 +75,8 @@ public class AddPropertyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_property);
+
+        recyclerView = findViewById(R.id.add_property_activity_recyclerView);
 
         priceEditText = findViewById(R.id.add_property_activity_price_filledTextField);
         surfaceEditText = findViewById(R.id.add_property_activity_surface_filledTextField);
@@ -149,12 +153,24 @@ public class AddPropertyActivity extends AppCompatActivity {
             // Get all House Seller names into ArrayList
             ArrayList<CharSequence> houseSellerNameArray = new ArrayList<>();
             viewModel.getHouseSellersLIst().observe(this, houseSellers -> {
-            for (HouseSeller houseSeller : houseSellers){
-                houseSellerList.add(houseSeller);
-                houseSellerNameArray.add(houseSeller.getName());
-            }
-            // Show this list inside spinner
-            propertyHouseSellerSpinner.setAdapter(new ArrayAdapter<>(getApplicationContext(),android.R.layout.simple_spinner_dropdown_item, houseSellerNameArray));
+                if(houseSellers.size()>0) {
+                    for (HouseSeller houseSeller : houseSellers) {
+                        houseSellerList.add(houseSeller);
+                        houseSellerNameArray.add(houseSeller.getName());
+                    }
+                    // Show this list inside spinner
+                    propertyHouseSellerSpinner.setAdapter(new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, houseSellerNameArray));
+                }
+                else{
+                    AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.myDialog));
+                    builder.setMessage(getResources().getString(R.string.alert_no_house_seller_content))
+                            .setTitle(getResources().getString(R.string.alert_no_house_seller_title))
+                            .setPositiveButton("Register House seller", (dialog, which) -> {
+                                Intent intent = new Intent(getApplicationContext(), AddHouseSellerActivity.class);
+                                startActivity(intent);
+                            })
+                            .show();
+                }
             });
         }
     }
@@ -238,18 +254,16 @@ public class AddPropertyActivity extends AppCompatActivity {
     //  Recycler view for photos
     //----------------------------------------------------------------------------------------------
     private void configureRecyclerView() {
-        RecyclerView recyclerView = findViewById(R.id.add_property_activity_recyclerView);
 
         if (isEditActivity){
             viewModel.getMediaByPropertyId(property.getId()).observe(this, medias -> {
                 mediaList = new ArrayList<>(medias);
-                for(int x = 0; x<=medias.size(); x++){this.mediaHaveComment.add(true);}
-                adapter = new AddPhotosRecyclerAdapter(getApplicationContext() ,mediaList, mediaHaveComment,mediaToDelete ,Glide.with(this));
+                adapter = new AddPhotosRecyclerAdapter(mediaList,mediaToDelete ,Glide.with(this));
                 recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
             });
         }else{
-            adapter = new AddPhotosRecyclerAdapter(getApplicationContext() ,mediaList, mediaHaveComment,Glide.with(this));
+            adapter = new AddPhotosRecyclerAdapter(mediaList,Glide.with(this));
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         }
@@ -274,8 +288,7 @@ public class AddPropertyActivity extends AppCompatActivity {
         callback = imageUri -> {
             Log.i("AddPropertyActivity", "image uri added = " + imageUri);
             mediaList.add(new Media(null, imageUri, 0));
-            mediaHaveComment.add(true);
-            adapter.notifyDataSetChanged();
+            adapter.notifyItemInserted(mediaList.size());
         };
     }
 
@@ -314,7 +327,7 @@ public class AddPropertyActivity extends AppCompatActivity {
             property.setDescription(getStringFromInputLayoutValue(descriptionEditText));
             property.setAddress(getStringFromInputLayoutValue(addressEditText));
 
-            viewModel.updatePropertyAndData(interestPoint, property, mediaList, mediaToDelete);
+            viewModel.updatePropertyAndData(interestPoint, property, mediaList, mediaToDelete, this);
         }
         else{
             interestPoint = new InterestPoint(interestsPointList);
@@ -379,13 +392,16 @@ public class AddPropertyActivity extends AppCompatActivity {
     private boolean photosCommentsAreOK(){
         boolean allMediaHaveComment = true;
         for(int x = 0; x<mediaList.size(); x++){
+            TextInputLayout textInputLayout = Objects.requireNonNull(recyclerView.findViewHolderForAdapterPosition(x)).itemView.findViewById(R.id.add_property_activity_item_edit_text);
             if(mediaList.get(x).getComment() == null || mediaList.get(x).getComment().equals("")){
-                mediaHaveComment.set(x, false);
                 allMediaHaveComment = false;
-                adapter.notifyItemChanged(x);
+                textInputLayout.setError(getResources().getString(R.string.required));
+            }else{
+                textInputLayout.setError(null);
             }
         }
         return allMediaHaveComment;
     }
+
 }
 

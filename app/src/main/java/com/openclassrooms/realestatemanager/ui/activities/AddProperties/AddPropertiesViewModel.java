@@ -84,23 +84,24 @@ class AddPropertiesViewModel extends ViewModel {
     }
 
 
-    void updatePropertyAndData(InterestPoint interestPoint, Property property, ArrayList<Media> mediaList, ArrayList<Long> mediaToDelete) {
+    void updatePropertyAndData(InterestPoint interestPoint, Property property, ArrayList<Media> mediaList, ArrayList<Long> mediaToDelete, Context context) {
         executor.execute(()-> interestPointDataSource.updateInterestPoint(interestPoint));
         executor.execute(()-> propertyDataSource.updateProperty(property));
 
         for(Media media : mediaList) {
             executor.execute(() -> {
-                if (media.getPropertyId() == property.getId()) {
-                    mediaDataSource.updateMedia(media);
-                } else {
+                if (media.getPropertyId() == property.getId()) {mediaDataSource.updateMedia(media);}
+                else {
                     media.setPropertyId(property.getId());
                     mediaDataSource.createMedia(media);
                 }
             });
+
             for (Long mediaId : mediaToDelete) {
                 executor.execute(()-> mediaDataSource.deleteMedia(mediaId));
             }
         }
+        Utils.startNotification(context.getString(R.string.notif_success_property_update_title), context.getString(R.string.notif_success_property_update_content), context);
     }
 
 }

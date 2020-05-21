@@ -123,9 +123,7 @@ public class PropertyDetailsFragment extends Fragment {
 
     private void setPropertyDescription(){propertyDescription.setText(property.getDescription());}
 
-    private void setPropertyPrice(){
-        propertyPrice.setText(String.valueOf(property.getPrice()));
-    }
+    private void setPropertyPrice(){propertyPrice.setText(String.format("%s %s" ,property.getPrice(), "$"));}
 
     private void setPropertySurface(){propertySurface.setText(String.format("%s %s", String.valueOf(property.getArea()), "m²") );}
 

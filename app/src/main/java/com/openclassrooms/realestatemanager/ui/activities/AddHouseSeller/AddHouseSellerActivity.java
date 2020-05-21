@@ -147,9 +147,5 @@ public class AddHouseSellerActivity extends AppCompatActivity {
          this.viewModel.createHouseSeller(houseSeller, getApplicationContext());
     }
 
-
-
-
-
 }
 

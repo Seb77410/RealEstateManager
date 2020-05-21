@@ -1,6 +1,5 @@
 package com.openclassrooms.realestatemanager.ui.activities.AddProperties;
 
-import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -25,9 +24,7 @@ class AddPhotosRecyclerViewHolder extends RecyclerView.ViewHolder {
     private TextInputLayout textInputLayout;
     private ImageButton deleteButton;
     private ArrayList<Media> mediaList = new ArrayList<>();
-    private ArrayList<Boolean> mediaHaveComment = new ArrayList<>();
     private ArrayList<Long> mediaToDelete;
-    private Context context;
 
     AddPhotosRecyclerViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -35,38 +32,34 @@ class AddPhotosRecyclerViewHolder extends RecyclerView.ViewHolder {
         textInputLayout = itemView.findViewById(R.id.add_property_activity_item_edit_text);
         deleteButton = itemView.findViewById(R.id.add_property_activity_item_delete_button);
 
+
         Objects.requireNonNull(textInputLayout.getEditText()).addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mediaList.get(getAdapterPosition()).setComment(String.valueOf(s));
-            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
 
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+                mediaList.get(getAdapterPosition()).setComment(String.valueOf(s));
+            }
         });
+
     }
 
-    void updateWithUriList(Context context,ArrayList<Media> mediaList,ArrayList<Boolean> mediaHaveComment ,RequestManager glide, AddPhotosRecyclerAdapter addPhotosRecyclerAdapter){
+    void updateWithUriList(ArrayList<Media> mediaList ,RequestManager glide, AddPhotosRecyclerAdapter addPhotosRecyclerAdapter){
         this.mediaList = mediaList;
-        this.mediaHaveComment = mediaHaveComment;
-        this.context = context;
         updateImage(glide);
         deletePhoto(addPhotosRecyclerAdapter);
-        checkForCommentError();
         setComment();
     }
 
-    void updateWithUriList(Context context, ArrayList<Media> mediaList, ArrayList<Boolean> mediaHaveComment , ArrayList<Long> mediaToDelete, RequestManager glide, AddPhotosRecyclerAdapter addPhotosRecyclerAdapter){
+    void updateWithUriList(ArrayList<Media> mediaList , ArrayList<Long> mediaToDelete, RequestManager glide, AddPhotosRecyclerAdapter addPhotosRecyclerAdapter){
         this.mediaList = mediaList;
-        this.mediaHaveComment = mediaHaveComment;
         this.mediaToDelete = mediaToDelete;
-        this.context = context;
         updateImage(glide);
         deletePhoto(addPhotosRecyclerAdapter);
-        checkForCommentError();
         setComment();
     }
 
@@ -84,18 +77,10 @@ class AddPhotosRecyclerViewHolder extends RecyclerView.ViewHolder {
                 .into(imageView);
     }
 
-    private void checkForCommentError(){
-        if (!mediaHaveComment.get(getAdapterPosition())){
-            Objects.requireNonNull(textInputLayout.getEditText()).setError(context.getResources().getString(R.string.required));
-        }
-    }
     private void deletePhoto(AddPhotosRecyclerAdapter addPhotosRecyclerAdapter){
         deleteButton.setOnClickListener(v -> {
-            if(mediaToDelete!= null){
-                mediaToDelete.add(mediaList.get(getAdapterPosition()).getId());
-            }
+            if(mediaToDelete!= null){mediaToDelete.add(mediaList.get(getAdapterPosition()).getId());}
             Objects.requireNonNull(textInputLayout.getEditText()).setText(null);
-            mediaHaveComment.remove(getAdapterPosition());
             mediaList.remove(getAdapterPosition());
             addPhotosRecyclerAdapter.notifyDataSetChanged();
         });

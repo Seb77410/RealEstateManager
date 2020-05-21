@@ -47,7 +47,7 @@ class PropertiesListViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void setPropertyPrice(){
-        propertyPrice.setText(String.valueOf(property.getPrice()));
+        propertyPrice.setText(String.format("%s %s", property.getPrice(), "$"));
     }
 
     private void setPropertyImage(){
